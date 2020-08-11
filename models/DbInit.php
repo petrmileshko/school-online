@@ -12,9 +12,13 @@ final class DbInit {
 
     /*
 
-    Пример  инициализации :
+    Пример  инициализации и работы с объектом:
 
     $connect = School\models\DbInit::prepare('Select * From Table');
+
+    $connect->execute();
+
+    $connect->fetchAll();
 
     */
   

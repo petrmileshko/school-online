@@ -15,9 +15,11 @@ final class DBmodel
     
     public function __construct() {
 
-        $this->connection = \site\models\DbInit::getConnection();
+    		$sql = 'Select * From Table';
+        $this->connection = School\models\DbInit::prepare($sql);
 
     }
+    
     
     public function __call($name, $params){
  
