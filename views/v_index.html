@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <?=$title?>
+    </title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/controllers/scripts/ajax.js"></script>
+    <script src="/assets/scripts/scripts.js"></script>
+     </head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <?=$siteName?>
+            </div>
+            <nav>
+                <?=$menu?>
+            </nav>
+        </header>
+        <div class="content">
+           <?php if( $content and is_string($content) ): ?>
+            <span> <?=$content?></span>
+            <?php endif; ?>
+        </div>
+        <div class="clear-fix"></div>
+        <div class="clear"></div>
+    </div>
+    <footer>
+        Все права защищены &copy;<?=$footer?>
+    </footer>
+</body>
+
+</html>
