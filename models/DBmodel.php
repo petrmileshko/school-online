@@ -21,8 +21,8 @@ final class DBmodel
     }
     
     
-    public function __call($name, $params){
- 
+    public function __call($name, $params) {
+ 	
 	}
     
 }
