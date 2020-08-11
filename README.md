@@ -75,11 +75,11 @@ v_scorelog.html - Представление журнала оценок/ общ
 
 /************************* Минимальная структура БД ***************************/ 
 
-1. Таблица пользователей ( id / login / fio / password / email / access_id )
-2. Таблица уровней доступа ( id / access)
-3. Таблица предметов (id / subject / some_code )
+1. Таблица пользователей Users ( id / login / fio / password / email / access_id )
+2. Таблица уровней доступа Auth ( id / access)
+3. Таблица предметов Subjects (id / subject / some_code )
 4. Таблица привязки учителей к предметам ( user_id / subject_id )
 5. Таблица классов ( id / class / some_code )
 6. Таблица привязки учеников к классам ( user_id / class_id )
-7. Таблица заданий (id / task_name / task_description / task_file / task_body / user_id / subject_id )
-8. Таблица ответов (id / answer_file / answer_body / user_id / task_id / status / score )
+7. Таблица заданий Tasks (id / task_name / task_description / task_file / task_body / user_id / subject_id )
+8. Таблица ответов Answers (id / answer_file / answer_body / user_id / task_id / status / score )
