@@ -18,3 +18,5 @@
 Александр Бауков BE php Js    https://github.com/Holyskretch
 
 nikita-mlygin / BE php Js     https://github.com/nikita-mlygin
+
+Иван Бойченко / FE JS React   https://github.com/Wonder4Code
