@@ -13,6 +13,7 @@ trait TraitPages {
      public function action_any() {
 
 	}
+	
     protected function render()
 	{
 
