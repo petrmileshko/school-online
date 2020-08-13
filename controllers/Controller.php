@@ -1,7 +1,7 @@
 <?php
 /*
 
-    Базовый абстрвктный для взаимосвязи контроллеров с моделями
+    Базовый абстрвктный класс контроллера
 
 */
 
@@ -11,20 +11,17 @@ abstract class Controller
 {
     
     
-    public abstract function action_any();
-    public abstract function action_index();
+    public abstract function action_any();   // объявить методы абстрактные 
+
     
     public function __construct() {
 
     }
     
-    public function request() {
-
-    }
-            
+  
     
     public function __call($name, $params){
-        $this->action_any();
+      
 	}
     
 }
