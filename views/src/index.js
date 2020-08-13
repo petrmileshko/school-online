@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+import './sass/bootstrap-custom.scss';
+import './icons/lineawesome/css/line-awesome.css';
+import './sass/style.scss';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
