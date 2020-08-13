@@ -85,3 +85,7 @@ v_scorelog.html - Представление журнала оценок/ общ
 6. Таблица привязки учеников к классам ClassesRelation ( user_id / class_id )
 7. Таблица заданий Tasks (id / task_name / task_description / task_file / task_body / user_id / subject_id )
 8. Таблица ответов Answers (id / answer_file / answer_body / user_id / task_id / status / score )
+
+/************************* Схема запросов HTTP между клиент - сервер  ***************************/ 
+
+На сонове стурктуры БД необходимо сделать схему как в примере по ссылке http://cyan-finance.ru:8000/api/#/
