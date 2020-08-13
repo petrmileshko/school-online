@@ -23,7 +23,7 @@ export default function ProfileSettings () {
                             <Form.Control type="email" placeholder="dgreen@mail.com" />
                         </Col>
                     </Form.Group>
-                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userEmail">
+                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userPhone">
                         <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Phone</Form.Label>
                         <Col lg={7}>
                             <Form.Control type="tel" placeholder="+00 987 654 32" />
