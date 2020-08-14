@@ -1,1 +1,4 @@
-ÐÐBranch for downloading files to hosting test-school.webpeternet.com
+
+Ветка для загрузки файлов для тестирования на хостинг:
+
+test-school.webpeternet.com
