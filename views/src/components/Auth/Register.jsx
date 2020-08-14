@@ -22,38 +22,39 @@ export default function Login() {
                             width="140"
                             height="127"
                         />
-                        <span className="h3 auth__title text-center">Sign In To Education Online</span>
+                        <span className="h3 auth__title text-center">Register To Education Online</span>
 
                         <Form className="form__signIn">
+                            <Form.Group controlId="inputName">
+                                <Form.Control type="text" required />
+                                <Form.Label>Full Name</Form.Label>
+                                <span className="bar"></span>
+                            </Form.Group>
                             <Form.Group controlId="inputEmail">
-                                <Form.Control type="email" />
+                                <Form.Control type="email" required />
                                 <Form.Label>Email</Form.Label>
                                 <span className="bar"></span>
                             </Form.Group>
                             <Form.Group controlId="inputPassword">
-                                <Form.Control type="password" />
+                                <Form.Control type="password" required />
                                 <Form.Label>Password</Form.Label>
                                 <span className="bar"></span>
                             </Form.Group>
                             <div className="form__include">
                                 <Form.Check
                                     type="checkbox"
-                                    label="Remember me"
-                                    id="check_remember"
+                                    label="Term Use"
+                                    id="term_use"
+                                    required
                                 />
-                                <a href="#" className="forgot-pass">Forgot Password?</a>
                             </div>
                             <Button
                                 className="btn btn-primary btn__gradient btn__grad-danger btn__sign-in"
                                 type="submit"
                             >
-                            Sign in
+                            Register
                             </Button>
                         </Form>
-                        <div className="register">
-                            <span className="register__text">Don't have an account?</span>
-                            <a href="#" className="register__link">Create an account</a>
-                        </div>
                     </div>
                 </Col>
             </Row>
