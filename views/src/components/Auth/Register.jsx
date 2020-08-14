@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import logo from '../../img/logo.png';
 
 export default function Login() {
@@ -55,6 +56,10 @@ export default function Login() {
                             Register
                             </Button>
                         </Form>
+                        <div className="register">
+                            <span className="register__text">Have an account?</span>
+                            <Link to="/">Sign In</Link>
+                        </div>
                     </div>
                 </Col>
             </Row>
