@@ -3,6 +3,10 @@ import { Navbar } from 'react-bootstrap';
 
 import logo from '../../img/logo.png';
 
+const handleToggleSidebar = () => {
+    console.log('click');
+}
+
 
 export default function Header () {
     return (
@@ -18,9 +22,13 @@ export default function Header () {
                                 className="brand__img"
                                 alt="School Online"
                             />
-                            <span className="brand__title">School Online</span>
+                            <span className="brand__title">Education Online</span>
                         </Navbar.Brand>
-                        <button className="btn navbar__toggler" type="button">
+                        <button
+                            className="btn navbar__toggler"
+                            type="button"
+                            onClick={ handleToggleSidebar }
+                        >
                             <span></span>
                             <span></span>
                             <span></span>
