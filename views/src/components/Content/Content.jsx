@@ -3,8 +3,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import Profile from '../Profile/Profile.jsx';
 import ProfileSettings from '../Profile/ProfileSettings.jsx';
+import Groups from '../Groups/Groups.jsx';
 
-export default function Content () {
+let Content = () => {
+
     return (
         <div className="content__inner profile">
             <Container fluid>
@@ -17,7 +19,7 @@ export default function Content () {
                                     <a href="#" className="breadcrumb__link">Home</a>
                                 </li>
                                 <li className="breadcrumb__item">
-                                    <span href="#" className="breadcrumb__link">Profile</span>
+                                    <span href="#" className="breadcrumb__link">{ pageName }</span>
                                 </li>
                             </ul>
                         </div>
@@ -28,10 +30,17 @@ export default function Content () {
                         <Profile />
                     </Col>
                     <Col xl={9}>
-                        <ProfileSettings />
+                        <div className="widget__wrapper has-shadow">
+                            <div className="widget__header">
+                                <h4 className="widget__title">Update Profile</h4>
+                            </div>
+                            <ProfileSettings />
+                        </div>
                     </Col>
                 </Row>
             </Container>
         </div>
     )
 }
+
+export default Content;

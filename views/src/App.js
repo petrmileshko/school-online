@@ -23,6 +23,9 @@ function App() {
 				<Route path="/profile">
 					<Layout />
 				</Route>
+				<Route path="/groups">
+					<Layout />
+				</Route>
 			</Switch>
 		</Router>
 	);

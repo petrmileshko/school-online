@@ -4,7 +4,7 @@ import Header from '../Header/Header.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import Content from '../Content/Content.jsx';
 
-export default function Layout () {
+let Layout = () => {
 
     return (
         <div className="page page__profile">
@@ -16,3 +16,5 @@ export default function Layout () {
         </div>
     )
 }
+
+export default Layout;
