@@ -8,6 +8,10 @@ import { ReactComponent as LogOut } from '../../img/logout.svg';
 
 export default function Sidebar (props) {
 
+    let dropdownToggler = evt => {
+        evt.target.closest('.sb-dropdown').classList.toggle('open');
+    }
+    
     return (
         <div className="sidebar sidebar__default">
             <div className={ `side-navbar${ props.sidebarShrink ? ' shrink' : '' }` }>
@@ -19,11 +23,25 @@ export default function Sidebar (props) {
                         </Link>
                     
                     </li>
-                    <li className="side-navbar__item">
-                        <Link to="/education" className="side-navbar__link">
+                    <li className="side-navbar__item sb-dropdown">
+                        <span
+                            className="side-navbar__link sb-dropdown__toggler"
+                            onClick={ dropdownToggler }
+                        >
                             <OpenBook className="side-navbar__icon icon-edu" />
                             <span className="side-navbar__link--title">Education</span>
-                        </Link>
+                        </span>
+                        <ul className="nav sb-dropdown__menu flex-column">
+                            <li className="nav-item sb-dropdown__item">
+                                <Link to="/classes" className="sb-dropdown__link">Classes</Link>
+                            </li>
+                            <li className="nav-item sb-dropdown__item">
+                                <Link to="/lessons" className="sb-dropdown__link">Lessons</Link>
+                            </li>
+                            <li className="nav-item sb-dropdown__item">
+                                <Link to="/tasks" className="sb-dropdown__link">Tasks</Link>
+                            </li>
+                        </ul>
                     </li>
                     <li className="side-navbar__item">
                         <Link to="/" className="side-navbar__link">
