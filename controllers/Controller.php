@@ -12,7 +12,7 @@ abstract class Controller
     
     protected $db;
     protected $controller;
-     protected $method;
+    protected $method;
     protected $query;
 
     public abstract function action_any();   // объявить методы абстрактные 

@@ -51,7 +51,7 @@ public static function initialize() {
         spl_autoload_register([new self, 'autoloader']);
 
 
-        // Считываем REST запрос, обрабатываем и возвращаем имя модели
+        // Считываем REST запрос, обрабатываем и возвращаем массив с параметрами контроллера
 
         $method = $_SERVER['REQUEST_METHOD'];
 
@@ -59,14 +59,14 @@ public static function initialize() {
 
             case 'GET'    :
                 $table = $_GET['Table'];
-                $qeury = array_slice($_GET, 1);
-                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$qeury, 'controller'=>"School\\controllers\\$table"]; 
+                $query = array_slice($_GET, 1);
+                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
                 return $rest;
 
             case 'POST'   :
                 $table = $_POST['Table'];
-                $qeury = array_slice($_POST, 1);
-                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$qeury, 'controller'=>"School\\controllers\\$table"]; 
+                $query = array_slice($_POST, 1);
+                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
                 return $rest;
 
             case 'PUT'    :
@@ -81,8 +81,8 @@ public static function initialize() {
                 }
 
                 $table = $assoc['Table'];
-                $qeury = array_slice($assoc, 1);
-                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$qeury, 'controller'=>"School\\controllers\\$table"]; 
+                $query = array_slice($assoc, 1);
+                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
                 return $rest;
 
             default:
