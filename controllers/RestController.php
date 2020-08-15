@@ -17,10 +17,19 @@ try {
 $query = Init::initialize();
 
 
-ob_start();
-echo '<pre>';
-print_r($query);
-echo '</pre>';
+foreach ( $Users as $value ) {
+
+	if( $value['email'] == $query['email'] and $value['password'] == $query['password'] ) {
+		ob_start();
+		echo 'Добро пожаловать - '.$value['name'];
+		echo '<br>Доступ - '.$value['access'];
+		exit();
+	}
+
+}
+
+echo 'Такой пользователь не найден';
+
 
  }
 catch(Exception $e) {

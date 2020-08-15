@@ -1,7 +1,20 @@
 <?php
 
     const INI_FILE = '../config/config.ini';
+    $Users = [
 
+        '0' => ['name' => 'Peter',
+         'email' => 'peter@mail.ru',
+         'password' => '1234',
+         'access' => 'Учитель',
+        ],
+        
+        '1' => ['name' => 'Иван',
+         'email' => 'ivan@mail.ru',
+         'password' => '1234',
+         'access' => 'Ученик',
+        ]
+    ];
 
 /*
 
