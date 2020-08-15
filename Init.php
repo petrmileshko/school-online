@@ -1,21 +1,4 @@
 <?php
-
-    const INI_FILE = '../config/config.ini';
-    $Users = [
-
-        '0' => ['name' => 'Peter',
-         'email' => 'peter@mail.ru',
-         'password' => '1234',
-         'access' => 'Учитель',
-        ],
-        
-        '1' => ['name' => 'Иван',
-         'email' => 'ivan@mail.ru',
-         'password' => '1234',
-         'access' => 'Ученик',
-        ]
-    ];
-
 /*
 
 
@@ -24,6 +7,9 @@
 					Автозагрузчик классов
 
 */
+
+
+const INI_FILE = '../config/config.ini';
 
 use \School\controllers;
 use \School\models;
@@ -38,7 +24,7 @@ function multiStrip($str) {
     return stripslashes( strip_tags( trim($str) ) );
     }
 
-
+#    Класс инициализации серверного приложения
 
 final class Init {
 
@@ -115,5 +101,24 @@ public static function initialize() {
 }
 
 
+    /*
+
+                        Тестовый код 
+
+                        
+    $Users = [
+
+        '0' => ['name' => 'Peter',
+         'email' => 'peter@mail.ru',
+         'password' => '1234',
+         'access' => 'Учитель',
+        ],
+        
+        '1' => ['name' => 'Иван',
+         'email' => 'ivan@mail.ru',
+         'password' => '1234',
+         'access' => 'Ученик',
+        ]
+    ]; */
 
 ?>

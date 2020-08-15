@@ -16,6 +16,16 @@ try {
 
 $query = Init::initialize();
 
+#...   Код обарботки запроса и выбора маршрута
+
+
+
+
+#...
+
+/*
+
+			Тестовый код 
 
 foreach ( $Users as $value ) {
 
@@ -29,6 +39,7 @@ foreach ( $Users as $value ) {
 }
 
 echo 'Такой пользователь не найден';
+*/
 
 
  }
