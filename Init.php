@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
 
 
@@ -9,7 +10,7 @@
 */
 
 
-const INI_FILE = '../config/config.ini';
+const INI_FILE = 'config/config.ini';
 
 use \School\controllers;
 use \School\models;
@@ -24,7 +25,7 @@ function multiStrip($str) {
     return stripslashes( strip_tags( trim($str) ) );
     }
 
-#    Класс инициализации серверного приложения
+//    Класс инициализации серверного приложения
 
 final class Init {
 
@@ -50,32 +51,42 @@ public static function initialize() {
         spl_autoload_register([new self, 'autoloader']);
 
 
-        // Считываем REST запрос, обрабатываем и возвращаем
+        // Считываем REST запрос, обрабатываем и возвращаем имя модели
 
         $method = $_SERVER['REQUEST_METHOD'];
+
         switch ($method ) {
+
             case 'GET'    :
-            return $_GET;
-            break;
+                $table = $_GET['Table'];
+                $qeury = array_slice($_GET, 1);
+                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$qeury, 'controller'=>"School\\controllers\\$table"]; 
+                return $rest;
+
             case 'POST'   :
+                $table = $_POST['Table'];
+                $qeury = array_slice($_POST, 1);
+                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$qeury, 'controller'=>"School\\controllers\\$table"]; 
+                return $rest;
+
             case 'PUT'    :
             case 'DELETE' :
-            $rawData = multiStrip(file_get_contents("php://input"));
+                $rawData = multiStrip(file_get_contents("php://input"));
+                $value = explode('&',$rawData);
+                    $assoc =[];
 
-            $value = explode('&',$rawData);
+                for($i=0;$i<count($value);$i++) {
+                    $res[$i] = explode('=',$value[$i]);
+                    $assoc += [$res[$i][0]=>$res[$i][1]];
+                }
 
-            for($i=0;$i<count($value);$i++) {
-                $res[$i] = explode('=',$value[$i]);
-                $assoc[$i] = [$res[$i][0]=>$res[$i][1]];
-            }
+                $table = $assoc['Table'];
+                $qeury = array_slice($assoc, 1);
+                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$qeury, 'controller'=>"School\\controllers\\$table"]; 
+                return $rest;
 
-             $table = $assoc[0]['Table'];
-            $qeury = array_slice($assoc, 1);
-            // Передаем обработанный запрос    
-            return [ 'Method'=>$method ,'Table'=>$table,'Query'=>$qeury ] ; 
-            break;
             default:
-            throw new Exception('Ошибка метод запроса  - '.$method);
+               throw new Exception('Ошибка метод запроса  - '.$method);
             break;
         }
 
@@ -95,30 +106,15 @@ public static function initialize() {
         if (is_file($file)) {          
             require $file;        
         }
-        else throw new Exception('Автозагрузчик : файл не найден - '.$file);
+        else throw new Exception('Автозагрузчик : класс не найден - '.$class);
+    }
+
+    public static function getDBParams() {
+        
+        return self::$dbParams;
     }
 
 }
 
-
-    /*
-
-                        Тестовый код 
-
-                        
-    $Users = [
-
-        '0' => ['name' => 'Peter',
-         'email' => 'peter@mail.ru',
-         'password' => '1234',
-         'access' => 'Учитель',
-        ],
-        
-        '1' => ['name' => 'Иван',
-         'email' => 'ivan@mail.ru',
-         'password' => '1234',
-         'access' => 'Ученик',
-        ]
-    ]; */
 
 ?>
