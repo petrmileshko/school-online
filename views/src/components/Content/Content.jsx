@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import Profile from '../Profile/Profile.jsx';
 import ProfileSettings from '../Profile/ProfileSettings.jsx';
-import Groups from '../Groups/Groups.jsx';
 
 let Content = () => {
 
@@ -19,7 +18,7 @@ let Content = () => {
                                     <a href="#" className="breadcrumb__link">Home</a>
                                 </li>
                                 <li className="breadcrumb__item">
-                                    <span href="#" className="breadcrumb__link">{ pageName }</span>
+                                    <span href="#" className="breadcrumb__link">Profile</span>
                                 </li>
                             </ul>
                         </div>
