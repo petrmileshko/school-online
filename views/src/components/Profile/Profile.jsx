@@ -3,6 +3,7 @@ import React from 'react';
 import avatar from '../../img/avatar-01.jpg';
 
 export default function Profile () {
+    
     return (
         <div className="widget__wrapper widget__profile has-shadow">
             <div className="widget__body">

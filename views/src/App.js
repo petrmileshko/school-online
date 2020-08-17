@@ -9,6 +9,7 @@ import {
 import Layout from "./components/Layout/Layout.jsx";
 import Login from "./components/Auth/Login.jsx";
 import Register from "./components/Auth/Register.jsx";
+import CropImage from './components/CropImage/CropImage.jsx';
 
 function App() {
 	return ( 
@@ -19,6 +20,9 @@ function App() {
 				</Route>
 				<Route path="/register">
 					<Register />
+				</Route>
+				<Route path="/crop">
+					<CropImage />
 				</Route>
 				<Route path="/profile">
 					<Layout />
