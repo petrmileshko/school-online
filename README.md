@@ -1,9 +1,7 @@
 # school-online
 Веб-приложение для дистанционного обучения  в средних школах - выдача и выполнение домашних заданий.
 
-Интсрументарий: PHP backend / JS React frontend / Ajax / mySQL/ HTML,CSS
-
-Метод обмена данными Фронт - Бэк ( Ajax / формат данных Json )
+Интсрументарий: PHP backend / JS React frontend / mySQL/ HTML,CSS
 
 Минимальный функционал:
 
