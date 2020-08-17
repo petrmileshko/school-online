@@ -1,7 +1,7 @@
 <?php
 
 /*
-
+        code by Peter Mileshko 
         Контроллер для работы с моделью - БД / талица Users
 
 */
