@@ -62,11 +62,11 @@
 
 /************************* Минимальная структура БД ***************************/ 
 
-1. Таблица пользователей Users ( id / login / fio / password / email / access_id )
+1. Таблица пользователей Users ( id / login / fio / password / email / access_id / time_stamp )
 2. Таблица уровней доступа Auth ( id / access)
 3. Таблица предметов Subjects (id / subject / some_code )
 4. Таблица привязки учителей к предметам SubjectRelation ( user_id / subject_id )
 5. Таблица классов Classes ( id / class / some_code )
 6. Таблица привязки учеников к классам ClassesRelation ( user_id / class_id )
-7. Таблица заданий Tasks (id / task_name / task_description / task_file / task_body / user_id / subject_id )
-8. Таблица ответов Answers (id / answer_file / answer_body / user_id / task_id / status / score )
+7. Таблица заданий Tasks (id / task_name / task_description / task_file / task_body / user_id / subject_id / time_stamp )
+8. Таблица ответов Answers (id / answer_file / answer_body / user_id / task_id / status / score / time_stamp )
