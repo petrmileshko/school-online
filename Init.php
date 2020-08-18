@@ -76,10 +76,25 @@ public static function initialize() {
                 ob_start();
                 echo "Метод - $method<br>";
                 echo 'Получено с сервера :<pre>';
-                print_r($rawData);
+
+                if($method == 'GET') print_r($_GET);
+                else print_r($rawData);
+
                 echo '<br>После конвертации:<br>';
-                print_r(json_decode($rawData));
+                if( $method == 'GET') {
+                    $res = [];
+
+                    foreach( $_GET as $key=>$val ) {
+
+                        $res += [$key=>$val];
+                    }     
+
+                    print_r($res);
+                }
+                else print_r(json_decode($rawData));
+
                 echo '</pre><br>';
+                
                 die('Получено на сервре');
 /*
                 $value = explode('&',$rawData);
