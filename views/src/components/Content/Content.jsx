@@ -4,7 +4,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Profile from '../Profile/Profile.jsx';
 import ProfileSettings from '../Profile/ProfileSettings.jsx';
 
-let Content = () => {
+let Content = (props) => {
+
+    const {user} = props;
 
     return (
         <div className="content__inner profile">
@@ -26,14 +28,14 @@ let Content = () => {
                 </Row>
                 <Row className="flex-row">
                     <Col xl={3}>
-                        <Profile />
+                        <Profile user={ user } />
                     </Col>
                     <Col xl={9}>
                         <div className="widget__wrapper has-shadow">
                             <div className="widget__header">
                                 <h4 className="widget__title">Update Profile</h4>
                             </div>
-                            <ProfileSettings />
+                            <ProfileSettings user={ user } />
                         </div>
                     </Col>
                 </Row>

@@ -7,18 +7,32 @@ import Content from '../Content/Content.jsx';
 class Layout extends React.Component {
 
     state = {
-        user: {
-            id: '',
-            role: 'teacher',
-            name: 'David Green'
-        },
-        sidebarShrink: true
+        user: {},
+        sidebarShrink: true,
+        loading: false
     }
 
     handleToggleSidebar = () => {
         let sbShrink = !this.state.sidebarShrink;
 
         this.setState({sidebarShrink: sbShrink});
+    }
+
+    getUserData = () => {
+        this.setState({loading: true});
+        fetch('https://jsonplaceholder.typicode.com/users/4')
+            .then(data => data.json())
+            .then(json => {
+
+                this.setState({user: json});
+                this.setState({loading: false});
+            });
+    }
+
+    componentDidMount() {
+
+        this.getUserData();
+    
     }
 
     render() {
@@ -33,7 +47,7 @@ class Layout extends React.Component {
                 />
                 <div className="page__content d-flex align-items-stretch">
                     <Sidebar sidebarShrink={ this.state.sidebarShrink } />
-                    <Content />
+                    {!this.state.loading && <Content user={this.state.user} />}
                 </div>
             </div>
         )

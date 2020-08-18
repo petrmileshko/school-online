@@ -2,7 +2,10 @@ import React from 'react';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-export default function ProfileSettings () {
+export default function ProfileSettings (props) {
+
+    const {user} = props;
+
     return (
         <div className="widget__body">
             <span className="widget__section--title h4">01. Personnal Informations</span>
@@ -10,19 +13,19 @@ export default function ProfileSettings () {
                 <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userName">
                     <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Full Name</Form.Label>
                     <Col lg={7}>
-                        <Form.Control type="text" placeholder="David Green" />
+                        <Form.Control type="text" placeholder="David Green" value={ user.name } />
                     </Col>
                 </Form.Group>
                 <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userEmail">
                     <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Email</Form.Label>
                     <Col lg={7}>
-                        <Form.Control type="email" placeholder="dgreen@mail.com" />
+                        <Form.Control type="email" placeholder="dgreen@mail.com" value={ user.email } />
                     </Col>
                 </Form.Group>
                 <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userPhone">
                     <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Phone</Form.Label>
                     <Col lg={7}>
-                        <Form.Control type="tel" placeholder="+00 987 654 32" />
+                        <Form.Control type="tel" placeholder="+00 987 654 32" value={ user.phone } />
                     </Col>
                 </Form.Group>
             </Form>
