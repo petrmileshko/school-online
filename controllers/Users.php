@@ -31,11 +31,12 @@ class Users extends Controller {
             foreach ( $this->user as $val ) {
 
                 if( $val['email'] == $this->email and $val['password'] == $this->password ) {
-                    ob_start();
-                    echo 'Добро пожаловать - '.$val['name'];
-                    echo '<br>Доступ - '.$val['access'];
+                  //  ob_start();
+                  //  echo 'Добро пожаловать - '.$val['name'];
+                  //  echo '<br>Доступ - '.$val['access'];
 
-                    return ob_get_clean();
+                   // return ob_get_clean();
+                     return json_encode($this->user);
                 }
             }
             
