@@ -63,7 +63,7 @@
 
 /************************* Минимальная структура БД ***************************/
 
-1. Таблица пользователей Users ( id / login / fio / password / email / access_id / time_stamp )
+1. Таблица пользователей Users ( id / login / fio / password / email / photo / access_id / time_stamp )
 2. Таблица уровней доступа Auth ( id / access)
 3. Таблица предметов Subjects (id / subject / some_code )
 4. Таблица привязки учителей к предметам SubjectRelation ( user_id / subject_id )
