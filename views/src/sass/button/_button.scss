@@ -11,6 +11,10 @@
     &__group {
         display: flex;
         justify-content: space-around;
+
+        .btn:not(:first-child) {
+            margin-left: 10px;
+        }
     }
     &__grad-pr { 
         background: $btn__grad-pr;
@@ -67,5 +71,15 @@
         fill: $link-navbar-color;
         width: 25px;
         height: 25px;
+    }
+}
+
+@media (min-width: 576px) {
+
+    .btn {
+
+        &__group {
+            justify-content: flex-end;
+        }
     }
 }

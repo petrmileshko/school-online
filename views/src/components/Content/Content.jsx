@@ -4,7 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Profile from '../Profile/Profile.jsx';
 import ProfileSettings from '../Profile/ProfileSettings.jsx';
 
-export default function Content () {
+let Content = () => {
+
     return (
         <div className="content__inner profile">
             <Container fluid>
@@ -28,10 +29,17 @@ export default function Content () {
                         <Profile />
                     </Col>
                     <Col xl={9}>
-                        <ProfileSettings />
+                        <div className="widget__wrapper has-shadow">
+                            <div className="widget__header">
+                                <h4 className="widget__title">Update Profile</h4>
+                            </div>
+                            <ProfileSettings />
+                        </div>
                     </Col>
                 </Row>
             </Container>
         </div>
     )
 }
+
+export default Content;
