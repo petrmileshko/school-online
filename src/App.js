@@ -9,7 +9,7 @@ import {
 import Layout from "./components/Layout/Layout.jsx";
 import Login from "./components/Auth/Login.jsx";
 import Register from "./components/Auth/Register.jsx";
-import MagazinList from "./components/Magazine/MagazinList.jsx";
+import MagazinList from "./components/MagazineList/MagazinList";
 
 function App() {
 	return ( 
