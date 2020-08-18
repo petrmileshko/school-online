@@ -12,6 +12,7 @@ trait TraitControllers {
     # Start...    тестовй код    удалить после отладки
 
     private $user = [
+
         [
          'name' => 'Peter',
          'email' => 'peter@mail.ru',

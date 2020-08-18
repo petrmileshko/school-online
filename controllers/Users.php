@@ -27,7 +27,7 @@ class Users extends Controller {
 
             # Start...    тестовй код   удалить после отладки
 
-
+            $i=0;
             foreach ( $this->user as $val ) {
 
                 if( $val['email'] == $this->email and $val['password'] == $this->password ) {
@@ -36,14 +36,17 @@ class Users extends Controller {
                   //  echo '<br>Доступ - '.$val['access'];
 
                    // return ob_get_clean();
-                     return json_encode($this->user);
-                }
+
+                     return json_encode($this->user[$i]);
+                    }
+
+                    $i++; 
+
             }
-            
+
            return 'Такой пользователь не найден';
 
            # End  ...    тестовый код
-
         } 
     
         /* Функция для вывода всех пользователей в админке */
