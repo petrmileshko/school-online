@@ -103,7 +103,7 @@ public static function initialize() {
                 }
                 else {
 
-                $message = 'Получено на сервере: '.$rawData;
+                $message = 'Получено на сервере: '.$rawData.' длина строки = '.strlen($rawData);
                 throw new Exception($message);
 
                 }
