@@ -21,7 +21,7 @@ trait TraitControllers {
          'fio' => 'Гавриков П.А.',
          'avatar' => 'img/users/peterGa.jpg',
          'password' => '1234',
-         'access' => 'Учитель'
+         'access' => 'Учитель',
          'subject' => 'Математика' 
         ],
         [
