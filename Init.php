@@ -92,7 +92,7 @@ public static function initialize() {
                 } */
                 
 
-                $assoc = json_decode( $rawData , true );  //  не хочет эта зараза декодировать нашу строку с json!!!
+                $assoc = json_decode( $rawData , true );  
 
                                switch (json_last_error()) {
                     case JSON_ERROR_NONE:
