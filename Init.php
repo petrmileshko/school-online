@@ -79,9 +79,6 @@ public static function initialize() {
                 $assoc = json_decode( $rawData , true );  
 
                                switch (json_last_error()) {
-                    case JSON_ERROR_NONE:
-                        $message = 'Ошибок нет';
-                    break;
                     case JSON_ERROR_DEPTH:
                         $message = 'JSON_ERROR: Достигнута максимальная глубина стека';
                     break;
