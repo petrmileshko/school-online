@@ -28,9 +28,7 @@ $rest = Init::initialize();
 
     }
     else {
-        
-           $answer = ['result'=>'negative','message'=>'Ошибка передачи данных.'];
-           echo json_encode($answer);
+           throw new Exception('Ошибка передачи данных');
     }
 
  }
