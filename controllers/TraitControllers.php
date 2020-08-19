@@ -39,8 +39,8 @@ trait TraitControllers {
 
 	# End  ...    тестовый код
 
-    /**
-     *
+    /*
+     *          Если передано ошибочное дейтсвие в запросе поле { action : string }
      */
     public function action_any() {
 

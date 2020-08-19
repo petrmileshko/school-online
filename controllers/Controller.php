@@ -16,15 +16,17 @@ abstract class Controller
     protected $query;
 
     /**
-     * @return mixed
+     * @return Exeption
      */
+    
     public abstract function action_any();   // объявить методы абстрактные
 
 
     /**
      * Controller constructor.
-     * @param $rest
+     * @param array [ 'Method'=>string ,'Table'=>string,'Query'=>array, 'controller'=>string ]
      */
+
     public function __construct($rest) {
 
     	$this->controller = array_slice( explode('\\',get_class($this)),2)[0];
@@ -34,8 +36,9 @@ abstract class Controller
 
 
     /**
-     * @return mixed
+     * @return Json
      */
+
     public function request() {
 
 		$action = 'action_';
@@ -52,8 +55,9 @@ abstract class Controller
 
     /**
      * @param $key
-     * @return mixed
+     * @return string or integer
      */
+
     public function getValue($key) {
     	return $this->query[$key];
     }
@@ -62,6 +66,7 @@ abstract class Controller
      * @param $name
      * @param $params
      */
+
     public function __call($name, $params){
       $this->action_any();
 	}
