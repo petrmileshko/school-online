@@ -95,7 +95,7 @@ public static function initialize() {
                         $message = 'JSON_ERROR: Некорректные символы UTF-8, возможно неверно закодирован';
                     break;
                     default:
-                        $message = 'JSON_ERROR: Неизвестная ошибка';
+                       // $message = 'JSON_ERROR: Неизвестная ошибка';
                     break;
                 }
 
