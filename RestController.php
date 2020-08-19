@@ -28,15 +28,22 @@ $rest = Init::initialize();
 
     }
     else {
-        echo 'Ошибка передачи данных.';
+        
+           $answer = ['result'=>'negative','message'=>'Ошибка передачи данных.'];
+           echo json_encode($answer);
     }
 
  }
 catch(Exception $e) {
-        die($e->getMessage());
+
+           $answer = ['result'=>'negative','message'=>$e->getMessage()];
+           echo json_encode($answer);
+
  }
 catch(PDOException $e) {
-        die($e->getMessage());
+
+           $answer = ['result'=>'negative','message'=>$e->getMessage()];
+           echo json_encode($answer);
  }
 
 

@@ -42,10 +42,13 @@ class Users extends Controller {
 
             }
 
-           return 'Такой пользователь не найден';
+           $message = 'Ошибочный пользователь или пароль: '.$this->email;
+
+            throw new Exception($message);
 
            # End  ...    тестовый код
         } 
+
             public function action_getUser() {
 
             # Start...    тестовй код   удалить после отладки
@@ -56,15 +59,16 @@ class Users extends Controller {
                 if( $val['id'] == $this->id ) {
 
                      return json_encode($this->user[$i]);
-                     
+
                     }
 
                     $i++; 
 
             }
 
-            $answer = ['result'=>'negative'];
-           return json_encode($answer);
+           $message = 'Пользователь не найден: '.$this->id;
+           
+            throw new Exception($message);
 
            # End  ...    тестовый код
         } 

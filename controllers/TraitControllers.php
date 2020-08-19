@@ -14,6 +14,7 @@ trait TraitControllers {
     private $user = [
 
         [
+         'result'=>'positive',
          'id'=>1,
          'name' => 'Peter',
          'email' => 'peter@mail.ru',
@@ -24,6 +25,7 @@ trait TraitControllers {
          'subject' => 'Математика' 
         ],
         [
+         'result'=>'positive',
          'id'=>2,
          'name' => 'Иван',
          'email' => 'ivan@mail.ru',
@@ -38,8 +40,10 @@ trait TraitControllers {
 	# End  ...    тестовый код
 
         public function action_any() {
-            
-            return 'Any called';
+
+           $message = 'action : '.$this->query['action'];
+
+            throw new Exception('Ошибка в запросе  - '.$message);
         }
     
 }
