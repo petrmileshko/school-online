@@ -92,7 +92,7 @@ public static function initialize() {
                 } */
                 
 
-                $assoc = json_decode( $rawData );
+                $assoc = json_decode( $rawData );  //  не хочет эта зараза декодировать нашу строку с json!!!
 
                 if ( is_array($assoc) )  {
 
