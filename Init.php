@@ -92,7 +92,31 @@ public static function initialize() {
                 } */
                 
 
-                $assoc = json_decode( $rawData );  //  не хочет эта зараза декодировать нашу строку с json!!!
+                $assoc = json_decode( $rawData , true );  //  не хочет эта зараза декодировать нашу строку с json!!!
+
+                               switch (json_last_error()) {
+                    case JSON_ERROR_NONE:
+                        $message = 'Ошибок нет';
+                    break;
+                    case JSON_ERROR_DEPTH:
+                        $message = 'JSON_ERROR: Достигнута максимальная глубина стека';
+                    break;
+                    case JSON_ERROR_STATE_MISMATCH:
+                        $message = 'JSON_ERROR: Некорректные разряды или несоответствие режимов';
+                    break;
+                    case JSON_ERROR_CTRL_CHAR:
+                        $message = 'JSON_ERROR: Некорректный управляющий символ';
+                    break;
+                    case JSON_ERROR_SYNTAX:
+                        $message = 'JSON_ERROR: Синтаксическая ошибка, некорректный JSON';
+                    break;
+                    case JSON_ERROR_UTF8:
+                        $message = 'JSON_ERROR: Некорректные символы UTF-8, возможно неверно закодирован';
+                    break;
+                    default:
+                        $message = 'JSON_ERROR: Неизвестная ошибка';
+                    break;
+                }
 
                 if ( is_array($assoc) )  {
 
@@ -103,7 +127,7 @@ public static function initialize() {
                 }
                 else {
 
-                $message = 'Получено на сервере: '.$rawData.' длина строки = '.strlen($rawData);
+                //$message .= 'Получено на сервере: '.$rawData;
                 throw new Exception($message);
 
                 }
