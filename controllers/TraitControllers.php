@@ -16,12 +16,12 @@ trait TraitControllers {
         [
          'result'=>'positive',
          'id'=>1,
-         'name' => 'Peter',
+         'name' => 'Петр',
          'email' => 'peter@mail.ru',
          'fio' => 'Гавриков П.А.',
          'avatar' => 'img/users/peterGa.jpg',
          'password' => '1234',
-         'access' => 'Учитель',
+         'access' => ['access_id'=>'2', 'name'=>'Учитель'],
          'subject' => 'Математика' 
         ],
         [
@@ -29,10 +29,10 @@ trait TraitControllers {
          'id'=>2,
          'name' => 'Иван',
          'email' => 'ivan@mail.ru',
-         'fio' => 'Гавриков П.А.',
-         'avatar' => 'img/users/peterGa.jpg',
+         'fio' => 'Иванов И.А.',
+         'avatar' => 'img/users/ivanGa.jpg',
          'password' => '1234',
-         'access' => 'Ученик',
+         'access' => ['access_id'=>'1', 'name'=>'Ученик'],
          'class' => '10 А'
         ]
     ]; 
@@ -52,3 +52,4 @@ trait TraitControllers {
 }
 
 ?>
+
