@@ -58,58 +58,41 @@ public static function initialize() {
         switch ($method ) {
 
             case 'GET'    :
-               // $table = $_GET['Table'];
-               // $query = array_slice($_GET, 1);
-               // $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
-               // return $rest;
+                $table = $_GET['Table'];
+                $query = array_slice($_GET, 1);
+                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
+                return $rest;
 
             case 'POST'   :
-               // $table = $_POST['Table'];
-               // $query = array_slice($_POST, 1);
-               // $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
-               // return $rest;
+            // $table = $_POST['Table'];
+            // $query = array_slice($_POST, 1);
+            // $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
+             //return $rest;
 
             case 'PUT'    :
             case 'DELETE' :
                 //$rawData = multiStrip(file_get_contents("php://input"));
-                $rawData = file_get_contents("php://input");
-                ob_start();
-                echo "Метод - $method<br>";
-                echo 'Получено с сервера :<pre>';
 
-                if($method == 'GET') print_r($_GET);
-                else print_r($rawData);
+            $rawData = file_get_contents("php://input");
 
-                echo '<br>После конвертации:<br>';
-                if( $method == 'GET') {
-                    $res = [];
-
-                    foreach( $_GET as $key=>$val ) {
-
-                        $res += [$key=>$val];
-                    }     
-
-                    print_r($res);
-                }
-                else print_r(json_decode($rawData));
-
-                echo '</pre><br>';
-                
-                die('Получено на сервре');
-/*
+                /*
                 $value = explode('&',$rawData);
                     $assoc =[];
 
                 for($i=0;$i<count($value);$i++) {
                     $res[$i] = explode('=',$value[$i]);
                     $assoc += [$res[$i][0]=>$res[$i][1]];
+                } */
+                $assoc = json_decode($rawData);
+
+                if ( $assoc and is_array($assoc))  {
+                    
+                                $table = $assoc['Table'];
+                                $query = array_slice($assoc, 1);
+                                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
+                                return $rest;
                 }
 
-                $table = $assoc['Table'];
-                $query = array_slice($assoc, 1);
-                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
-                return $rest;
-*/
             default:
                throw new Exception('Ошибка метод запроса  - '.$method);
             break;
@@ -141,5 +124,28 @@ public static function initialize() {
 
 }
 
+/*                ob_start();
+                echo "Метод - $method<br>";
+                echo 'Получено с сервера :<pre>';
+
+                if($method == 'GET') print_r($_GET);
+                else print_r($rawData);
+
+                echo '<br>После конвертации:<br>';
+                if( $method == 'GET') {
+                    $res = [];
+
+                    foreach( $_GET as $key=>$val ) {
+
+                        $res += [$key=>$val];
+                    }     
+
+                    print_r($res);
+                }
+                else print_r(json_decode($rawData));
+
+                echo '</pre><br>';
+                
+                die('Получено на сервре');*/
 
 ?>

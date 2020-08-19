@@ -14,6 +14,7 @@ class Users extends Controller {
 
     private $email;
     private $password;
+    private $id;
 
       use TraitControllers;
     
@@ -21,6 +22,7 @@ class Users extends Controller {
         parent::__construct ($rest);
         $this->email = parent::getValue('email');
         $this->password = parent::getValue('password');
+        $this->id = parent::getValue('id');
     }
     
         public function action_login() {
@@ -31,11 +33,7 @@ class Users extends Controller {
             foreach ( $this->user as $val ) {
 
                 if( $val['email'] == $this->email and $val['password'] == $this->password ) {
-                  //  ob_start();
-                  //  echo 'Добро пожаловать - '.$val['name'];
-                  //  echo '<br>Доступ - '.$val['access'];
 
-                   // return ob_get_clean();
 
                      return json_encode($this->user[$i]);
                     }
@@ -45,6 +43,28 @@ class Users extends Controller {
             }
 
            return 'Такой пользователь не найден';
+
+           # End  ...    тестовый код
+        } 
+            public function action_getUser() {
+
+            # Start...    тестовй код   удалить после отладки
+
+            $i=0;
+            foreach ( $this->user as $val ) {
+
+                if( $val['id'] == $this->id ) {
+
+                     return json_encode($this->user[$i]);
+                     
+                    }
+
+                    $i++; 
+
+            }
+
+            $answer = ['result'=>'negative'];
+           return json_encode($answer);
 
            # End  ...    тестовый код
         } 

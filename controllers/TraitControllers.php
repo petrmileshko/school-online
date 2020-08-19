@@ -14,17 +14,25 @@ trait TraitControllers {
     private $user = [
 
         [
+         'id'=>1,
          'name' => 'Peter',
          'email' => 'peter@mail.ru',
+         'fio' => 'Гавриков П.А.',
+         'avatar' => 'img/users/peterGa.jpg',
          'password' => '1234',
          'access' => 'Учитель'
+         'subject' => 'Математика' 
         ],
         [
+         'id'=>2,
          'name' => 'Иван',
          'email' => 'ivan@mail.ru',
+         'fio' => 'Гавриков П.А.',
+         'avatar' => 'img/users/peterGa.jpg',
          'password' => '1234',
-         'access' => 'Ученик'
-        ],
+         'access' => 'Ученик',
+         'class' => '10 А'
+        ]
     ]; 
 
 	# End  ...    тестовый код
