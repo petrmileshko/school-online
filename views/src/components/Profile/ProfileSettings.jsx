@@ -13,19 +13,19 @@ export default function ProfileSettings (props) {
                 <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userName">
                     <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Full Name</Form.Label>
                     <Col lg={7}>
-                        <Form.Control type="text" placeholder="David Green" value={ user.name } />
+                        <Form.Control type="text" placeholder={ user.name } />
                     </Col>
                 </Form.Group>
                 <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userEmail">
                     <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Email</Form.Label>
                     <Col lg={7}>
-                        <Form.Control type="email" placeholder="dgreen@mail.com" value={ user.email } />
+                        <Form.Control type="email" placeholder={ user.email } />
                     </Col>
                 </Form.Group>
                 <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userPhone">
                     <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Phone</Form.Label>
                     <Col lg={7}>
-                        <Form.Control type="tel" placeholder="+00 987 654 32" value={ user.phone } />
+                        <Form.Control type="tel" placeholder={ user.phone } />
                     </Col>
                 </Form.Group>
             </Form>

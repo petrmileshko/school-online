@@ -5,7 +5,7 @@ import avatar from '../../img/avatar-01.jpg';
 export default function Profile (props) {
 
     const {user} = props;
-    
+
     return (
         <div className="widget__wrapper widget__profile has-shadow">
             <div className="widget__body">
@@ -13,42 +13,22 @@ export default function Profile (props) {
                     height="150" />
                 <span className="user__name h3">{ user.name }</span>
                 <span className="user__email h4 mb-4">{ user.email }</span>
-                <span className="user__position h4 mb-4">Преподаватель</span>
+                <span className="user__position h4 mb-4">{ user.access.name }</span>
                 <ul className="user__subjects subject__list">
                     <li className="subject__item">
-                        <a href="#" className="subject__link">История</a>
-                    </li>
-                    <li className="subject__item">
-                        <a href="#" className="subject__link">Испанский язык</a>
+                        <a href="#" className="subject__link">
+                            {
+                                user.access.access_id == 2 &&
+                                user.subject
+                            }
+                            {
+                                user.access.access_id == 1 &&
+                                `Класс 10 Б`
+                            }
+                        </a>
                     </li>
                 </ul>
                 <hr className="separator-dashed" />
-                <ul className="nav flex-column">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
-                            <i className="la la-group la-2x align-middle pr-2"></i>
-                            Classes
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
-                            <i className="la la-bell la-2x align-middle pr-2"/>
-                            Lessons
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
-                            <i className="la la-clipboard la-2x align-middle pr-2"></i>
-                            Tasks
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="./profile-settings.html">
-                            <i className="la la-gears la-2x align-middle pr-2"></i>
-                            Settings
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
     )

@@ -11,6 +11,8 @@ export default function Sidebar (props) {
     let dropdownToggler = evt => {
         evt.target.closest('.sb-dropdown').classList.toggle('open');
     }
+
+    const {user} = props;
     
     return (
         <div className="sidebar sidebar__default">
@@ -32,9 +34,12 @@ export default function Sidebar (props) {
                             <span className="side-navbar__link--title">Education</span>
                         </span>
                         <ul className="nav sb-dropdown__menu flex-column">
-                            <li className="nav-item sb-dropdown__item">
-                                <Link to="/classes" className="sb-dropdown__link">Classes</Link>
-                            </li>
+                            {
+                                user.access.access_id == 2 &&
+                                <li className="nav-item sb-dropdown__item">
+                                    <Link to="/classes" className="sb-dropdown__link">Classes</Link>
+                                </li>
+                            }
                             <li className="nav-item sb-dropdown__item">
                                 <Link to="/lessons" className="sb-dropdown__link">Lessons</Link>
                             </li>
