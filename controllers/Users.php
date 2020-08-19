@@ -16,7 +16,7 @@ class Users extends Controller {
     private $password;
     private $id;
 
-      use TraitControllers;
+    use TraitControllers;
     
     public function __construct ($rest) {
         parent::__construct ($rest);

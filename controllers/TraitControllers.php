@@ -39,7 +39,10 @@ trait TraitControllers {
 
 	# End  ...    тестовый код
 
-        public function action_any() {
+    /**
+     *
+     */
+    public function action_any() {
 
            $message = 'action : '.$this->query['action'];
 
