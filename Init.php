@@ -73,8 +73,9 @@ public static function initialize() {
             case 'DELETE' :
                 //$rawData = multiStrip(file_get_contents("php://input"));
 
-            $rawData = file_get_contents("php://input");
-            
+            $rawData = multiStrip( preg_replace( '|\xEF\xBB\xBF|', "", file_get_contents("php://input") ) );
+
+
             if( $rawData == '' ) {
 
                 $message = 'Headers пустой. Ничего не передано на сервер. Метод: '.$method;
@@ -91,7 +92,7 @@ public static function initialize() {
                 } */
                 
 
-                $assoc = json_decode( multiStrip($rawData) );
+                $assoc = json_decode( $rawData );
 
                 if ( is_array($assoc) )  {
 
