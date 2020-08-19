@@ -16,7 +16,7 @@ class Users extends Controller {
     private $password;
     private $id;
 
-      use TraitControllers;
+    use TraitControllers;
     
     public function __construct ($rest) {
         parent::__construct ($rest);
@@ -27,7 +27,7 @@ class Users extends Controller {
     
         public function action_login() {
 
-            # Start...    тестовй код   удалить после отладки
+            # Start...    тестовй код - после отладки заменить на рабочий
 
             $i=0;
             foreach ( $this->user as $val ) {
@@ -51,7 +51,7 @@ class Users extends Controller {
 
             public function action_getUser() {
 
-            # Start...    тестовй код   удалить после отладки
+            # Start...    тестовй код - после отладки заменить на рабочий
 
             $i=0;
             foreach ( $this->user as $val ) {

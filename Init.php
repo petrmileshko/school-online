@@ -62,16 +62,9 @@ public static function initialize() {
                 $query = array_slice($_GET, 1);
                 $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
                 return $rest;
-
             case 'POST'   :
-            // $table = $_POST['Table'];
-            // $query = array_slice($_POST, 1);
-            // $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
-             //return $rest;
-
             case 'PUT'    :
             case 'DELETE' :
-                //$rawData = multiStrip(file_get_contents("php://input"));
 
             $rawData = multiStrip( preg_replace( '|\xEF\xBB\xBF|', "", file_get_contents("php://input") ) );
 
@@ -81,23 +74,11 @@ public static function initialize() {
                 $message = 'Headers пустой. Ничего не передано на сервер. Метод: '.$method;
                 throw new Exception($message);
 
-            }
-                /*
-                $value = explode('&',$rawData);
-                    $assoc =[];
-
-                for($i=0;$i<count($value);$i++) {
-                    $res[$i] = explode('=',$value[$i]);
-                    $assoc += [$res[$i][0]=>$res[$i][1]];
-                } */
-                
+            }   
 
                 $assoc = json_decode( $rawData , true );  
 
                                switch (json_last_error()) {
-                    case JSON_ERROR_NONE:
-                        $message = 'Ошибок нет';
-                    break;
                     case JSON_ERROR_DEPTH:
                         $message = 'JSON_ERROR: Достигнута максимальная глубина стека';
                     break;
@@ -114,11 +95,10 @@ public static function initialize() {
                         $message = 'JSON_ERROR: Некорректные символы UTF-8, возможно неверно закодирован';
                     break;
                     default:
-                        $message = 'JSON_ERROR: Неизвестная ошибка';
                     break;
                 }
 
-                if ( is_array($assoc) )  {
+                if ( is_array($assoc) and !$message )  {
 
                                 $table = $assoc['Table'];
                                 $query = array_slice($assoc, 1);
@@ -127,7 +107,6 @@ public static function initialize() {
                 }
                 else {
 
-                //$message .= 'Получено на сервере: '.$rawData;
                 throw new Exception($message);
 
                 }
@@ -163,28 +142,5 @@ public static function initialize() {
 
 }
 
-/*                ob_start();
-                echo "Метод - $method<br>";
-                echo 'Получено с сервера :<pre>';
-
-                if($method == 'GET') print_r($_GET);
-                else print_r($rawData);
-
-                echo '<br>После конвертации:<br>';
-                if( $method == 'GET') {
-                    $res = [];
-
-                    foreach( $_GET as $key=>$val ) {
-
-                        $res += [$key=>$val];
-                    }     
-
-                    print_r($res);
-                }
-                else print_r(json_decode($rawData));
-
-                echo '</pre><br>';
-                
-                die('Получено на сервре');*/
 
 ?>
