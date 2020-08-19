@@ -74,7 +74,13 @@ public static function initialize() {
                 //$rawData = multiStrip(file_get_contents("php://input"));
 
             $rawData = file_get_contents("php://input");
+            
+            if( $rawData == '' ) {
 
+                $message = 'Headers пустой. Ничего не передано на сервер. Метод: '.$method;
+                throw new Exception($message);
+
+            }
                 /*
                 $value = explode('&',$rawData);
                     $assoc =[];
@@ -83,14 +89,21 @@ public static function initialize() {
                     $res[$i] = explode('=',$value[$i]);
                     $assoc += [$res[$i][0]=>$res[$i][1]];
                 } */
+
                 $assoc = json_decode($rawData);
 
-                if ( $assoc and is_array($assoc))  {
-                    
+                if ( is_array($assoc))  {
+
                                 $table = $assoc['Table'];
                                 $query = array_slice($assoc, 1);
                                 $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
                                 return $rest;
+                }
+                else {
+
+                $message = 'Получено на сервере: '.$rawData;
+                throw new Exception($message);
+                
                 }
 
             default:
