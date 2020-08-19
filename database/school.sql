@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Авг 19 2020 г., 18:19
--- Версия сервера: 10.3.13-MariaDB
--- Версия PHP: 7.3.2
+-- Хост: localhost
+-- Время создания: Авг 19 2020 г., 20:31
+-- Версия сервера: 5.7.30-33-log
+-- Версия PHP: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `school`
+-- База данных: `host1589827_school`
 --
 
 -- --------------------------------------------------------
@@ -36,7 +34,7 @@ CREATE TABLE `answers` (
   `task_id` int(11) NOT NULL,
   `status` varchar(255) NOT NULL,
   `score` varchar(255) NOT NULL,
-  `time_stamp` timestamp NOT NULL DEFAULT current_timestamp()
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -55,10 +53,10 @@ CREATE TABLE `auth` (
 --
 
 INSERT INTO `auth` (`id`, `access`) VALUES
-(1, 'Администратор'),
-(2, 'Директор'),
-(3, 'Учитель'),
-(4, 'Ученик');
+(1, 'Ученик'),
+(2, 'Учитель'),
+(3, 'Директор'),
+(4, 'Администратор');
 
 -- --------------------------------------------------------
 
@@ -91,13 +89,6 @@ CREATE TABLE `classes_relation` (
   `class_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `classes_relation`
---
-
-INSERT INTO `classes_relation` (`user_id`, `class_id`) VALUES
-(3, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -129,14 +120,6 @@ CREATE TABLE `subject_relation` (
   `subject_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `subject_relation`
---
-
-INSERT INTO `subject_relation` (`user_id`, `subject_id`) VALUES
-(3, 1),
-(3, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -151,15 +134,8 @@ CREATE TABLE `tasks` (
   `task_body` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `time_stamp` timestamp NOT NULL DEFAULT current_timestamp()
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `tasks`
---
-
-INSERT INTO `tasks` (`id`, `task_name`, `task_description`, `task_file`, `task_body`, `user_id`, `subject_id`, `time_stamp`) VALUES
-(1, 'дз_1', 'сделать домашку', '/path', 'не понял что тут', 3, 1, '2020-08-19 15:09:57');
 
 -- --------------------------------------------------------
 
@@ -173,8 +149,8 @@ CREATE TABLE `users` (
   `fio` varchar(100) NOT NULL,
   `pass` varchar(255) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `access_id` int(2) NOT NULL DEFAULT 4,
-  `time_stamp` timestamp NOT NULL DEFAULT current_timestamp()
+  `access_id` int(2) NOT NULL DEFAULT '1',
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -182,8 +158,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `fio`, `pass`, `email`, `access_id`, `time_stamp`) VALUES
-(1, 'admin', 'Baukov Aleksandr', '12345', 'test@mail.ru', 1, '2020-08-19 13:51:36'),
-(3, 'user1', 'test user', '12345', 'test@test.ru', 2, '2020-08-19 14:02:48');
+(1, 'admin', 'Baukov Aleksandr', '12345', 'test@mail.ru', 4, '2020-08-19 13:51:36'),
+(3, 'user1', 'test user', '12345', 'test@test.ru', 1, '2020-08-19 14:02:48');
 
 --
 -- Индексы сохранённых таблиц
@@ -253,37 +229,31 @@ ALTER TABLE `users`
 --
 ALTER TABLE `answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT для таблицы `auth`
 --
 ALTER TABLE `auth`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT для таблицы `classes`
 --
 ALTER TABLE `classes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `subjects`
 --
 ALTER TABLE `subjects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -321,7 +291,6 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `auth` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
