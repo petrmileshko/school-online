@@ -43,67 +43,67 @@ trait TraitControllers {
          'result'=>'positive',
          'fio' => 'Гавриков П.А.',
          'subject' => 'Математика',
-         'score', => 4
+         'score' => 4
         ],
                 [
          'result'=>'positive',
          'fio' => 'Гавриков П.А.',
          'subject' => 'Математика',
-         'score', => 3
+         'score' => 3
         ],
                 [
          'result'=>'positive',
          'fio' => 'Гавриков П.А.',
          'subject' => 'Иностранный язык',
-         'score', => 5
+         'score' => 5
         ],
                 [
          'result'=>'positive',
          'fio' => 'Гавриков П.А.',
          'subject' => 'Физика',
-         'score', => 4
+         'score' => 4
         ],
                         [
          'result'=>'positive',
          'fio' => 'Гавриков П.А.',
          'subject' => 'Физика',
-         'score', => 5
+         'score' => 5
         ],
                 [
          'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Физика',
-         'score', => 4
+         'score' => 4
         ],
                         [
          'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Иностранный язык',
-         'score', => 3
+         'score' => 3
         ],
                                 [
          'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Иностранный язык',
-         'score', => 4
+         'score' => 4
         ],
         [
          'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Математика',
-         'score', => 5
+         'score' => 5
         ]
                                         [
          'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Иностранный язык',
-         'score', => null
+         'score' => null
         ],
         [
          'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Математика',
-         'score', => null
+         'score' => null
         ]
     ]; 
 	# End  ...    тестовый код
