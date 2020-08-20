@@ -81,6 +81,8 @@ class Users extends Controller {
 
         public function action_all() {
 
+        return json_encode($this->user);
+
         } 
 
 
