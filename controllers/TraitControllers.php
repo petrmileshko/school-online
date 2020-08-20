@@ -159,7 +159,7 @@ trait TraitControllers {
 
            $message = 'action : '.$this->query['action'];
 
-            throw new Exception('Ошибка в запросе  - '.$message);
+            throw new \Exception('Ошибка в запросе  - '.$message);
         }
     
 }
