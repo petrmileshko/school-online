@@ -31,7 +31,7 @@ class Tasks extends Controller {
            # End  ...    тестовый код
         } 
 
-            public function action_getTask() {
+        public function action_getTask() {
 
             # Start...    тестовй код - после отладки заменить на рабочий
 
@@ -47,7 +47,7 @@ class Tasks extends Controller {
                     $i++; 
 
             }
-    
+        }
 }
 
 ?>
