@@ -106,6 +106,38 @@ trait TraitControllers {
          'score' => null
         ]
     ]; 
+
+    private $tasks = [
+
+        [
+         'result'=>'positive',
+         'fio' => 'Гавриков П.А.',
+         'subject' => 'Математика',
+         'task_name' => 'Дробные числа. Решить примеры',
+         'id' => 1
+        ],
+                [
+         'result'=>'positive',
+         'fio' => 'Гавриков П.А.',
+         'subject' => 'Математика',
+         'task_name' => 'Решить примеры и выучить теорию',
+         'id' => 2
+        ],
+                [
+         'result'=>'positive',
+         'fio' => 'Гавриков П.А.',
+         'subject' => 'Иностранный язык',
+         'task_name' => 'Прочесть и перевести текст',
+         'id' => 3
+        ],
+        [
+         'result'=>'positive',
+         'fio' => 'Иванов И.А.',
+         'subject' => 'Физика',
+         'task_name' => 'Прочесть и выучить закон механики.',
+         'id' => 4
+        ]
+    ]; 
 	# End  ...    тестовый код
 
     /*
