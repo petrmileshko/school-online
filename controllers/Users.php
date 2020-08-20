@@ -48,7 +48,7 @@ class Users extends Controller {
 
            $message = 'Ошибочный пользователь или пароль: '.$this->email;
 
-            throw new Exception($message);
+            throw new \Exception($message);
 
            # End  ...    тестовый код
         } 
@@ -72,7 +72,7 @@ class Users extends Controller {
 
            $message = 'Пользователь не найден: '.$this->id;
            
-            throw new Exception($message);
+            throw new \Exception($message);
 
            # End  ...    тестовый код
         } 
