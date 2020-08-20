@@ -1,0 +1,30 @@
+
+Страница Журнал Оценок запрос-ответ json
+
+
+
+Запрос на все записи с оценками
+{
+	
+	"Table" : 'Answers',
+	"action" : 'scores',
+	'question' : string					
+}
+
+Ответы:
+
+Положительный
+
+{
+	     'result' : 'positive',
+         'fio' : string,
+         'subject' : string,
+         'score' : integer
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}
