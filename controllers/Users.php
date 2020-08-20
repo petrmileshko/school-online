@@ -34,7 +34,10 @@ class Users extends Controller {
 
                 if( $val['email'] == $this->email and $val['password'] == $this->password ) {
 
+                    $token = random_bytes(5);
 
+                    user[$i] += ['question'=>$token];
+                    //$_SESSION['token'] = $token;
                      return json_encode($this->user[$i]);
                     }
 
