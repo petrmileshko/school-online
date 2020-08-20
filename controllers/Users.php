@@ -36,7 +36,7 @@ class Users extends Controller {
 
                     $token = random_bytes(5);
 
-                    user[$i] += ['question'=>$token];
+                    $user[$i] += ['question'=>$token];
                     //$_SESSION['token'] = $token;
                      return json_encode($this->user[$i]);
                     }
