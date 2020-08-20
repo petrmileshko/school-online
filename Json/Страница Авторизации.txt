@@ -1,0 +1,37 @@
+
+запрос-ответ json
+
+
+
+Запрос на все записи с оценками
+{
+	
+	'Table' : 'Users',
+	'action' : 'login',
+	'email' : string,
+	'password' : string
+}
+
+Ответы:
+
+Положительный
+
+{
+	     'result' : 'positive',
+         'question' : string
+         'id' : integer,
+         'name' : string,
+         'email' : string,
+         'fio' : string,
+         'avatar' : string,
+         'password' : string,
+         'access' : { 'access_id'=>integer, 'name'=>string},          (только для учителей)
+         'class' : string											   (только для учеников)	
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}

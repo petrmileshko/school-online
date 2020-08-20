@@ -58,10 +58,20 @@ public static function initialize() {
         switch ($method ) {
 
             case 'GET'    :
-                $table = $_GET['Table'];
+                $table = multiStrip($_GET['Table']);
                 $query = array_slice($_GET, 1);
-                $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
-                return $rest;
+                foreach ($query as $key=>$item) {
+                    $query[$key] = multiStrip($item);
+                }
+                if ($table and is_array($query) ) {
+
+                    $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
+                    return $rest;
+                }
+                else {
+                    throw new Exception('Пустой запрос');
+                }
+                
             case 'POST'   :
             case 'PUT'    :
             case 'DELETE' :
