@@ -114,6 +114,9 @@ trait TraitControllers {
          'fio' => 'Гавриков П.А.',
          'subject' => 'Математика',
          'task_name' => 'Дробные числа. Решить примеры',
+         'task_description' => 'Тут идет краткое описание задания 1',
+         'task_body' => 'Тут идет текст задания 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque iusto ab nisi aspernatur velit consequatur quas ratione libero dignissimos corrupti ullam, sunt tempora consectetur quis?',
+         'task_file' => 'data/tasks/задание1.txt',
          'id' => 1
         ],
                 [
@@ -121,6 +124,9 @@ trait TraitControllers {
          'fio' => 'Гавриков П.А.',
          'subject' => 'Математика',
          'task_name' => 'Решить примеры и выучить теорию',
+                  'task_description' => 'Тут идет краткое описание задания 2',
+         'task_body' => 'Тут идет текст задания 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque iusto ab nisi aspernatur velit consequatur quas ratione libero dignissimos corrupti ullam, sunt tempora consectetur quis?',
+         'task_file' => 'data/tasks/задание2.txt',
          'id' => 2
         ],
                 [
@@ -128,6 +134,9 @@ trait TraitControllers {
          'fio' => 'Гавриков П.А.',
          'subject' => 'Иностранный язык',
          'task_name' => 'Прочесть и перевести текст',
+                  'task_description' => 'Тут идет краткое описание задания 3',
+         'task_body' => 'Тут идет текст задания 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque iusto ab nisi aspernatur velit consequatur quas ratione libero dignissimos corrupti ullam, sunt tempora consectetur quis?',
+         'task_file' => 'data/tasks/задание3.txt',
          'id' => 3
         ],
         [
@@ -135,6 +144,9 @@ trait TraitControllers {
          'fio' => 'Иванов И.А.',
          'subject' => 'Физика',
          'task_name' => 'Прочесть и выучить закон механики.',
+         'task_description' => 'Тут идет краткое описание задания 4',
+         'task_body' => 'Тут идет текст задания 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque iusto ab nisi aspernatur velit consequatur quas ratione libero dignissimos corrupti ullam, sunt tempora consectetur quis?',
+         'task_file' => 'data/tasks/задание4.txt',
          'id' => 4
         ]
     ]; 

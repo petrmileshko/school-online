@@ -62,7 +62,7 @@ class Users extends Controller {
 
                 if( $val['id'] == $this->id ) {
 
-                     return json_encode($this->user[$i]);
+                     return json_encode($val);
 
                     }
 
