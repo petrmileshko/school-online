@@ -92,8 +92,8 @@ trait TraitControllers {
          'fio' => 'Иванов И.А.',
          'subject' => 'Математика',
          'score' => 5
-        ]
-                                        [
+        ],
+        [
          'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Иностранный язык',
