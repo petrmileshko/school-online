@@ -48,7 +48,7 @@ class Users extends Controller {
 
            $message = 'Ошибочный пользователь или пароль: '.$this->email;
 
-            throw new Exception($message);
+            throw new \Exception($message);
 
            # End  ...    тестовый код
         } 
@@ -62,7 +62,7 @@ class Users extends Controller {
 
                 if( $val['id'] == $this->id ) {
 
-                     return json_encode($this->user[$i]);
+                     return json_encode($val);
 
                     }
 
@@ -72,7 +72,7 @@ class Users extends Controller {
 
            $message = 'Пользователь не найден: '.$this->id;
            
-            throw new Exception($message);
+            throw new \Exception($message);
 
            # End  ...    тестовый код
         } 
@@ -80,6 +80,8 @@ class Users extends Controller {
         /* Функция для вывода всех пользователей в админке */
 
         public function action_all() {
+
+        return json_encode($this->user);
 
         } 
 
