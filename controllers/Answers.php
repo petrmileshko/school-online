@@ -21,7 +21,7 @@ class Answers extends Controller {
     
         public function action_scores() {
 
-            # Start...    тестовй код - после отладки заменить на рабочий
+            # Start...    тестовый код - после отладки заменить на рабочий
 
                      return json_encode($this->answers);
 

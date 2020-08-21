@@ -19,17 +19,28 @@ class Users extends Controller {
     use TraitControllers;
     
     public function __construct ($rest) {
+
         parent::__construct ($rest);
+
         $this->email = parent::getValue('email');
         $this->password = parent::getValue('password');
         $this->id = parent::getValue('id');
+       
+        if ($this->data) {
+            $this->user = $this->data;
+        }
     }
+
+    /**
+     * 
+     * @return json
+     */
     
         public function action_login() {
 
-            # Start...    тестовй код - после отладки заменить на рабочий
+            # Start...    тестовый код - после отладки заменить на рабочий
 
-            $i=0;
+            
             foreach ( $this->user as $val ) {
 
                 if( $val['email'] == $this->email and $val['password'] == $this->password ) {
@@ -42,8 +53,6 @@ class Users extends Controller {
                      return json_encode($val);
                     }
 
-                    $i++; 
-
             }
 
            $message = 'Ошибочный пользователь или пароль: '.$this->email;
@@ -53,11 +62,16 @@ class Users extends Controller {
            # End  ...    тестовый код
         } 
 
+    /**
+     * 
+     * @return json
+     */
+    
+
             public function action_getUser() {
 
-            # Start...    тестовй код - после отладки заменить на рабочий
+            # Start...    тестовый код - после отладки заменить на рабочий
 
-            $i=0;
             foreach ( $this->user as $val ) {
 
                 if( $val['id'] == $this->id ) {
@@ -65,8 +79,6 @@ class Users extends Controller {
                      return json_encode($val);
 
                     }
-
-                    $i++; 
 
             }
 
@@ -76,9 +88,41 @@ class Users extends Controller {
 
            # End  ...    тестовый код
         } 
-    
-        /* Функция для вывода всех пользователей в админке */
 
+    /**
+     * 
+     * @return json
+     */
+
+         public function action_update() {
+
+            # Start...    тестовый код - после отладки заменить на рабочий
+
+
+            foreach ( $this->user as $val ) {
+
+                if( $val['id'] == $this->id ) {
+
+                    $result = $this->update( array_slice($this->query, 1), $this->id , $this->user );
+
+                     return json_encode($result);
+
+                    }
+
+            }
+
+           $message = 'Пользователь не найден: '.$this->id;
+           
+            throw new \Exception($message);
+
+           # End  ...    тестовый код
+        } 
+
+
+    /**
+     * 
+     * @return json
+     */
         public function action_all() {
 
         return json_encode($this->user);
