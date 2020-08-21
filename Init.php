@@ -31,7 +31,12 @@ final class Init {
 
 	private static $dbParams;
 
-	
+
+    /**
+     * 
+     * @return array
+     */
+
 public static function initialize() {
 
 	 if(!is_file(INI_FILE)) throw new Exception('Файл не найден - '.INI_FILE);
@@ -130,6 +135,11 @@ public static function initialize() {
 
     }
 
+    /**
+     * @param  string
+     * 
+     */
+
     public static function autoloader($class)       // автозагручик классов
     {
         $result = array_slice( explode('\\',$class),1);
@@ -145,11 +155,36 @@ public static function initialize() {
         else throw new Exception('Автозагрузчик : класс не найден - '.$class);
     }
 
+    /**
+     * 
+     * @return array
+     */
+
     public static function getDBParams() {
         
         return self::$dbParams;
     }
 
+    /**
+     * @param array string
+     * 
+     */
+
+    public static function save(array $values, $param) {
+
+        $_SESSION[$param] = $values;
+
+    }
+
+    /**
+     * @param  string
+     * @return array or null
+     */
+
+    public static function load($param) {
+
+        return ( $_SESSION[$param] ) ? $_SESSION[$param] : null;
+    }
 }
 
 

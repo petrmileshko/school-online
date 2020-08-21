@@ -9,7 +9,7 @@ namespace School\controllers;
 
 trait TraitControllers {
 
-    # Start...    тестовй код    удалить после отладки
+    # Start...    тестовый код    удалить после отладки
 
     private $user = [
 

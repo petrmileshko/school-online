@@ -14,9 +14,10 @@ abstract class Controller
     protected $controller;
     protected $method;
     protected $query;
+    protected $data;
 
     /**
-     * @return Exeption
+     * @return Exception
      */
     
     public abstract function action_any();   // объявить методы абстрактные
@@ -27,9 +28,10 @@ abstract class Controller
      * @param array [ 'Method'=>string ,'Table'=>string,'Query'=>array, 'controller'=>string ]
      */
 
-    public function __construct($rest) {
+    public function __construct(array $rest) {
 
     	$this->controller = array_slice( explode('\\',get_class($this)),2)[0];
+        $this->data = \Init::load( $this->controller );
     	$this->query = $rest['Query'];
     	$this->method = $rest['Method'];
     }
@@ -54,7 +56,7 @@ abstract class Controller
     }
 
     /**
-     * @param $key
+     * @param $key string
      * @return string or integer
      */
 
@@ -63,7 +65,40 @@ abstract class Controller
     }
 
     /**
-     * @param $name
+     * @param array , integer , array
+     * @return array server response 
+     */
+
+    public function update(array $fields, $index, array $table ) {
+
+
+            $i=0;
+        foreach ($table as $row) {
+
+
+            if (  $row['id'] == $index ) {
+
+                foreach ($fields as $key => $value) {
+
+                   $table[$i][$key] = $value;
+
+                }
+
+                \Init::save( $table, $this->controller );
+
+                return ['result'=>'positive'];
+            }
+            $i++;
+        }
+
+        $message = 'Ошибка update. Позиция в '.$this->controller.' не найдена - id: '.$this->id;
+           
+        throw new \Exception($message);
+
+    }
+
+    /**
+     * @param $name string
      * @param $params
      */
 

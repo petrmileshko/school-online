@@ -23,7 +23,7 @@ class Tasks extends Controller {
     
         public function action_all() {
 
-            # Start...    тестовй код - после отладки заменить на рабочий
+            # Start...    тестовый код - после отладки заменить на рабочий
 
                      return json_encode($this->tasks);
 

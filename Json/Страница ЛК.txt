@@ -35,3 +35,35 @@
 	'result' : 'negative',
 	'message' : string
 }
+
+------------------------------------------------------------
+
+Запрос
+
+{
+	
+		 'Table' : 'Users',
+		 'action' : 'update',
+		 'id' : integer,
+         'name' : string,
+         'email' : string,
+         'fio' : string,
+         'avatar' : string,
+         'password' : string,
+		 'question' : string					
+}
+
+Ответы:
+
+Положительный
+
+{
+	     'result' : 'positive'
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}
