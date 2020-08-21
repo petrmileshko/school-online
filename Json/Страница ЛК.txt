@@ -24,7 +24,8 @@
          'fio' : string,
          'avatar' : string,
          'password' : string,
-         'access' : { 'access_id'=>integer, 'name'=>string},          (только для учителей)
+         'access' : { 'access_id'=>integer, 'name'=>string},
+         'subject' : string,									       (только для учителей)
          'class' : string											   (только для учеников)
 }
 
