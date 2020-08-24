@@ -28,8 +28,8 @@ export default function GroupsList () {
                             <td>Испанский язык</td>
                             <td>10 А</td>
                             <td className="td-actions">
-                                <a href="#"><i className="la la-edit edit"></i></a>
-                                <a href="#"><i className="la la-close delete"></i></a>
+                                <a href="/"><i className="la la-edit edit"></i></a>
+                                <a href="/"><i className="la la-close delete"></i></a>
                             </td>
                         </tr>
                     </tbody>

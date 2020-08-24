@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useHttp } from '../../hooks/http.hook';
+import { AuthContext } from '../../context/AuthContext';
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import logo from '../../img/logo.png';
 
-export default function Login() {
+export const Login = () => {
+    const auth = useContext(AuthContext);
+    const {loading, request} = useHttp();
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    });
+
+    const changeHandler = event => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+    }
+
+    const loginHandler = async () => {
+        try {
+            const data = await request(
+                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
+                'POST',
+                {Table: 'Users', action: 'login', ...form}
+            );
+
+            auth.login( data.question, data.id, data.access );
+        } catch (e) {}
+    }
+
     return (
         <Container fluid className="auth__page">
             <Row>
@@ -12,6 +37,10 @@ export default function Login() {
                     <div className="title__wrapper">
                         <h1 className="title">Welcome To Education Online!</h1>
                         <span className="subtitle">Etiam consequat urna at magna bibendum, in tempor arcu fermentum vitae mi massa egestas.</span>
+                        <span className="h3 pt-5" style={{color: '#fff'}}>Данные для авторизации в приложении</span>
+                        <span className="h4 pt-3" style={{color: '#fff'}}>Учитель:</span>
+                        <span>Email: peter@mail.ru</span>
+                        <span>Password: 1234</span>
                     </div>
                 </Col>
                 <Col md={7} lg={6} xl={4} className="col-right">
@@ -27,35 +56,43 @@ export default function Login() {
 
                         <Form className="form__signIn">
                             <Form.Group controlId="inputEmail">
-                                <Form.Control type="email" />
+                                <Form.Control
+                                    type="email"
+                                    name="email"
+                                    value={ form.email }
+                                    onChange={ changeHandler }
+                                />
                                 <Form.Label>Email</Form.Label>
                                 <span className="bar"></span>
                             </Form.Group>
                             <Form.Group controlId="inputPassword">
-                                <Form.Control type="password" />
+                                <Form.Control
+                                    type="password"
+                                    name="password"
+                                    value={ form.password }
+                                    onChange={ changeHandler }
+                                />
                                 <Form.Label>Password</Form.Label>
                                 <span className="bar"></span>
                             </Form.Group>
                             <div className="form__include">
                                 <Form.Check
                                     type="checkbox"
+                                    name="checkbox"
                                     label="Remember me"
                                     id="check_remember"
                                 />
-                                <a href="#" className="forgot-pass">Forgot Password?</a>
+                                <a href="/" className="forgot-pass">Forgot Password?</a>
                             </div>
                             <Button
                                 className="btn btn-primary btn__gradient btn__grad-danger btn__sign-in"
                                 type="submit"
+                                disabled={ loading }
+                                onClick={ loginHandler }
                             >
                             Sign in
                             </Button>
                         </Form>
-                        <Link to="/profile"
-                            className="btn btn-primary btn__gradient btn__grad-danger btn__sign-in"
-                        >
-                            Аварийный вход
-                        </Link>
                         <div className="register">
                             <span className="register__text">Don't have an account?</span>
                             <Link to="/register">Create an account</Link>

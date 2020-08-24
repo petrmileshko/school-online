@@ -3,7 +3,7 @@ import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import logo from '../../img/logo.png';
 
-export default function Header (props) {
+export const Header = props => {
 
     return (
         <header className="header">
@@ -11,7 +11,7 @@ export default function Header (props) {
                 <div className="navbar__wrapper">
                     <div className="navbar__header">
                         <Navbar.Brand
-                            href="#"
+                            href="/"
                             className="d-flex align-items-center"
                         >
                             <img
@@ -26,7 +26,7 @@ export default function Header (props) {
                         <button
                             className={`btn navbar__toggler${ props.sidebarShrink ? '' : ' active' }`}
                             type="button"
-                            onClick={ props.sidebarToggle }
+                            onClick={ props.sbToggle }
                         >
                             <span></span>
                             <span></span>

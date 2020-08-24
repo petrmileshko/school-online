@@ -1,18 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import {AuthContext} from '../../context/AuthContext';
 
 import { Nav } from 'react-bootstrap';
 import { ReactComponent as IconUser } from '../../img/user.svg';
 import { ReactComponent as OpenBook } from '../../img/open-book.svg';
 import { ReactComponent as LogOut } from '../../img/logout.svg';
 
-export default function Sidebar (props) {
+export const Sidebar = props => {
+    const history = useHistory();
+    const auth = useContext(AuthContext);
 
-    let dropdownToggler = evt => {
-        evt.target.closest('.sb-dropdown').classList.toggle('open');
+    let dropdownToggler = event => {
+        event.target.closest('.sb-dropdown').classList.toggle('open');
     }
 
-    const {user} = props;
+    const logoutHandler = event => {
+        event.preventDefault();
+        auth.logout();
+        history.push('/');
+    }
     
     return (
         <div className="sidebar sidebar__default">
@@ -34,25 +41,22 @@ export default function Sidebar (props) {
                             <span className="side-navbar__link--title">Education</span>
                         </span>
                         <ul className="nav sb-dropdown__menu flex-column">
-                            {
-                                user.access.access_id == 2 &&
-                                <li className="nav-item sb-dropdown__item">
-                                    <Link to="/classes" className="sb-dropdown__link">Classes</Link>
-                                </li>
-                            }
                             <li className="nav-item sb-dropdown__item">
-                                <Link to="/lessons" className="sb-dropdown__link">Lessons</Link>
+                                <Link to="/sabjects" className="sb-dropdown__link">Subjects</Link>
                             </li>
                             <li className="nav-item sb-dropdown__item">
                                 <Link to="/tasks" className="sb-dropdown__link">Tasks</Link>
                             </li>
+                            <li className="nav-item sb-dropdown__item">
+                                <Link to="/answers" className="sb-dropdown__link">Answers</Link>
+                            </li>
                         </ul>
                     </li>
                     <li className="side-navbar__item">
-                        <Link to="/" className="side-navbar__link">
+                        <a href="/" className="side-navbar__link" onClick={logoutHandler}>
                             <LogOut className="side-navbar__icon icon-logout" />
                             <span className="side-navbar__link--title">Logout</span>
-                        </Link>
+                        </a>
                     </li>
                 </Nav>
             </div>

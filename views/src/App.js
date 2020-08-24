@@ -1,38 +1,23 @@
 import React from 'react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Link
-} from "react-router-dom";
-
-import Layout from "./components/Layout/Layout.jsx";
-import Login from "./components/Auth/Login.jsx";
-import Register from "./components/Auth/Register.jsx";
-import CropImage from './components/CropImage/CropImage.jsx';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {useRoutes} from './routes';
+import {useAuth} from './hooks/auth.hook';
+import {AuthContext} from './context/AuthContext';
 
 function App() {
-	return ( 
-		<Router>
-			<Switch>
-				<Route exact path="/">
-					<Login />
-				</Route>
-				<Route path="/register">
-					<Register />
-				</Route>
-				<Route path="/crop">
-					<CropImage />
-				</Route>
-				<Route path="/profile">
-					<Layout />
-				</Route>
-				<Route path="/groups">
-					<Layout />
-				</Route>
-			</Switch>
-		</Router>
-	);
+	const {login, logout, token, userId, userAccess} = useAuth();
+	const isAuthenticated = !!token;
+	const routes = useRoutes(isAuthenticated);
+
+	return (
+		<AuthContext.Provider value={{
+			token, login, logout, userId, userAccess, isAuthenticated
+		}}>
+			<Router>
+				<>{ routes }</>
+			</Router>
+		</AuthContext.Provider>
+	)
 }
 
 export default App;
