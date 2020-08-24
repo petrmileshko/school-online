@@ -5,6 +5,8 @@ import { Header } from "../components/Header/Header.jsx";
 import { Sidebar } from "../components/Sidebar/Sidebar.jsx";
 import { TaskDetail } from '../components/Tasks/TaskDetail.jsx';
 import { useHttp } from "../hooks/http.hook";
+import RichTextEditor from '../components/RichTextEditor/RichTextEditor.js';
+import {Editor, EditorState} from 'draft-js';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
@@ -13,6 +15,7 @@ export const DetailTaskPage = () => {
     const taskId = useParams().id;
     const [sbShrink, setSbShrink] = useState(true);
     const [task, setTask] = useState();
+    const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
     const {request, loading} = useHttp();
     
     const sidebarToggleHandler = useCallback(() => {
@@ -76,9 +79,24 @@ export const DetailTaskPage = () => {
                                 </div>
                             </Row>
                             <Row className="flex-row">
-                                <Col>
+                                <Col xs={12}>
                                     <div className="widget__wrapper has-shadow">
                                         <TaskDetail task={ task } />
+                                    </div>
+                                </Col>
+                                <Col xs={12}>
+                                    <div className="widget__wrapper has-shadow">
+                                        <div className="widget__header">
+                                            <h4 class="widget__title">Ответ на задание</h4>
+                                        </div>
+                                        <div className="widget__body">
+                                            <RichTextEditor />
+                                            {/* <Editor
+                                                placeholder="Enter your answer..."
+                                                editorState={editorState}
+                                                onChange={setEditorState}
+                                            /> */}
+                                        </div>
                                     </div>
                                 </Col>
                             </Row>
