@@ -2,8 +2,7 @@ import React from 'react';
 
 import avatar from '../../img/avatar-01.jpg';
 
-export const Profile = props => {
-    const { user } = props;
+export const Profile = ({ user }) => {
 
     return (
         <div className="widget__wrapper widget__profile has-shadow">

@@ -8,22 +8,21 @@ export const TasksList = () => {
     const {loading, request} = useHttp();
     const [tasks, setTasks] = useState();
 
-    const getTasksData = useCallback(async () => {
-        try {
-            const data = await request(
-                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
-                'POST',
-                {Table: 'Tasks', action: 'all'}
-            );
-
-            setTasks(data);
-            
-        } catch (e) {}
-    }, [request]);
-
     useEffect(() => {
-        getTasksData();
-    }, [getTasksData]);
+        const tasksData = async () => {
+            try {
+                const data = await request(
+                    'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
+                    'POST',
+                    {Table: 'Tasks', action: 'all'}
+                );
+
+                setTasks(data);
+
+            } catch (e) {}
+        }
+        tasksData();
+    }, [request]);
 
     return (
         <>

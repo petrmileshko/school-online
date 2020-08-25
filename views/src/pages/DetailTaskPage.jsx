@@ -26,22 +26,20 @@ export const DetailTaskPage = () => {
         
     }, []);
 
-    const getTaskData = useCallback(async () => {
-        try {
-            const data = await request(
-                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
-                'POST',
-                {Table: 'Tasks', action: 'getTask', id: taskId}
-            );
-
-            setTask(data);
-            
-        } catch (e) {}
-    }, [taskId, request]);
-
     useEffect(() => {
-        getTaskData();
-    }, [getTaskData]);
+        const taskData = async () => {
+            try {
+                const data = await request(
+                    'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
+                    'POST',
+                    {Table: 'Tasks', action: 'getTask', id: taskId}
+                );
+
+                setTask(data);
+            } catch (e) {}
+        }
+        taskData();
+    }, [taskId, request]);
 
     const getEditorContent = () => {
         const content = editorState.getCurrentContent().getPlainText();

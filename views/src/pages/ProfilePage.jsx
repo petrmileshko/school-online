@@ -11,7 +11,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 export const ProfilePage = props => {
     const [sbShrink, setSbShrink] = useState(true);
-    const {userId} = useContext(AuthContext);
+    const {userId, userAccess} = useContext(AuthContext);
     const {loading, request} = useHttp();
     const [user, setUser] = useState(null);
     
@@ -21,22 +21,21 @@ export const ProfilePage = props => {
         
     }, []);
 
-    const getUserData = useCallback(async () => {
-        try {
-            const data = await request(
-                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
-                'POST',
-                {Table: 'Users', action: 'getUser', id: userId}
-            );
-
-            setUser(data);
-            
-        } catch (e) {}
-    }, [userId, request]);
-
     useEffect(() => {
-        getUserData();
-    }, [getUserData]);
+        const userData = async () => {
+            try {
+                const data = await request(
+                    'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
+                    'POST',
+                    {Table: 'Users', action: 'getUser', id: userId}
+                );
+
+                setUser(data);
+
+            } catch (e) {}
+        }
+        userData();
+    }, [userId, request]);
 
     return (
         <div className={`page page__profile${ sbShrink ? '' : ' sidebar-shrink' }`}>
