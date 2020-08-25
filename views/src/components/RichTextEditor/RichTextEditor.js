@@ -1,7 +1,6 @@
 import React from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
 
-
 import 'draft-js/dist/Draft.css';
 import './style.css';
 

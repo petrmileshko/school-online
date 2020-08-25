@@ -21,21 +21,22 @@ export const ProfilePage = props => {
         
     }, []);
 
-    useEffect(() => {
-        const userData = async () => {
-            try {
-                const data = await request(
-                    'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
-                    'POST',
-                    {Table: 'Users', action: 'getUser', id: userId}
-                );
-    
-                setUser(data);
-                
-            } catch (e) {}
-        }
-        userData();
+    const getUserData = useCallback(async () => {
+        try {
+            const data = await request(
+                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
+                'POST',
+                {Table: 'Users', action: 'getUser', id: userId}
+            );
+
+            setUser(data);
+            
+        } catch (e) {}
     }, [userId, request]);
+
+    useEffect(() => {
+        getUserData();
+    }, [getUserData]);
 
     return (
         <div className={`page page__profile${ sbShrink ? '' : ' sidebar-shrink' }`}>

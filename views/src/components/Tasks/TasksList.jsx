@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useHttp } from "../../hooks/http.hook";
 import { TasksListItem } from "../Tasks/TasksListItem.jsx";
 
@@ -8,21 +8,22 @@ export const TasksList = () => {
     const {loading, request} = useHttp();
     const [tasks, setTasks] = useState();
 
-    useEffect(() => {
-        const tasksData = async () => {
-            try {
-                const data = await request(
-                    'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
-                    'POST',
-                    {Table: 'Tasks', action: 'all'}
-                );
-    
-                setTasks(data);
-                
-            } catch (e) {}
-        }
-        tasksData();
+    const getTasksData = useCallback(async () => {
+        try {
+            const data = await request(
+                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
+                'POST',
+                {Table: 'Tasks', action: 'all'}
+            );
+
+            setTasks(data);
+            
+        } catch (e) {}
     }, [request]);
+
+    useEffect(() => {
+        getTasksData();
+    }, [getTasksData]);
 
     return (
         <>

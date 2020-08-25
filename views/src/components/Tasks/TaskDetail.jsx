@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export const TaskDetail = props => {
     const { task } = props;
@@ -6,7 +6,7 @@ export const TaskDetail = props => {
     return (
         <>
         <div className="widget__header">
-            <h4 class="widget__title">{ task.subject }</h4>
+            <h4 className="widget__title">{ task.subject }</h4>
         </div>
         <div className="widget__body">
             <div className="d-flex justify-content-between align-items-center pb-4 pt-2">
