@@ -12,7 +12,7 @@ export const Profile = props => {
                         height="150" />
                 <span className="user__name h3">{user.name}</span>
                 <span className="user__email h4 mb-4">{user.email}</span>
-                <span className="user__position h4 mb-4">{}</span>
+                <span className="user__position h4 mb-4">{user.access.name}</span>
                 <ul className="user__subjects subject__list">
                     <li className="subject__item">
                         <a href="/" className="subject__link">

@@ -43,6 +43,12 @@ export const DetailTaskPage = () => {
         getTaskData();
     }, [getTaskData]);
 
+    const getEditorContent = () => {
+        const content = editorState.getCurrentContent().getPlainText();
+        
+        setAnswer(content);
+    }
+
     return (
         <div className={`page page__task-detail${ sbShrink ? '' : ' sidebar-shrink' }`}>
             <Header 
@@ -99,6 +105,7 @@ export const DetailTaskPage = () => {
                                             <div className="btn__group pt-5 pb-3">
                                                 <Button
                                                     className="btn btn__gradient btn__grad-danger"
+                                                    onClick={ getEditorContent }
                                                 >
                                                     Save
                                                 </Button>
