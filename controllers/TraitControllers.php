@@ -14,7 +14,6 @@ trait TraitControllers {
     private $user = [
 
         [
-         'result'=>'positive',
          'id'=>1,
          'name' => 'Петр',
          'email' => 'peter@mail.ru',
@@ -25,7 +24,6 @@ trait TraitControllers {
          'subject' => 'Математика' 
         ],
         [
-         'result'=>'positive',
          'id'=>2,
          'name' => 'Иван',
          'email' => 'ivan@mail.ru',
@@ -38,7 +36,6 @@ trait TraitControllers {
     ]; 
 
     private $answers = [
-        'result'=>'positive',
         [
          'fio' => 'Гавриков П.А.',
          'subject' => 'Математика',
@@ -99,7 +96,6 @@ trait TraitControllers {
     private $tasks = [
 
         [
-         'result'=>'positive',
          'fio' => 'Гавриков П.А.',
          'subject' => 'Математика',
          'task_name' => 'Дробные числа. Решить примеры',
@@ -108,8 +104,7 @@ trait TraitControllers {
          'task_file' => 'data/tasks/задание1.txt',
          'id' => 1
         ],
-                [
-         'result'=>'positive',
+        [
          'fio' => 'Гавриков П.А.',
          'subject' => 'Математика',
          'task_name' => 'Решить примеры и выучить теорию',
@@ -118,8 +113,7 @@ trait TraitControllers {
          'task_file' => 'data/tasks/задание2.txt',
          'id' => 2
         ],
-                [
-         'result'=>'positive',
+        [
          'fio' => 'Гавриков П.А.',
          'subject' => 'Иностранный язык',
          'task_name' => 'Прочесть и перевести текст',
@@ -129,7 +123,6 @@ trait TraitControllers {
          'id' => 3
         ],
         [
-         'result'=>'positive',
          'fio' => 'Иванов И.А.',
          'subject' => 'Физика',
          'task_name' => 'Прочесть и выучить закон механики.',
