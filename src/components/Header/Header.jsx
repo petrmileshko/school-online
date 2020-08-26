@@ -3,12 +3,12 @@ import { Navbar } from 'react-bootstrap';
 
 import logo from '../../img/logo.png';
 
-const handleToggleSidebar = () => {
-    console.log('click');
-}
+// const handleToggleSidebar = () => {
+//     console.log('click');
+// }
 
 
-export default function Header () {
+export default function Header (props) {
     return (
         <header className="header">
             <Navbar className="fixed-top">
@@ -25,9 +25,9 @@ export default function Header () {
                             <span className="brand__title">Education Online</span>
                         </Navbar.Brand>
                         <button
-                            className="btn navbar__toggler"
+                            className={`btn navbar__toggler${ props.sidebarShrink ? '' : ' active' }`}
                             type="button"
-                            onClick={ handleToggleSidebar }
+                            onClick={ props.sidebarToggle }
                         >
                             <span></span>
                             <span></span>

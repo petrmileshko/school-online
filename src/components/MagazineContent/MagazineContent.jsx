@@ -1,10 +1,14 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import Magazine from '../Magazine/Magazine';
+import {Magazine} from '../Magazine/Magazine';
 import GroupsList from '../Magazine/GroupsList';
 
-export default function MagazineContent () {
+
+export default function MagazineContent (props) {
+
+    const {user} = props;
+
     return (
         <div className="content__inner profile">
             <Container fluid>
@@ -25,17 +29,18 @@ export default function MagazineContent () {
                 </Row>
                 <Row className="flex-row">
                     <Col xl={12}>
-                        <Magazine />
+                        <Magazine user={ user }/>
                     </Col>
                 
                 </Row>
                 <Row className="flex-row">
                     <Col xl={12}>
-                        <GroupsList />
+                        <GroupsList user={ user }/>
                     </Col>
-                
                 </Row>
             </Container>
         </div>
     )
 }
+
+    
