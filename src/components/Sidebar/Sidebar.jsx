@@ -7,11 +7,18 @@ import { ReactComponent as IconUser } from '../../img/user.svg';
 import { ReactComponent as OpenBook } from '../../img/open-book.svg';
 import { ReactComponent as LogOut } from '../../img/logout.svg';
 
-export default function Sidebar () {
+export default function Sidebar (props) {
+
+    // let dropdownToggler = evt => {
+    //     evt.target.closest('.sb-dropdown').classList.toggle('open');
+    // }
+
+    const {user} = props;
+   
     return (
         <div className="sidebar sidebar__default">
-            <div className="side-navbar shrink">
-                <Nav className="side-navbar__list">
+            <div className={ `side-navbar${ props.sidebarShrink ? ' shrink' : '' }` }>
+                <Nav className="side-navbar__list flex-column flex-nowrap">
                     <Nav.Item className="side-navbar__item">
                         <Link to="/profile" className="side-navbar__link">
                             <IconUser className="side-navbar__icon icon-user" />

@@ -2,7 +2,11 @@ import React from 'react';
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
-export default function Magazine () {
+export const Magazine = ({user}) => {
+  
+    // console.log(user);
+    //  const a = user.fio;
+    // console.log(a);
     return (
         <div className="widget__wrapper widget__profile--update has-shadow">
             <div className="widget__body">
