@@ -13,7 +13,7 @@ session_start();
 const INI_FILE = 'config/config.ini';
 
 use \School\controllers;
-use \School\models;
+//use \School\models;
 
 
 /*
@@ -94,28 +94,28 @@ public static function initialize() {
 
                 $assoc = json_decode( $rawData , true );  //  не хочет эта зараза декодировать нашу строку с json!!!
 
-                               switch (json_last_error()) {
-                    case JSON_ERROR_NONE:
-                        $message = 'Ошибок нет';
-                    break;
-                    case JSON_ERROR_DEPTH:
-                        $message = 'JSON_ERROR: Достигнута максимальная глубина стека';
-                    break;
-                    case JSON_ERROR_STATE_MISMATCH:
-                        $message = 'JSON_ERROR: Некорректные разряды или несоответствие режимов';
-                    break;
-                    case JSON_ERROR_CTRL_CHAR:
-                        $message = 'JSON_ERROR: Некорректный управляющий символ';
-                    break;
-                    case JSON_ERROR_SYNTAX:
-                        $message = 'JSON_ERROR: Синтаксическая ошибка, некорректный JSON';
-                    break;
-                    case JSON_ERROR_UTF8:
-                        $message = 'JSON_ERROR: Некорректные символы UTF-8, возможно неверно закодирован';
-                    break;
-                    default:
-                        $message = 'JSON_ERROR: Неизвестная ошибка';
-                    break;
+                    switch (json_last_error()) {
+                        case JSON_ERROR_NONE:
+                            $message = 'Ошибок нет';
+                        break;
+                        case JSON_ERROR_DEPTH:
+                            $message = 'JSON_ERROR: Достигнута максимальная глубина стека';
+                        break;
+                        case JSON_ERROR_STATE_MISMATCH:
+                            $message = 'JSON_ERROR: Некорректные разряды или несоответствие режимов';
+                        break;
+                        case JSON_ERROR_CTRL_CHAR:
+                            $message = 'JSON_ERROR: Некорректный управляющий символ';
+                        break;
+                        case JSON_ERROR_SYNTAX:
+                            $message = 'JSON_ERROR: Синтаксическая ошибка, некорректный JSON';
+                        break;
+                        case JSON_ERROR_UTF8:
+                            $message = 'JSON_ERROR: Некорректные символы UTF-8, возможно неверно закодирован';
+                        break;
+                        default:
+                            $message = 'JSON_ERROR: Неизвестная ошибка';
+                        break;
                 }
 
                 if ( is_array($assoc) )  {
@@ -143,6 +143,7 @@ public static function initialize() {
 
     public static function autoloader($class)       // автозагручик классов
     {
+        $file = '';
         $result = array_slice( explode('\\',$class),1);
         for ($i=0;$i<count($result);$i++) {
             if($i<count($result)-1) $file .= $result[$i].'/';
