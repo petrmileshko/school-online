@@ -151,5 +151,8 @@ class SQL {
 }
 
 // пример использования
-// $obj = SQL::Instance()->insert("users", ['login'=> 'Alex', 'fio'=>'Alexandr Baukov']);
+// $obj = SQL::Instance()->insert("Users", ['login'=> 'Alex', 'fio'=>'Alexandr Baukov']);
+// $odj = SQL::Instance()->Select('Users', 'id', 3);
+// $obj = SQL::Instance()->Update('Users', ['access_id' => 4], 'id = 3')
+// $odj = SQL::Instance()->Delete('Users', 'id = 3');
 //
