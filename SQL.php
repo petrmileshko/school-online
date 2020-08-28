@@ -203,6 +203,28 @@ class SQL {
 
         return $q->fetch();
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     * Для задачи "Страница заданий"
+     * По id реподавателя выдает все текущие задачи от него. Выводит task_name, subject, fio.
+     */
+    public function SelectFromTasksAndSubjectsAndUsers($id){
+        $query = "SELECT t.task_name, s.subject, u.fio FROM tasks t 
+                    JOIN subjects s ON t.subject_id=s.id 
+                    JOIN users u ON t.user_id=u.id WHERE u.id=".$id;
+
+        $q = $this->db->prepare($query);
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
+    }
 }
 
 // пример использования
@@ -210,6 +232,12 @@ class SQL {
 // $odj = School\models\SQL::Instance()->Select('Users', 'id', 3);
 // $obj = School\models\SQL::Instance()->Update('Users', ['access_id' => 4], 'id = 3')
 // $odj = School\models\SQL::Instance()->Delete('Users', 'id = 3');
-// $sql = SQL::Instance()->SelectFromUsersAndSubjects(3);
-// $sql = SQL::Instance()->SelectFromUsersAndAuth(3);
-// print_r($sql);
+// $sql = School\models\SQL::Instance()->SelectFromUsersAndSubjects(3);
+// $sql = School\models\SQL::Instance()->SelectFromUsersAndAuth(3);
+ $sql = School\models\SQL::Instance()->SelectFromTasksAndSubjectsAndUsers(3);
+ print_r($sql);
+
+
+//"SELECT t.task_name, s.subject, u.fio FROM tasks t
+//JOIN subjects s ON t.subject_id=s.id
+//JOIN users u ON t.user_id=u.id WHERE u.id=3";
