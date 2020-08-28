@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once 'config/db.php';
 /*
 
                     code by Peter Mileshko 
@@ -9,8 +10,6 @@ session_start();
 
 */
 
-
-const INI_FILE = 'config/config.ini';
 
 use \School\controllers;
 use \School\models;
@@ -39,16 +38,6 @@ final class Init {
 
 public static function initialize() {
 
-	 if(!is_file(INI_FILE)) throw new Exception('Файл не найден - '.INI_FILE);
-       
-       $iniData = parse_ini_file( INI_FILE, true ); // Загружаем параметры сайта
-       
-       if( !$iniData['database'] ) throw new Exception('Ошибка в файле - '.INI_FILE.'<br>Не заданы параметры');
-       
-       //Формируем данные для подключения БД
-
-       $dsn = sprintf( '%s:dbname=%s;host=%s', $iniData['database']['driver'], $iniData['database']['dbname'], $iniData['database']['host'] );
-        self::$dbParams = ['dsn'=>$dsn,'user'=>$iniData['database']['username'],'password'=>$iniData['database']['password']];
 
         // Регистрируем автозагрузчик классов
        
