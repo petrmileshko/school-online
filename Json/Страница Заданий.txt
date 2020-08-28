@@ -19,7 +19,7 @@
 	     'result' : 'positive',
          'id' : integer,
          'task_name' : string,
-         'subject' : integer,
+         'subject' : string,	(название предмета)
          'fio' : string			(учитель создавший задание)
 }
 
