@@ -6,13 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 export const AnswersList = () => {
   const { loading, request } = useHttp();
-  const [answers, setAnswers] = useState([
-    {
-      name: "",
-      subjects: [{ title: "", score: 0 }],
-    },
-  ]);
-
+  const [answers, setAnswers] = useState([]);
   const getAnswersData = useCallback(
     async (signal) => {
       try {
@@ -22,34 +16,38 @@ export const AnswersList = () => {
           { Table: "Answers", action: "scores", signal: signal }
         );
         console.log("data", data);
-
-        const cleanData = removeMatches(data);
-        console.log(cleanData);
+        handleData(data);
       } catch (err) {
         console.log(("___POST_ANSWERS___", err));
       }
     },
     [request]
   );
-  const removeMatches = (data) => {
-    const removed = {
-      students: [],
-      subjects: [],
-    };
-
+  const handleData = (data) => {
+    const result = new Object();
     data.forEach((el) => {
-      removed.students.push(el.fio);
-      removed.subjects.push(el.subject);
+      debugger
+      if (!isEmpty(result)) {
+        for (const name in result) {
+          for (const subj in result[name]) {
+            if (el.fio === name && el.subject === subj) {
+              result[name][subj].push(el.score);
+            } else if (el.fio === name && el.subject !== subj) {
+              result[name][el.subject] = [el.score];
+            } else {
+              result[el.fio] = { [el.subject]: [el.score] };
+            }
+          }
+        }
+      } else {
+        result[el.fio] = {
+          [el.subject]: [el.score],
+        };
+      }
     });
-
-    for (const prop in removed) {
-      removed[prop] = removed[prop].filter(
-        (item, pos) => removed[prop].indexOf(item) === pos
-      );
-    }
-
-    return removed;
+    console.log("result", result);
   };
+  const isEmpty = (obj) => JSON.stringify(obj) === "{}";
 
   const average = (nums) => {
     return nums.reduce((a, b) => a + b) / nums.length;
