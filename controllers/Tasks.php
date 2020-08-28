@@ -21,33 +21,40 @@ class Tasks extends Controller {
         $this->id = parent::getValue('id');
     }
     
+    /**
+     * 
+     * @return json
+     */
+
         public function action_all() {
 
-            # Start...    тестовый код - после отладки заменить на рабочий
+            $tasks = $this->getValue();
 
-                     return json_encode($this->tasks);
-
-
-           # End  ...    тестовый код
-        } 
-
-        public function action_getTask() {
-
-            # Start...    тестовй код - после отладки заменить на рабочий
-
-            $i=0;
-            foreach ( $this->tasks as $val ) {
-
-                if( $val['id'] == $this->id ) {
-
-                     return json_encode($val);
-
+                if( $tasks ) {
+                     return json_encode($tasks);
                     }
 
-                    $i++; 
+            $message = 'Заданий в базе нет.';
 
-            }
-           # End  ...    тестовый код
+            throw new \Exception($message);
+        } 
+
+    /**
+     * 
+     * @return json
+     */
+        public function action_getTask() {
+
+             $task = $this->getValue( 'id', $this->id);
+
+                if( $task ) {
+                     return json_encode($task);
+                    }
+
+           $message = 'Задача не найдена : '.$this->id;
+
+            throw new \Exception($message);
+
         }
 }
 

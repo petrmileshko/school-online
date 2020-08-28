@@ -34,6 +34,7 @@ abstract class Controller
         $this->data = \Init::load( $this->controller );
     	$this->query = $rest['Query'];
     	$this->method = $rest['Method'];
+        $this->db = \School\models\SQL::Instance();
     }
 
 
@@ -57,11 +58,19 @@ abstract class Controller
 
     /**
      * @param $key string
-     * @return string or integer
+     * @param $value string or integer
+     * @return string or integer or array
      */
 
-    public function getValue($key) {
-    	return $this->query[$key];
+    public function getValue( $key = null, $value = null ) {
+
+        if ( $value and $key ) {
+            return $this->db->Select($this->controller, $key, $value);
+        } 
+        elseif ( $key ) {
+            return ( $this->query[$key] ) ? $this->query[$key] : null ;
+        }
+        return $this->db->Select($this->controller);
     }
 
     /**
