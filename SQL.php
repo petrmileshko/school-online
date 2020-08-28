@@ -5,7 +5,7 @@ include_once 'config/db.php';
  * Class SQL Служит для подключения к БД, с использованием Singleton, и использования основных запросов.
  * Code by Aleksand Baukov
  */
-class SQL {
+final class SQL {
 
     private static $instance;
     private $db;
