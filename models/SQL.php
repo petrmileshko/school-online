@@ -252,7 +252,7 @@ class SQL {
      */
 
     public function getTasks(){
-        $q = $this->db->prepare("SELECT t.task_name, t.task_description, t.task_body, t.task_file, s.subject, u.fio FROM Tasks t JOIN Subjects s ON t.subject_id=s.id JOIN Users u ON t.user_id=u.id");
+        $q = $this->db->prepare("SELECT t.task_name, s.subject, u.fio FROM Tasks t JOIN Subjects s ON t.subject_id=s.id JOIN Users u ON t.user_id=u.id");
         $q->execute();
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
