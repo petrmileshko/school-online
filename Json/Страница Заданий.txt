@@ -7,7 +7,7 @@
 {
 	
 	"Table" : 'Tasks',
-	"action" : 'all',
+	"action" : 'getTasks',
 	'question' : string					
 }
 
@@ -16,7 +16,6 @@
 Положительный
 
 {
-	     'result' : 'positive',
          'id' : integer,
          'task_name' : string,
          'subject' : string,	(название предмета)

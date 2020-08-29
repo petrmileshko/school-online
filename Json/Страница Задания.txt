@@ -3,7 +3,7 @@
 
 
 
-Запрос на запись по id из таблицы заданий
+Запрос Вернуть задание по его id из таблицы заданий
 {
 	
 	'Table' : 'Tasks',
@@ -17,8 +17,6 @@
 Положительный
 
 {
-	     'result' : 'positive',
-         'id' : integer,
          'task_name' : string,
          'task_description' : string,
          'task_body' : string,
