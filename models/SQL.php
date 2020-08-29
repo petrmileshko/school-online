@@ -13,6 +13,7 @@ class SQL {
     /**
      * @return SQL
      */
+
     public static function Instance(){
         if (self::$instance == null){
             self::$instance = new SQL();
@@ -147,6 +148,73 @@ class SQL {
     public function Password ($name, $password) {
 
         return strrev(md5($name)) . md5($password);
+    }
+
+     /**
+     * @param $id
+     * @return mixed
+     * Запрос из таблиц Users и Subjects, принимает user_id, возвращает, ФИО преподавателя и предмет.
+     */
+     
+    public function getSubjectByUser($id){
+        $query = "SELECT s.subject FROM `Users` u
+                    JOIN Subject_relation sr ON u.id = sr.user_id 
+                    JOIN Subjects s ON sr.subject_id=s.id 
+                    WHERE u.id=".$id;
+
+        $q = $this->db->prepare($query);
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * Может быть понадобится в личном кабинете.
+     * Запрос из таблиц Users и Auth. выводит все данные по пользователе и его уровень доступа, по user_id.
+     */
+
+    public function getUserFull($id){
+        $query = "SELECT * FROM Users u JOIN Auth a ON u.access_id=a.id WHERE u.id=".$id;
+
+        $q = $this->db->prepare($query);
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * Для задачи "Страница заданий"
+     * По id реподавателя выдает все текущие задачи от него. Выводит task_name, subject, fio.
+     */
+
+    public function getTasksByUser($id){
+        $query = "SELECT t.task_name, s.subject, u.fio FROM Tasks t 
+                    JOIN Subjects s ON t.subject_id=s.id 
+                    JOIN Users u ON t.user_id=u.id WHERE u.id=".$id;
+
+        $q = $this->db->prepare($query);
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
     }
 }
 
