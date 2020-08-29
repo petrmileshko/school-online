@@ -62,15 +62,25 @@ abstract class Controller
      * @return string or integer or array
      */
 
-    public function getValue( $key = null, $value = null ) {
+    public function getValue( $key = null, $value = null , $func = null ) {
 
         if ( $value and $key ) {
+
             return $this->db->Select($this->controller, $key, $value);
+
         } 
         elseif ( $key ) {
+
             return ( $this->query[$key] ) ? $this->query[$key] : null ;
         }
-        return $this->db->Select($this->controller);
+        elseif( $func ) {
+            return ( $value ) ? $this->db->$func($value) : $this->db->$func();
+        }
+        else  {
+            return $this->db->Select($this->controller);
+            }
+
+
     }
 
     /**
