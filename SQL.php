@@ -9,6 +9,9 @@ include_once 'config/db.php';
  */
 class SQL {
 
+    /**
+     * @var
+     */
     private static $instance;
     private $db;
 
@@ -225,6 +228,29 @@ class SQL {
 
         return $q->fetch();
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     * По id  выдает всю информацию о преподавателе, уровню доступа и предметом.
+     */
+    public function GetAllAboutUserById($id){
+        $query = "SELECT * FROM `users` u 
+                    JOIN subject_relation sr ON u.id = sr.user_id 
+                    JOIN subjects s ON sr.subject_id=s.id 
+                    JOIN auth a ON u.access_id=a.id 
+                    WHERE u.id=".$id;
+
+        $q = $this->db->prepare($query);
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
+    }
 }
 
 // пример использования
@@ -241,3 +267,9 @@ class SQL {
 //"SELECT t.task_name, s.subject, u.fio FROM tasks t
 //JOIN subjects s ON t.subject_id=s.id
 //JOIN users u ON t.user_id=u.id WHERE u.id=3";
+
+"SELECT * FROM `users` u 
+JOIN subject_relation sr ON u.id = sr.user_id 
+JOIN subjects s ON sr.subject_id=s.id 
+JOIN auth a ON u.access_id=a.id 
+WHERE u.id=3";
