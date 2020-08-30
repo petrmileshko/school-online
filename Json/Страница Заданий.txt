@@ -1,0 +1,30 @@
+
+Страница Журнал Заданий запрос-ответ json
+
+
+
+Запрос на все записи из таблицы заданий
+{
+	
+	"Table" : 'Tasks',
+	"action" : 'getTasks',
+	'question' : string					
+}
+
+Ответы:
+
+Положительный
+
+{
+         'id' : integer,
+         'task_name' : string,
+         'subject' : string,	(название предмета)
+         'fio' : string			(учитель создавший задание)
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}

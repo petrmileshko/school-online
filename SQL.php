@@ -1,6 +1,4 @@
 <?php
-namespace School\models;
-
 include_once 'config/db.php';
 
 /**
@@ -9,9 +7,6 @@ include_once 'config/db.php';
  */
 class SQL {
 
-    /**
-     * @var
-     */
     private static $instance;
     private $db;
 
@@ -27,9 +22,9 @@ class SQL {
 
     private function __construct() {
         setlocale(LC_ALL, 'ru_RU.UTF8');
-        $this->db = new \PDO(DRIVER . ':host='. SERVER . ';dbname=' . DB, USERNAME, PASSWORD);
+        $this->db = new PDO(DRIVER . ':host='. SERVER . ';dbname=' . DB, USERNAME, PASSWORD);
         $this->db->exec('SET NAMES UTF8');
-        $this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+        $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
     /**
@@ -53,9 +48,9 @@ class SQL {
         $q = $this->db->prepare($query);
         $q->execute();
 
-        if ($q->errorCode() != \PDO::ERR_NONE) {
+        if ($q->errorCode() != PDO::ERR_NONE) {
             $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
+            die($info[2]);
         }
 
         if ($where_key AND $where_value) {
@@ -96,9 +91,9 @@ class SQL {
         $q = $this->db->prepare($query);
         $q->execute($object);
 
-        if ($q->errorCode() != \PDO::ERR_NONE) {
+        if ($q->errorCode() != PDO::ERR_NONE) {
             $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
+            die($info[2]);
         }
 
         return $this->db->lastInsertId();
@@ -107,12 +102,6 @@ class SQL {
     //UPDATE table set count=10,price=1000 where id = 2
     //Update('table', ['count' => 10,'price'=>1000], 'id = 2')
 
-    /**
-     * @param $table
-     * @param $object
-     * @param $where
-     * @return int
-     */
     public function Update($table, $object, $where) {
 
         $sets = array();
@@ -132,29 +121,24 @@ class SQL {
         $q = $this->db->prepare($query);
         $q->execute($object);
 
-        if ($q->errorCode() != \PDO::ERR_NONE) {
+        if ($q->errorCode() != PDO::ERR_NONE) {
             $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
+            die($info[2]);
         }
 
         return $q->rowCount();
     }
 
-
-    /**
-     * @param $table
-     * @param $where
-     * @return int
-     */
+    //Delete('table', 'id = 2')
     public function Delete($table, $where) {
 
         $query = "DELETE FROM $table WHERE $where";
         $q = $this->db->prepare($query);
         $q->execute();
 
-        if ($q->errorCode() != \PDO::ERR_NONE) {
+        if ($q->errorCode() != PDO::ERR_NONE) {
             $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
+            die($info[2]);
         }
 
         return $q->rowCount();
@@ -164,112 +148,11 @@ class SQL {
 
         return strrev(md5($name)) . md5($password);
     }
-
-    /**
-     * @param $id
-     * @return mixed
-     * Запрос из таблиц Users и Subjects, принимает user_id, возвращает, ФИО преподавателя и предмет.
-     */
-    public function SelectFromUsersAndSubjects($id){
-        $query = "SELECT u.fio, s.subject FROM `users` u
-                    JOIN subject_relation sr ON u.id = sr.user_id 
-                    JOIN subjects s ON sr.subject_id=s.id 
-                    WHERE u.id=".$id;
-
-        $q = $this->db->prepare($query);
-        $q->execute();
-
-        if ($q->errorCode() != \PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
-        }
-
-        return $q->fetch();
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     * Может быть понадобится в личном кабинете.
-     * Запрос из таблиц Users и Auth. выводит все данные по пользователе и его уровень доступа, по user_id.
-     */
-    public function SelectFromUsersAndAuth($id){
-        $query = "SELECT * FROM users u JOIN auth a ON u.access_id=a.id WHERE u.id=".$id;
-
-        $q = $this->db->prepare($query);
-        $q->execute();
-
-        if ($q->errorCode() != \PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
-        }
-
-        return $q->fetch();
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     * Для задачи "Страница заданий"
-     * По id реподавателя выдает все текущие задачи от него. Выводит task_name, subject, fio.
-     */
-    public function SelectFromTasksAndSubjectsAndUsers($id){
-        $query = "SELECT t.task_name, s.subject, u.fio FROM tasks t 
-                    JOIN subjects s ON t.subject_id=s.id 
-                    JOIN users u ON t.user_id=u.id WHERE u.id=".$id;
-
-        $q = $this->db->prepare($query);
-        $q->execute();
-
-        if ($q->errorCode() != \PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
-        }
-
-        return $q->fetch();
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     * По id  выдает всю информацию о преподавателе, уровню доступа и предметом.
-     */
-    public function GetAllAboutUserById($id){
-        $query = "SELECT * FROM `users` u 
-                    JOIN subject_relation sr ON u.id = sr.user_id 
-                    JOIN subjects s ON sr.subject_id=s.id 
-                    JOIN auth a ON u.access_id=a.id 
-                    WHERE u.id=".$id;
-
-        $q = $this->db->prepare($query);
-        $q->execute();
-
-        if ($q->errorCode() != \PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
-        }
-
-        return $q->fetch();
-    }
 }
 
 // пример использования
-// $obj = School\models\SQL::Instance()->insert("Users", ['login'=> 'Alex', 'fio'=>'Alexandr Baukov']);
-// $odj = School\models\SQL::Instance()->Select('Users', 'id', 3);
-// $obj = School\models\SQL::Instance()->Update('Users', ['access_id' => 4], 'id = 3')
-// $odj = School\models\SQL::Instance()->Delete('Users', 'id = 3');
-// $sql = School\models\SQL::Instance()->SelectFromUsersAndSubjects(3);
-// $sql = School\models\SQL::Instance()->SelectFromUsersAndAuth(3);
- $sql = School\models\SQL::Instance()->SelectFromTasksAndSubjectsAndUsers(3);
- print_r($sql);
-
-
-//"SELECT t.task_name, s.subject, u.fio FROM tasks t
-//JOIN subjects s ON t.subject_id=s.id
-//JOIN users u ON t.user_id=u.id WHERE u.id=3";
-
-"SELECT * FROM `users` u 
-JOIN subject_relation sr ON u.id = sr.user_id 
-JOIN subjects s ON sr.subject_id=s.id 
-JOIN auth a ON u.access_id=a.id 
-WHERE u.id=3";
+// $obj = SQL::Instance()->insert("User", ['login'=> 'Alex', 'fio'=>'Alexandr Baukov']);
+// $odj = SQL::Instance()->Select('User', 'id', 3);
+// $obj = SQL::Instance()->Update('User', ['access_id' => 4], 'id = 3')
+// $odj = SQL::Instance()->Delete('User', 'id = 3');
+//

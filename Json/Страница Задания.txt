@@ -1,0 +1,33 @@
+
+Страница Задания запрос-ответ json
+
+
+
+Запрос Вернуть задание по его id из таблицы заданий
+{
+	
+	'Table' : 'Tasks',
+	'action' : 'getTask',
+	'id': integer,
+	'question' : string					
+}
+
+Ответы:
+
+Положительный
+
+{
+         'task_name' : string,
+         'task_description' : string,
+         'task_body' : string,
+         'task_file' : string,
+         'subject' : integer,
+         'fio' : string			(учитель создавший задание)
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}

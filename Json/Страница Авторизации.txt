@@ -1,0 +1,37 @@
+
+запрос-ответ json
+
+
+
+Запрос на авторизацию
+{
+	
+	'Table' : 'Users',
+	'action' : 'login',
+	'email' : string,
+	'password' : string
+}
+
+Ответы:
+
+Положительный
+
+{
+        'result' : 'positive',
+         'id' : integer,
+         'name' : string,
+         'email' : string,
+         'fio' : string,
+         'avatar' : string,
+         'password' : string,
+         'access' : { 'access_id'=>integer, 'name'=>string},
+         'subject' : string,                                 (только для учителей)
+         'class' : string                                   (только для учеников)
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}

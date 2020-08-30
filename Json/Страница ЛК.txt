@@ -1,0 +1,69 @@
+
+Страница Личный Кабинет запрос-ответ json
+
+
+
+Запрос
+{
+	
+	'Table' : 'Users',
+	'action' : 'getUser',
+	'id' : integer,
+	'question' : string					
+}
+
+Ответы:
+
+Положительный
+
+{
+	     'result' : 'positive',
+         'id' : integer,
+         'name' : string,
+         'email' : string,
+         'fio' : string,
+         'avatar' : string,
+         'password' : string,
+         'access' : { 'access_id'=>integer, 'name'=>string},
+         'subject' : string,									       (только для учителей)
+         'class' : string											   (только для учеников)
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}
+
+------------------------------------------------------------
+
+Запрос
+
+{
+	
+		 'Table' : 'Users',
+		 'action' : 'update',
+		 'id' : integer,
+         'name' : string,
+         'email' : string,
+         'fio' : string,
+         'avatar' : string,
+         'password' : string,
+		 'question' : string					
+}
+
+Ответы:
+
+Положительный
+
+{
+	     'result' : 'positive'
+}
+
+Отрицательный
+
+{
+	'result' : 'negative',
+	'message' : string
+}
