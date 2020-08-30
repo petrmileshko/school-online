@@ -41,12 +41,28 @@ class Answer extends Controller {
 
     public function index()
     {
-        // TODO: Implement index() method.
+        $answers = $this->getValue( null, null , $this->query['action']);
+
+        if( $answers ) {
+            return json_encode($answers);
+        }
+
+        $message = 'Ответов в базе нет.';
+
+        throw new \Exception($message);
     }
 
     public function show()
     {
-        // TODO: Implement show() method.
+        $answer = $this->getValue( null, $this->id, $this->query['action']);
+
+        if( $answer ) {
+            return json_encode($answer);
+        }
+
+        $message = 'Ответ не найден : '.$this->id;
+
+        throw new \Exception($message);
     }
 
     public function create()

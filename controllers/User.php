@@ -9,6 +9,8 @@
 namespace School\controllers;
 
 
+use School\models\SQL;
+
 /**
  * Class User
  * @package School\controllers
@@ -60,8 +62,9 @@ class User extends Controller {
      * Показать конкретного пользователя
      */
     public function show() {
+        $user = SQL::Instance()->Select('Users', 'id', 3); // 3 = id полученный с фронта
 
-        $user = $this->getValue( null, $this->id, $this->query['action']);
+        //$user = $this->getValue( null, $this->id, $this->query['action']);
 
         if( $user ) {
             return json_encode($user);
@@ -79,8 +82,9 @@ class User extends Controller {
      * Показать всех пользователей
      */
     public function index() {
+            $users = SQL::Instance()->Select('Users'); // Предлагаю сразу вот так
 
-            $users = $this->getValue( null, null , $this->query['action']);
+            //$users = $this->getValue( null, null , $this->query['action']);
 
                 if( $users ) {
                      return json_encode($users);
@@ -141,4 +145,8 @@ class User extends Controller {
 
 }
 
+
+
 ?>
+
+

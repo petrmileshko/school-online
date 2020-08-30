@@ -3,6 +3,7 @@
  * Class SQL Служит для подключения к БД, с использованием Singleton, и использования основных запросов.
  * Code by Aleksand Baukov
  */
+
 namespace School\models;
 
 class SQL {

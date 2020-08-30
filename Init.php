@@ -28,7 +28,6 @@ function multiStrip($str) {
 
 final class Init {
 
-	private static $dbParams;
 
 
     /**
@@ -131,6 +130,7 @@ public static function initialize() {
 
     public static function autoloader($class)       // автозагручик классов
     {
+        $file ='';
         $result = array_slice( explode('\\',$class),1);
         for ($i=0;$i<count($result);$i++) {
             if($i<count($result)-1) $file .= $result[$i].'/';
@@ -144,15 +144,6 @@ public static function initialize() {
         else throw new Exception('Автозагрузчик : класс не найден - '.$class);
     }
 
-    /**
-     * 
-     * @return array
-     */
-
-    public static function getDBParams() {
-        
-        return self::$dbParams;
-    }
 
     /**
      * @param array string

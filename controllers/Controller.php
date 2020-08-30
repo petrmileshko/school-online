@@ -1,13 +1,15 @@
 <?php
 /*
 	code by Peter Mileshko and Alexandr Baukov
-    Базовый абстрвктный класс контроллера
+    Базовый абстрактный класс контроллера
 
 */
 
 namespace School\controllers;
 
-abstract class Controller 
+use Exception;
+
+abstract class Controller
 {
     
     protected $db;
@@ -15,13 +17,6 @@ abstract class Controller
     protected $method;
     protected $query;
     protected $data;
-
-    /**
-     * @return Exception
-     */
-    
-    public abstract function action_any();   // объявить методы абстрактные
-
 
     /**
      * Controller constructor.
@@ -83,15 +78,12 @@ abstract class Controller
     abstract public function delete();
 
 
-
-
-
     /**
      * @param $key string
      * @param $value string or integer
+     * @param null $func
      * @return string or integer or array
      */
-
     public function getValue( $key = null, $value = null , $func = null ) {
 
         if ( $value and $key ) {
@@ -113,10 +105,13 @@ abstract class Controller
 
     }
 
-    /** @param array , integer , array
+    /**
+     * @param array $fields
+     * @param $index
+     * @param array $table
      * @return array server response
+     * @throws Exception
      */
-
     public function RenamePLS(array $fields, $index, array $table ) { // Нужно переназвать
 
 
@@ -141,7 +136,7 @@ abstract class Controller
 
         $message = 'Ошибка update. Позиция в '.$this->controller.' не найдена - id: '.$this->id;
 
-        throw new \Exception($message);
+        throw new Exception($message);
 
     }
 
