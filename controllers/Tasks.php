@@ -28,7 +28,7 @@ class Tasks extends Controller {
 
         public function action_getTasks() {
 
-            $tasks = $this->getValue( null, null , 'getTasks');
+            $tasks = $this->getValue( null, null , $this->query['action']);
 
                 if( $tasks ) {
                      return json_encode($tasks);
@@ -45,7 +45,7 @@ class Tasks extends Controller {
      */
         public function action_getTask() {
 
-             $task = $this->getValue( null, $this->id, 'getTask');
+             $task = $this->getValue( null, $this->id, $this->query['action']);
 
                 if( $task ) {
                      return json_encode($task);

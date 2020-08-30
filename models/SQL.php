@@ -176,31 +176,6 @@ class SQL {
     /**
      * @param $id
      * @return mixed
-     * По id  выдает всю информацию о пользователе, уровню доступа и предметом.
-     */
-    public function getUserFull($id){
-        $query = "SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
-                    LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
-                    LEFT JOIN Subjects s ON sr.subject_id=s.id 
-                    LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
-                    LEFT JOIN Сlasses c ON cr.class_id=c.id 
-                    LEFT JOIN Auth a ON u.access_id=a.id 
-                    WHERE u.id=".$id;
-
-        $q = $this->db->prepare($query);
-        $q->execute();
-
-        if ($q->errorCode() != \PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
-        }
-
-        return $q->fetch();
-    }
-
-    /**
-     * @param $id
-     * @return mixed
      * Для задачи "Страница заданий"
      * По id реподавателя выдает все текущие задачи от него. Выводит task_name, subject, fio.
      */
@@ -221,7 +196,7 @@ class SQL {
         return $q->fetch();
     }
 
-        /**
+    /**
      * @param $id
      * @return mixed
      * Для"Страница задания"
@@ -229,9 +204,9 @@ class SQL {
      */
 
     public function getTask($id){
-        $query = "SELECT t.task_name, t.task_description, t.task_body, t.task_file, s.subject, u.fio FROM Tasks t 
-                    JOIN Subjects s ON t.subject_id=s.id 
-                    JOIN Users u ON t.user_id=u.id WHERE t.id=".$id;
+        $query = 'SELECT t.task_name, t.task_description, t.task_body, t.task_file, s.subject, u.fio FROM Tasks t 
+                            JOIN Subjects s ON t.subject_id=s.id 
+                            JOIN Users u ON t.user_id=u.id WHERE t.id='.$id;
 
         $q = $this->db->prepare($query);
         $q->execute();
@@ -244,7 +219,7 @@ class SQL {
         return $q->fetch();
     }
 
-            /**
+    /**
      * @param $id
      * @return mixed
      * Для задачи "Страница заданий"
@@ -252,7 +227,7 @@ class SQL {
      */
 
     public function getTasks(){
-        $q = $this->db->prepare("SELECT t.task_name, s.subject, u.fio FROM Tasks t JOIN Subjects s ON t.subject_id=s.id JOIN Users u ON t.user_id=u.id");
+        $q = $this->db->prepare('SELECT t.task_name, s.subject, u.fio FROM Tasks t JOIN Subjects s ON t.subject_id=s.id JOIN Users u ON t.user_id=u.id');
         $q->execute();
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
@@ -263,6 +238,53 @@ class SQL {
         return $q->fetchAll();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * По id  выдает всю информацию о пользователе, предмета, класс, уровень доступа.
+     */
+    public function getUser($id){
+        $query = 'SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
+                            LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
+                            LEFT JOIN Subjects s ON sr.subject_id=s.id 
+                            LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
+                            LEFT JOIN Сlasses c ON cr.class_id=c.id 
+                            LEFT JOIN Auth a ON u.access_id=a.id 
+                            WHERE u.id='.$id;
+
+        $q = $this->db->prepare($query);
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
+    }
+
+    /**
+     * @param 
+     * @return mixed
+     * Выдает полную информацию о всех пользователях.
+     */
+    public function getUsers(){
+
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
+                            LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
+                            LEFT JOIN Subjects s ON sr.subject_id=s.id 
+                            LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
+                            LEFT JOIN Сlasses c ON cr.class_id=c.id 
+                            LEFT JOIN Auth a ON u.access_id=a.id');
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetchAll();
+    }
 
 }
 

@@ -68,26 +68,38 @@ class Users extends Controller {
      */
     
 
-            public function action_getUser() {
+        public function action_getUser() {
 
-            # Start...    тестовый код - после отладки заменить на рабочий
+              $user = $this->getValue( null, $this->id, $this->query['action']);
 
-            foreach ( $this->user as $val ) {
-
-                if( $val['id'] == $this->id ) {
-
-                     return json_encode($val);
-
+                if( $user ) {
+                     return json_encode($user);
                     }
 
-            }
+           $message = 'Пользователь не найден : '.$this->id;
 
-           $message = 'Пользователь не найден: '.$this->id;
-           
             throw new \Exception($message);
 
-           # End  ...    тестовый код
+        }
+
+    /**
+     * 
+     * @return json
+     */
+
+    public function action_getUsers() {
+
+            $users = $this->getValue( null, null , $this->query['action']);
+
+                if( $users ) {
+                     return json_encode($users);
+                    }
+
+            $message = 'Пользователей в базе нет.';
+
+            throw new \Exception($message);
         } 
+
 
     /**
      * 
