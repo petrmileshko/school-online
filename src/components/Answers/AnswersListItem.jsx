@@ -1,17 +1,17 @@
 import React from "react";
 
-export const AnswersListItem = (props) => {
-  const { answers } = props;
+export const AnswersListItem = ({ answers, subjectsList }) => {
+  const answerItem = answers.map((el, i) => {
+    return (
+      <tr key={i}>
+        <td>{el.name}</td>
+        {subjectsList.map((subj, i) => {
+          const score = el.subjects.find((el) => el.title === subj).scores;
+          return <td key={i}>{score}</td>;
+        })}
+      </tr>
+    );
+  });
 
-  //   const answerItem = answers.map((el, i) => {
-  //     return (
-  //       <tr key={i}>
-  //         <td>{el.fio}</td>
-  //         <td>{el.subject}</td>
-  //         <td>{el.score}</td>
-  //       </tr>
-  //     );
-  //   });
-
-  return <></>;
+  return answerItem;
 };

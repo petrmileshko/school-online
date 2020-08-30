@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 export const AnswersList = () => {
   const { loading, request } = useHttp();
   const [answers, setAnswers] = useState([]);
+  const [subjectsList, setSubjectsList] = useState([]);
   const getAnswersData = useCallback(
     async (signal) => {
       try {
@@ -15,39 +16,67 @@ export const AnswersList = () => {
           "POST",
           { Table: "Answers", action: "scores", signal: signal }
         );
-        console.log("data", data);
+
         handleData(data);
+        getAllSubjects(data);
       } catch (err) {
         console.log(("___POST_ANSWERS___", err));
       }
     },
     [request]
   );
+
   const handleData = (data) => {
-    const result = new Object();
-    data.forEach((el) => {
-      debugger
-      if (!isEmpty(result)) {
-        for (const name in result) {
-          for (const subj in result[name]) {
-            if (el.fio === name && el.subject === subj) {
-              result[name][subj].push(el.score);
-            } else if (el.fio === name && el.subject !== subj) {
-              result[name][el.subject] = [el.score];
+    const vocabulary = [];
+    data.forEach((dataItem) => {
+      if (dataItem.score !== null) {
+        if (vocabulary.length > 0) {
+          const student = vocabulary.find((el) => el.name === dataItem.fio);
+          if (student) {
+            const subj = student.subjects.find(
+              (s) => s.title === dataItem.subject
+            );
+            if (subj) {
+              subj.scores.push(dataItem.score);
             } else {
-              result[el.fio] = { [el.subject]: [el.score] };
+              student.subjects.push({
+                title: dataItem.subject,
+                scores: [dataItem.score],
+              });
             }
+          } else {
+            vocabulary.push({
+              name: dataItem.fio,
+              subjects: [{ title: dataItem.subject, scores: [dataItem.score] }],
+            });
           }
+        } else {
+          vocabulary.push({
+            name: dataItem.fio,
+            subjects: [{ title: dataItem.subject, scores: [dataItem.score] }],
+          });
         }
-      } else {
-        result[el.fio] = {
-          [el.subject]: [el.score],
-        };
       }
     });
-    console.log("result", result);
+
+    vocabulary.forEach((stud) => {
+      stud.subjects.forEach((subj) => {
+        subj.scores = average(subj.scores);
+      });
+    });
+    console.log("VOCABULARY", vocabulary);
+    setAnswers(vocabulary);
   };
-  const isEmpty = (obj) => JSON.stringify(obj) === "{}";
+
+  const getAllSubjects = (data) => {
+    let result = [];
+    data.forEach((el) => {
+      result.push(el.subject);
+    });
+
+    result = result.filter((item, pos) => result.indexOf(item) === pos);
+    setSubjectsList(result);
+  };
 
   const average = (nums) => {
     return nums.reduce((a, b) => a + b) / nums.length;
@@ -77,13 +106,17 @@ export const AnswersList = () => {
             <table className="table table-hover mb-0">
               <thead>
                 <tr>
-                  <th> Фио </th>
-
-                  <th> Оценка </th>
+                  <th>ФИО</th>
+                  {subjectsList.map((subjName, i) => (
+                    <th key={i}>{subjName}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                <AnswersListItem answers={answers} />
+                <AnswersListItem
+                  answers={answers}
+                  subjectsList={subjectsList}
+                />
               </tbody>
             </table>
           </div>
