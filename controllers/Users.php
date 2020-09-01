@@ -16,6 +16,7 @@ class Users extends Controller {
     private $password;
     private $id;
 
+
     use TraitControllers;
     
     public function __construct ($rest) {
@@ -23,7 +24,7 @@ class Users extends Controller {
         parent::__construct ($rest);
 
         $this->email = parent::getValue('email');
-        $this->password = parent::getValue('password');
+        $this->password = parent::getValue('pass');
         $this->id = parent::getValue('id');
        
         if ($this->data) {
@@ -36,31 +37,44 @@ class Users extends Controller {
      * @return json
      */
     
-        public function action_login() {
+    public function action_login() {
 
-            # Start...    тестовый код - после отладки заменить на рабочий
+        if( !$this->passport and !\Init::is_Authorized() ) {
 
-            
-            foreach ( $this->user as $val ) {
+            $user = $this->getValue( null,[ 'email'=>$this->email , 'pass'=>$this->password ], $this->query['action']);
 
-                if( $val['email'] == $this->email and $val['password'] == $this->password ) {
+                if ( $user ) {
 
-                    $token = random_int(100, 1000).$val['id'];
-                    
-                    $val += ['question'=>$token];
+                    $this->passport = new \School\models\Passport($user);
+                    $user += $this->passport->get(); 
 
-                    //$_SESSION['token'] = $token;
-                     return json_encode($val);
-                    }
+                    return json_encode($user);
+                }
+                else {
+                $message = 'Ошибочный email: ('.$this->email.') или пароль.';
+                throw new \Exception($message);                
+                }
 
             }
+                $message = 'Уже авторизованы. is Authorized';
+                throw new \Exception($message);  
+    } 
 
-           $message = 'Ошибочный пользователь или пароль: '.$this->email;
+    /**
+     * 
+     * @return json
+     */
+    
+    public function action_logout() {
 
-            throw new \Exception($message);
+        if( $this->passport or \Init::is_Authorized() ) {
 
-           # End  ...    тестовый код
-        } 
+                \School\models\Passport::destroy();
+
+                return json_encode(['result'=>'positive','message'=>'Signed off']);
+            }
+
+    } 
 
     /**
      * 
@@ -129,18 +143,6 @@ class Users extends Controller {
 
            # End  ...    тестовый код
         } 
-
-
-    /**
-     * 
-     * @return json
-     */
-        public function action_all() {
-
-        return json_encode($this->user);
-
-        } 
-
 
     
 }

@@ -17,14 +17,13 @@
 Положительный
 
 {
-	     'result' : 'positive',
          'id' : integer,
          'name' : string,
          'email' : string,
          'fio' : string,
          'avatar' : string,
-         'password' : string,
-         'access' : { 'access_id'=>integer, 'name'=>string},
+         'pass' : string,
+         'access' : string,
          'subject' : string,									       (только для учителей)
          'class' : string											   (только для учеников)
 }
@@ -37,7 +36,7 @@
 }
 
 ------------------------------------------------------------
-
+Временный
 Запрос
 
 {
@@ -49,17 +48,10 @@
          'email' : string,
          'fio' : string,
          'avatar' : string,
-         'password' : string,
+         'pass' : string,
 		 'question' : string					
 }
 
-Ответы:
-
-Положительный
-
-{
-	     'result' : 'positive'
-}
 
 Отрицательный
 
