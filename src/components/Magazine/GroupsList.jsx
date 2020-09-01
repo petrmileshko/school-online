@@ -34,6 +34,3 @@ export default function GroupsList (props) {
     )
 }
 
-// {props.user.map(item =>(
-//     <tr key={item.id}>
-//         <td>{item.fio}</td>
