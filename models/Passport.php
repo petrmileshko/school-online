@@ -17,7 +17,7 @@ class Passport {
 
         $this->token = random_int(100, 1000).$user['id'];
         \Init::save( [ 'question' => $this->token ] , 'question' );
-        \Init::save( $user , 'user' );
+        \Init::save( $user , 'Users' );
 
     }
 
@@ -49,7 +49,7 @@ class Passport {
     public static function destroy() {
 
     \Init::delete('question');
-    \Init::delete('user');
+    \Init::delete('Users');
 
     }
 
