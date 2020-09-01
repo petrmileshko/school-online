@@ -76,7 +76,6 @@ public static function initialize() {
                 throw new Exception($message);
 
             }   
-
                 $assoc = json_decode( $rawData , true );  
 
                                switch (json_last_error()) {

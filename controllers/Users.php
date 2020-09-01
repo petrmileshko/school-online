@@ -22,14 +22,9 @@ class Users extends Controller {
     public function __construct ($rest) {
 
         parent::__construct ($rest);
-
         $this->email = parent::getValue('email');
         $this->password = parent::getValue('pass');
         $this->id = parent::getValue('id');
-       
-        if ($this->data) {
-            $this->user = $this->data;
-        }
     }
 
     /**
@@ -39,7 +34,7 @@ class Users extends Controller {
     
     public function action_login() {
 
-        if( !$this->passport and !\Init::is_Authorized() ) {
+        if( !$this->passport and !$this->data ) {
 
             $user = $this->getValue( null,[ 'email'=>$this->email , 'pass'=>$this->password ], $this->query['action']);
 
@@ -67,7 +62,7 @@ class Users extends Controller {
     
     public function action_logout() {
 
-        if( $this->passport or \Init::is_Authorized() ) {
+        if( $this->passport or $this->data ) {
 
                 \School\models\Passport::destroy();
 
