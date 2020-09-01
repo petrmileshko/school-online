@@ -15,6 +15,7 @@ abstract class Controller
     protected $method;
     protected $query;
     protected $data;
+    protected $passport;
 
     /**
      * @return Exception

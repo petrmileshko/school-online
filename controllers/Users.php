@@ -16,6 +16,7 @@ class Users extends Controller {
     private $password;
     private $id;
 
+
     use TraitControllers;
     
     public function __construct ($rest) {
@@ -36,31 +37,27 @@ class Users extends Controller {
      * @return json
      */
     
-        public function action_login() {
+    public function action_login() {
 
-            # Start...    тестовый код - после отладки заменить на рабочий
+        if( !$this->passport ) {
 
-            
-            foreach ( $this->user as $val ) {
+            $user = $this->getValue( null,[ 'email'=>$this->email , 'pass'=>$this->password ], $this->query['action']);
 
-                if( $val['email'] == $this->email and $val['password'] == $this->password ) {
+                if ( $user and is_array($user) ) {
 
-                    $token = random_int(100, 1000).$val['id'];
+                    $this->passport = new \School\models\Passort($user);
+                    $user += $this->passport->get(); 
                     
-                    $val += ['question'=>$token];
-
-                    //$_SESSION['token'] = $token;
-                     return json_encode($val);
-                    }
+                    return json_encode($user);
+                }
+                else {
+                $message = 'Ошибочный email: ('.$this->email.') или пароль.';
+                throw new \Exception($message);                
+                }
 
             }
 
-           $message = 'Ошибочный пользователь или пароль: '.$this->email;
-
-            throw new \Exception($message);
-
-           # End  ...    тестовый код
-        } 
+    } 
 
     /**
      * 
@@ -129,18 +126,6 @@ class Users extends Controller {
 
            # End  ...    тестовый код
         } 
-
-
-    /**
-     * 
-     * @return json
-     */
-        public function action_all() {
-
-        return json_encode($this->user);
-
-        } 
-
 
     
 }

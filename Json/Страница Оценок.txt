@@ -16,7 +16,6 @@
 Положительный
 
 {
-	     'result' : 'positive',
          'fio' : string,
          'subject' : string,
          'score' : integer

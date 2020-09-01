@@ -206,7 +206,7 @@ class SQL {
     public function getTask($id){
         $query = 'SELECT t.task_name, t.task_description, t.task_body, t.task_file, s.subject, u.fio FROM Tasks t 
                             JOIN Subjects s ON t.subject_id=s.id 
-                            JOIN Users u ON t.user_id=u.id WHERE t.id='.$id;
+                            JOIN Users u ON t.user_id=u.id WHERE t.id=:id'.$id;
 
         $q = $this->db->prepare($query);
         $q->execute();
@@ -244,16 +244,16 @@ class SQL {
      * По id  выдает всю информацию о пользователе, предмета, класс, уровень доступа.
      */
     public function getUser($id){
-        $query = 'SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
+
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
                             LEFT JOIN Сlasses c ON cr.class_id=c.id 
                             LEFT JOIN Auth a ON u.access_id=a.id 
-                            WHERE u.id='.$id;
+                            WHERE u.id=:id');
 
-        $q = $this->db->prepare($query);
-        $q->execute();
+        $q->execute( [ 'id' => $id ] );
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
             $info = $q->errorInfo();
@@ -285,6 +285,32 @@ class SQL {
 
         return $q->fetchAll();
     }
+    
+    /**
+     * @param array
+     * @return array
+     *      Авторизация пользователя по почте и паролю. Возвращает массив с данными пользователя
+     */
+
+    public function login( array $params) {
+        
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
+                            LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
+                            LEFT JOIN Subjects s ON sr.subject_id=s.id 
+                            LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
+                            LEFT JOIN Сlasses c ON cr.class_id=c.id 
+                            LEFT JOIN Auth a ON u.access_id=a.id WHERE u.email=:email and u.pass=:pass');
+
+         $q->execute( $params );
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+        $info = $q->errorInfo();
+        throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
+        
+    } 
 
 }
 
