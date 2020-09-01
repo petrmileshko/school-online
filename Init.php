@@ -28,9 +28,6 @@ function multiStrip($str) {
 
 final class Init {
 
-	private static $dbParams;
-
-
     /**
      * 
      * @return array
@@ -144,15 +141,6 @@ public static function initialize() {
         else throw new Exception('Автозагрузчик : класс не найден - '.$class);
     }
 
-    /**
-     * 
-     * @return array
-     */
-
-    public static function getDBParams() {
-        
-        return self::$dbParams;
-    }
 
     /**
      * @param array string
