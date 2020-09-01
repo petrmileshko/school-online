@@ -54,12 +54,5 @@ class Passport {
     }
 
 }
-/*
-            ob_start();
-            echo '<pre>';
-            print_r( $value);
-            print_r( $func);
-            echo '</pre>';
-            die('Test');
-            */
+
 ?>
