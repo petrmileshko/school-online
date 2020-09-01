@@ -11,7 +11,7 @@ export const Login = () => {
     const {loading, request} = useHttp();
     const [form, setForm] = useState({
         email: '',
-        password: ''
+        pass: ''
     });
 
     const changeHandler = event => {
@@ -21,7 +21,7 @@ export const Login = () => {
     const loginHandler = async () => {
         try {
             const data = await request(
-                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
+                'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/MainController.php',
                 'POST',
                 {Table: 'Users', action: 'login', ...form}
             );
@@ -39,7 +39,7 @@ export const Login = () => {
                         <span className="subtitle">Etiam consequat urna at magna bibendum, in tempor arcu fermentum vitae mi massa egestas.</span>
                         <span className="h3 pt-5" style={{color: '#fff'}}>Данные для авторизации в приложении</span>
                         <span className="h4 pt-3" style={{color: '#fff'}}>Учитель:</span>
-                        <span>Email: peter@mail.ru</span>
+                        <span>Email: ivan@gamle.ru</span>
                         <span>Password: 1234</span>
                     </div>
                 </Col>
@@ -68,8 +68,8 @@ export const Login = () => {
                             <Form.Group controlId="inputPassword">
                                 <Form.Control
                                     type="password"
-                                    name="password"
-                                    value={ form.password }
+                                    name="pass"
+                                    value={ form.pass }
                                     onChange={ changeHandler }
                                 />
                                 <Form.Label>Password</Form.Label>

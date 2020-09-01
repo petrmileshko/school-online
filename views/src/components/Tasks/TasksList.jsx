@@ -12,7 +12,7 @@ export const TasksList = () => {
         const tasksData = async () => {
             try {
                 const data = await request(
-                    `https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php?Table=Tasks&action=getTasks`
+                    `https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/MainController.php?Table=Tasks&action=getTasks`
                 );
 
                 setTasks(data);

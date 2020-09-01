@@ -1,7 +1,8 @@
 import React from "react";
 
-export const AnswersListItem = props => {
-    const { answers } = props;
+export const AnswersListItem = ({ answers }) => {
+
+    console.log(answers);
     
     const answerItem = answers.map((el, i) => {
         return (
