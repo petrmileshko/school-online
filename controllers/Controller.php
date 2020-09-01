@@ -75,6 +75,7 @@ abstract class Controller
             return ( $this->query[$key] ) ? $this->query[$key] : null ;
         }
         elseif( $func ) {
+
             return ( $value ) ? $this->db->$func($value) : $this->db->$func();
         }
         else  {

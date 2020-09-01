@@ -30,14 +30,36 @@ class Passport {
         return ( $this->token ) ? [ 'question' => $this->token ] : \Init::load('question');
     }
 
+    /**
+     * @param  string
+     * @return boolean
+     */
+
     public static function confirm( $question ) {
 
         return ( \Init::load('question')['question'] == $question );
 
     }
 
+    /**
+     * @param  
+     * @return 
+     */
+
+    public static function destroy() {
+
+    \Init::delete('question');
+    \Init::delete('user');
+
+    }
 
 }
-
-
+/*
+            ob_start();
+            echo '<pre>';
+            print_r( $value);
+            print_r( $func);
+            echo '</pre>';
+            die('Test');
+            */
 ?>

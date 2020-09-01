@@ -174,6 +174,23 @@ public static function initialize() {
 
         return ( $_SESSION[$param] ) ? $_SESSION[$param] : null;
     }
+
+    /**
+     * @param  string
+     * @return 
+     */
+
+    public static function delete($param) {
+        unset($_SESSION[$param]);
+    }
+
+    /**
+     * @param  
+     * @return boolean
+     */
+        public static function is_Authorized() {
+        return ( $_SESSION['question'] ) ? true: false;
+    }
 }
 
 

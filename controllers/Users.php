@@ -24,7 +24,7 @@ class Users extends Controller {
         parent::__construct ($rest);
 
         $this->email = parent::getValue('email');
-        $this->password = parent::getValue('password');
+        $this->password = parent::getValue('pass');
         $this->id = parent::getValue('id');
        
         if ($this->data) {
@@ -39,15 +39,15 @@ class Users extends Controller {
     
     public function action_login() {
 
-        if( !$this->passport ) {
+        if( !$this->passport and !\Init::is_Authorized() ) {
 
             $user = $this->getValue( null,[ 'email'=>$this->email , 'pass'=>$this->password ], $this->query['action']);
 
-                if ( $user and is_array($user) ) {
+                if ( $user ) {
 
-                    $this->passport = new \School\models\Passort($user);
+                    $this->passport = new \School\models\Passport($user);
                     $user += $this->passport->get(); 
-                    
+
                     return json_encode($user);
                 }
                 else {
@@ -55,6 +55,23 @@ class Users extends Controller {
                 throw new \Exception($message);                
                 }
 
+            }
+                $message = 'Уже авторизованы. is Authorized';
+                throw new \Exception($message);  
+    } 
+
+    /**
+     * 
+     * @return json
+     */
+    
+    public function action_logout() {
+
+        if( $this->passport or \Init::is_Authorized() ) {
+
+                \School\models\Passport::destroy();
+
+                return json_encode(['result'=>'positive','message'=>'Signed off']);
             }
 
     } 
