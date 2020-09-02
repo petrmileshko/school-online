@@ -64,7 +64,6 @@ export const AnswersList = () => {
 				subj.scores = average(subj.scores);
 			});
 		});
-		console.log('VOCABULARY', vocabulary);
 		setAnswers(vocabulary);
 	};
 
