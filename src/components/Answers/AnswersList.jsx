@@ -12,7 +12,7 @@ export const AnswersList = () => {
     async (signal) => {
       try {
         const data = await request(
-          "https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php",
+          "https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/MainController.php",
           "POST",
           { Table: "Answers", action: "scores", signal: signal }
         );
