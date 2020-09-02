@@ -2,8 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useHttp } from "../../hooks/http.hook";
 import { AnswersListItem } from "./AnswersListItem.jsx";
 
-import Spinner from "react-bootstrap/Spinner";
-
 export const AnswersList = () => {
   const { loading, request } = useHttp();
   const [answers, setAnswers] = useState([]);

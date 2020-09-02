@@ -25,9 +25,7 @@ export const ProfilePage = props => {
         const userData = async () => {
             try {
                 const data = await request(
-                    'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
-                    'POST',
-                    {Table: 'Users', action: 'getUser', id: userId}
+                    `https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/MainController.php?Table=Users&action=getUser&id=${ userId }`
                 );
 
                 setUser(data);

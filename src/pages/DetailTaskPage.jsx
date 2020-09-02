@@ -1,19 +1,19 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Header } from "../components/Header/Header.jsx";
 import { Sidebar } from "../components/Sidebar/Sidebar.jsx";
 import { TaskDetail } from '../components/Tasks/TaskDetail.jsx';
 import { useHttp } from "../hooks/http.hook";
-//import RichTextEditor from '../components/RichTextEditor/RichTextEditor.js';
 import { Editor, EditorState } from 'draft-js';
-
+import { AuthContext } from "../context/AuthContext";
 import 'draft-js/dist/Draft.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 
 export const DetailTaskPage = () => {
     const taskId = useParams().id;
+    const {userId} = useContext(AuthContext);
     const [sbShrink, setSbShrink] = useState(true);
     const [task, setTask] = useState();
     const [answer, setAnswer] = useState();
@@ -30,9 +30,7 @@ export const DetailTaskPage = () => {
         const taskData = async () => {
             try {
                 const data = await request(
-                    'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/RestController.php',
-                    'POST',
-                    {Table: 'Tasks', action: 'getTask', id: taskId}
+                    `https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/MainController.php?Table=Tasks&action=getTask&id=${taskId}`
                 );
 
                 setTask(data);
@@ -43,10 +41,16 @@ export const DetailTaskPage = () => {
 
     const getEditorContent = () => {
         const content = editorState.getCurrentContent().getPlainText();
-        
-        setAnswer(content);
+        setAnswer({ answer_id: Date.now(), answer_userId: userId, answer_content: content });
     }
 
+    useEffect(() => {
+
+        if (answer) {
+
+            console.log(answer);
+        }
+    }, [answer]);
     return (
         <div className={`page page__task-detail${ sbShrink ? '' : ' sidebar-shrink' }`}>
             <Header 
@@ -102,7 +106,8 @@ export const DetailTaskPage = () => {
                                             />
                                             <div className="btn__group pt-5 pb-3">
                                                 <Button
-                                                    className="btn btn__gradient btn__grad-danger"
+                                                    className="btn__gradient btn__grad-danger"
+                                                    variant="gradient"
                                                     onClick={ getEditorContent }
                                                 >
                                                     Save

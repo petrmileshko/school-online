@@ -15,6 +15,7 @@ export const TasksListItem = props => {
                     </Link>
                 </td>
                 <td>10 А</td>
+                <td>{ el.fio }</td>
                 <td className="td-actions">
                     <Link to={`/task/${el.id}`}>
                         <i className="la la-edit edit"></i>
