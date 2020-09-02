@@ -10,6 +10,7 @@ input,
         box-shadow: none;
     }
 }
+
 .form__signIn {
 
     .form-group {
@@ -53,28 +54,34 @@ input,
             background: $pr-color;
             transition: 0.2s ease all;
         }
+
         &:before {
             left: 50%;
         }
+
         &:after {
             right: 50%;
         }
     }
 
-    .form-control:focus ~ .bar:before,
-    .form-control:focus ~ .bar:after {
+    .form-control:focus~.bar:before,
+    .form-control:focus~.bar:after {
         width: 50%;
     }
 
-    .form-control:focus ~ .form-label {
+    .form-control:focus~.form-label {
         top: -5px;
         font-size: 0.625rem;
         opacity: 1;
     }
 
-    .form-control:not([value=""]) ~ .form-label {
+    .form-control:not([value=""])~.form-label {
         top: -5px;
         font-size: 0.625rem;
         opacity: 1;
     }
+}
+
+textarea.form-control {
+    height: unset;
 }
