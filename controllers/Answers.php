@@ -1,7 +1,7 @@
 <?php
 
 /*
-        code by Peter Mileshko 
+        code by  
         Контроллер для работы с моделью - БД / талица Answers
 
 */
@@ -29,15 +29,7 @@ class Answers extends Controller {
            # End  ...    тестовый код
         } 
         
-        public function action_all() {
 
-            # Start...    тестовый код - после отладки заменить на рабочий
-
-                     return json_encode($this->answers);
-
-
-           # End  ...    тестовый код
-        } 
 }
 
 ?>
