@@ -38,8 +38,17 @@ export const Login = () => {
                         <h1 className="title">Welcome To Education Online!</h1>
                         <span className="subtitle">Etiam consequat urna at magna bibendum, in tempor arcu fermentum vitae mi massa egestas.</span>
                         <span className="h3 pt-5" style={{color: '#fff'}}>Данные для авторизации в приложении</span>
-                        <span className="h4 pt-3" style={{color: '#fff'}}>Учитель:</span>
+                        <span className="h4 pt-3" style={{color: '#fff'}}>Ученик:</span>
                         <span>Email: ivan@gamle.ru</span>
+                        <span>Password: 1234</span>
+                        <span className="h4 pt-3" style={{color: '#fff'}}>Ученик:</span>
+                        <span>Email: rossam@ramd.ru</span>
+                        <span>Password: 1234</span>
+                        <span className="h4 pt-3" style={{color: '#fff'}}>Учитель:</span>
+                        <span>Email: email@email.com</span>
+                        <span>Password: 1234</span>
+                        <span className="h4 pt-3" style={{color: '#fff'}}>Директор:</span>
+                        <span>Email: abros@bros.bro</span>
                         <span>Password: 1234</span>
                     </div>
                 </Col>
