@@ -56,6 +56,23 @@ class Tasks extends Controller {
             throw new \Exception($message);
 
         }
+
+    /**
+     * 
+     * @return json
+     */
+        public function action_createTask() {
+
+
+
+           $message = 'Задача не найдена : '.$this->id;
+
+            throw new \Exception($message);
+
+        }
+
+
+
 }
 
 ?>

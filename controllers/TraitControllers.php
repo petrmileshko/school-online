@@ -137,10 +137,7 @@ trait TraitControllers {
     /*
      *          Если передано ошибочное дейтсвие в запросе поле { action : string }
      */
-    public function action_any() {
-
-           $message = 'action : '.$this->query['action'];
-
+    public function fail( $message ) {
             throw new \Exception('Ошибка в запросе  - '.$message);
         }
     
