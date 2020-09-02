@@ -311,6 +311,10 @@ class SQL {
         
     } 
 
+    public function __call($name, $params){
+        $msg = 'SQL.php метода нет: '.$name;
+      throw new \Exception($msg);
+    }
 }
 
 // пример использования

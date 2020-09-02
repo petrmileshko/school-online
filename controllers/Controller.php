@@ -21,7 +21,7 @@ abstract class Controller
      * @return Exception
      */
     
-    public abstract function action_any();   // объявить методы абстрактные
+    public abstract function fail($message);   // объявить методы абстрактные
 
 
     /**
@@ -90,29 +90,17 @@ abstract class Controller
      * @return array server response 
      */
 
-    public function update(array $fields, $index, array $table ) {
+    public function setValue( $key = null, $value , $func ) {
 
-
-            $i=0;
-        foreach ($table as $row) {
-
-
-            if (  $row['id'] == $index ) {
-
-                foreach ($fields as $key => $value) {
-
-                   $table[$i][$key] = $value;
-
-                }
-
-                \Init::save( $table, $this->controller );
-
-                return ['result'=>'positive'];
+            if ($key) { 
+                return $this->db->$func($this->controller, $value, $key ); 
             }
-            $i++;
-        }
+            else { 
+                return $this->db->$func($this->controller, $value ); 
+            }
 
-        $message = 'Ошибка update. Позиция в '.$this->controller.' не найдена - id: '.$this->id;
+
+        $message = 'Ошибка setValue. Таблица '.$this->controller;
            
         throw new \Exception($message);
 
@@ -124,7 +112,8 @@ abstract class Controller
      */
 
     public function __call($name, $params){
-      $this->action_any();
+        $msg = 'Метода нет action : '.$this->query['action'];
+      $this->fail($msg);
 	}
 
 }

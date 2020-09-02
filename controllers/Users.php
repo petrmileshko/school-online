@@ -104,9 +104,7 @@ class Users extends Controller {
                      return json_encode($users);
                     }
 
-            $message = 'Пользователей в базе нет.';
-
-            throw new \Exception($message);
+            throw new \Exception('Пользователей в базе нет.');
         } 
 
 
@@ -115,28 +113,15 @@ class Users extends Controller {
      * @return json
      */
 
-         public function action_update() {
+         public function action_Update() {
 
-            # Start...    тестовый код - после отладки заменить на рабочий
+            $result =  $this->setValue( 'id='.$this->id, array_slice($this->query, 3) , $this->query['action']);
 
-
-            foreach ( $this->user as $val ) {
-
-                if( $val['id'] == $this->id ) {
-
-                    $result = $this->update( array_slice($this->query, 1), $this->id , $this->user );
-
-                     return json_encode($result);
-
+                    if( $result ) {
+                     return json_encode(['result'=>'positive', 'message'=>$result]);
                     }
 
-            }
-
-           $message = 'Пользователь не найден: '.$this->id;
-           
-            throw new \Exception($message);
-
-           # End  ...    тестовый код
+            throw new \Exception('Ошибка сохранения данных таблицы: '.$this->controller);
         } 
 
     
