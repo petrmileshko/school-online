@@ -47,12 +47,12 @@ class Users extends Controller {
                 }
                 else {
                 $message = 'Ошибочный email: ('.$this->email.') или пароль.';
-                throw new \Exception($message);                
+                $this->fail($message);                
                 }
 
             }
                 $message = 'Уже авторизованы. is Authorized';
-                throw new \Exception($message);  
+                $this->fail($message);  
     } 
 
     /**
@@ -87,7 +87,7 @@ class Users extends Controller {
 
            $message = 'Пользователь не найден : '.$this->id;
 
-            throw new \Exception($message);
+            $this->fail($message); 
 
         }
 
@@ -104,7 +104,7 @@ class Users extends Controller {
                      return json_encode($users);
                     }
 
-            throw new \Exception('Пользователей в базе нет.');
+             $this->fail('Пользователей в базе нет.');
         } 
 
 
@@ -121,7 +121,7 @@ class Users extends Controller {
                      return json_encode(['result'=>'positive', 'message'=>$result]);
                     }
 
-            throw new \Exception('Ошибка сохранения данных таблицы: '.$this->controller);
+             $this->fail('Ошибка сохранения данных таблицы: '.$this->controller);
         } 
 
     

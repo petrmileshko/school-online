@@ -135,10 +135,10 @@ trait TraitControllers {
 	# End  ...    тестовый код
 
     /*
-     *          Если передано ошибочное дейтсвие в запросе поле { action : string }
+     *          Возврат в случае ошибки + сообщение
      */
     public function fail( $message ) {
-            throw new \Exception('Ошибка в запросе  - '.$message);
+            throw new \Exception($message);
         }
     
 }

@@ -36,7 +36,7 @@ class Tasks extends Controller {
 
             $message = 'Заданий в базе нет.';
 
-            throw new \Exception($message);
+             $this->fail($message);
         } 
 
     /**
@@ -53,7 +53,7 @@ class Tasks extends Controller {
 
            $message = 'Задача не найдена : '.$this->id;
 
-            throw new \Exception($message);
+             $this->fail($message);
 
         }
 
@@ -67,7 +67,7 @@ class Tasks extends Controller {
 
            $message = 'Задача не найдена : '.$this->id;
 
-            throw new \Exception($message);
+             $this->fail($message);
 
         }
 
