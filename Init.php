@@ -28,8 +28,6 @@ function multiStrip($str) {
 
 final class Init {
 
-
-
     /**
      * 
      * @return array
@@ -78,7 +76,6 @@ public static function initialize() {
                 throw new Exception($message);
 
             }   
-
                 $assoc = json_decode( $rawData , true );  
 
                                switch (json_last_error()) {
@@ -130,7 +127,6 @@ public static function initialize() {
 
     public static function autoloader($class)       // автозагручик классов
     {
-        $file ='';
         $result = array_slice( explode('\\',$class),1);
         for ($i=0;$i<count($result);$i++) {
             if($i<count($result)-1) $file .= $result[$i].'/';
@@ -164,6 +160,23 @@ public static function initialize() {
     public static function load($param) {
 
         return ( $_SESSION[$param] ) ? $_SESSION[$param] : null;
+    }
+
+    /**
+     * @param  string
+     * @return 
+     */
+
+    public static function delete($param) {
+        unset($_SESSION[$param]);
+    }
+
+    /**
+     * @param  
+     * @return boolean
+     */
+        public static function is_Authorized() {
+        return ( $_SESSION['question'] ) ? true: false;
     }
 }
 

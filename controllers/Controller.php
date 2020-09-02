@@ -1,15 +1,13 @@
 <?php
 /*
-	code by Peter Mileshko and Alexandr Baukov
-    Базовый абстрактный класс контроллера
+	code by Peter Mileshko 
+    Базовый абстрвктный класс контроллера
 
 */
 
 namespace School\controllers;
 
-use Exception;
-
-abstract class Controller
+abstract class Controller 
 {
     
     protected $db;
@@ -17,6 +15,16 @@ abstract class Controller
     protected $method;
     protected $query;
     protected $data;
+    protected $passport;
+    protected $array;
+
+    /**
+     * @param $message
+     * @return Exception
+     */
+    
+    public abstract function fail($message);   // объявить методы абстрактные
+
 
     /**
      * Controller constructor.
@@ -51,39 +59,13 @@ abstract class Controller
 		}
     }
 
-
-    /**
-     * Функция для вывода всех данных из конкретной таблицы/связанных таблиц
-     */
-    abstract public function index();
-
-    /**
-     * Функция для вывода данных по конкретному объекту из конкретной таблицы/связанных таблиц
-     */
-    abstract public function show();
-
-    /**
-     * Функция для добавления новых данных  в конкретную таблицу
-     */
-    abstract public function create();
-
-    /**
-     * Функция для обновления данных в конекретной таблице
-     */
-    abstract public function update();
-
-    /**
-     * Функция для удаления данных из конкретной таблицы
-     */
-    abstract public function delete();
-
-
     /**
      * @param $key string
      * @param $value string or integer
      * @param null $func
      * @return string or integer or array
      */
+
     public function getValue( $key = null, $value = null , $func = null ) {
 
         if ( $value and $key ) {
@@ -96,6 +78,7 @@ abstract class Controller
             return ( $this->query[$key] ) ? $this->query[$key] : null ;
         }
         elseif( $func ) {
+
             return ( $value ) ? $this->db->$func($value) : $this->db->$func();
         }
         else  {
@@ -106,39 +89,47 @@ abstract class Controller
     }
 
     /**
-     * @param array $fields
-     * @param $index
-     * @param array $table
+     * @param null $key
+     * @param $value
+     * @param $func
      * @return array server response
-     * @throws Exception
+     * @throws \Exception
      */
-    public function RenamePLS(array $fields, $index, array $table ) { // Нужно переназвать
 
+    public function setValue( $key = null, $value , $func ) {
 
-            $i=0;
-        foreach ($table as $row) {
-
-
-            if (  $row['id'] == $index ) {
-
-                foreach ($fields as $key => $value) {
-
-                   $table[$i][$key] = $value;
-
-                }
-
-                \Init::save( $table, $this->controller );
-
-                return ['result'=>'positive'];
+            if ($key) { 
+                return $this->db->$func($this->controller, $value, $key ); 
             }
-            $i++;
-        }
+            else { 
+                return $this->db->$func($this->controller, $value ); 
+            }
 
-        $message = 'Ошибка update. Позиция в '.$this->controller.' не найдена - id: '.$this->id;
 
-        throw new Exception($message);
+        $message = 'Ошибка setValue. Таблица '.$this->controller;
+           
+        throw new \Exception($message);
 
     }
+
+    /**
+     * @param $table
+     * @param $array
+     * @param $func
+     * @return mixed
+     * @throws \Exception
+     */
+    public function addValue($table, $array, $func ){
+        if ($array) {
+            return $this->db->$func($this->controller, $array);
+        }
+
+
+        $message = 'Ошибка addValue. Таблица '.$this->controller;
+
+        throw new \Exception($message);
+    }
+
 
     /**
      * @param $name string
@@ -146,7 +137,8 @@ abstract class Controller
      */
 
     public function __call($name, $params){
-      $this->action_any();
+        $msg = 'Метода нет action : '.$this->query['action'];
+      $this->fail($msg);
 	}
 
 }

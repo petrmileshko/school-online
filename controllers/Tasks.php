@@ -1,8 +1,8 @@
 <?php
 
 /*
-        code by Peter Mileshko and Alexandr Baukov
-        Контроллер для работы с моделью - БД / талица Task
+        code by Peter Mileshko 
+        Контроллер для работы с моделью - БД / талица Tasks
 
 */
 
@@ -10,7 +10,7 @@ namespace School\controllers;
 
 
 
-class Task extends Controller {
+class Tasks extends Controller {
 
     private $id;
 
@@ -20,14 +20,13 @@ class Task extends Controller {
         parent::__construct ($rest);
         $this->id = parent::getValue('id');
     }
-
-
+    
     /**
      * 
-     * Показать все задания
+     * @return json
      */
 
-        public function index() {
+        public function action_getTasks() {
 
             $tasks = $this->getValue( null, null , $this->query['action']);
 
@@ -37,14 +36,14 @@ class Task extends Controller {
 
             $message = 'Заданий в базе нет.';
 
-            throw new \Exception($message);
+             $this->fail($message);
         } 
 
     /**
      * 
-     * Показать конкретное задание
+     * @return json
      */
-        public function show() {
+        public function action_getTask() {
 
              $task = $this->getValue( null, $this->id, $this->query['action']);
 
@@ -54,21 +53,26 @@ class Task extends Controller {
 
            $message = 'Задача не найдена : '.$this->id;
 
-            throw new \Exception($message);
+             $this->fail($message);
 
         }
-        public function create()
-        {
-            // TODO: Implement create() method.
+
+    /**
+     * 
+     * @return json
+     */
+        public function action_createTask() {
+
+
+
+           $message = 'Задача не найдена : '.$this->id;
+
+             $this->fail($message);
+
         }
-        public function update()
-        {
-            // TODO: Implement update() method.
-        }
-        public function delete()
-        {
-            // TODO: Implement delete() method.
-        }
+
+
+
 }
 
 ?>

@@ -3,7 +3,6 @@
  * Class SQL Служит для подключения к БД, с использованием Singleton, и использования основных запросов.
  * Code by Aleksand Baukov
  */
-
 namespace School\models;
 
 class SQL {
@@ -68,20 +67,20 @@ class SQL {
     //insert("goods",['title'=>'Товар 1','price'=>100])
     /**
      * @param $table
-     * @param $object
+     * @param $array
      * @return string
      */
-    public function Insert($table, $object) {
+    public function Insert($table, $array) {
 
         $columns = array();
 
-        foreach ($object as $key => $value) {
+        foreach ($array as $key => $value) {
 
             $columns[] = $key;
             $masks[] = ":$key";
 
             if ($value === null) {
-                $object[$key] = 'NULL';
+                $array[$key] = 'NULL';
             }
         }
 
@@ -91,7 +90,7 @@ class SQL {
         $query = "INSERT INTO $table ($columns_s) VALUES ($masks_s)";
 
         $q = $this->db->prepare($query);
-        $q->execute($object);
+        $q->execute($array);
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
             $info = $q->errorInfo();
@@ -104,16 +103,22 @@ class SQL {
     //UPDATE table set count=10,price=1000 where id = 2
     //Update('table', ['count' => 10,'price'=>1000], 'id = 2')
 
-    public function Update($table, $object, $where) {
+    /**
+     * @param $table
+     * @param $array
+     * @param $where
+     * @return int
+     */
+    public function Update($table, $array, $where) {
 
         $sets = array();
 
-        foreach ($object as $key => $value) {
+        foreach ($array as $key => $value) {
 
             $sets[] = "$key=:$key";
 
             if ($value === NULL) {
-                $object[$key]='NULL';
+                $array[$key]='NULL';
             }
         }
 
@@ -121,7 +126,7 @@ class SQL {
         $query = "UPDATE $table SET $sets_s WHERE $where";
 
         $q = $this->db->prepare($query);
-        $q->execute($object);
+        $q->execute($array);
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
             $info = $q->errorInfo();
@@ -132,6 +137,12 @@ class SQL {
     }
 
     //Delete('table', 'id = 2')
+
+    /**
+     * @param $table
+     * @param $where
+     * @return int
+     */
     public function Delete($table, $where) {
 
         $query = "DELETE FROM $table WHERE $where";
@@ -154,11 +165,11 @@ class SQL {
      /**
      * @param $id
      * @return mixed
-     * Запрос из таблиц User и Subjects, принимает user_id, возвращает, ФИО преподавателя и предмет.
+     * Запрос из таблиц Users и Subjects, принимает user_id, возвращает, ФИО преподавателя и предмет.
      */
      
     public function getSubjectByUser($id){
-        $query = "SELECT s.subject FROM `User` u
+        $query = "SELECT s.subject FROM `Users` u
                     JOIN Subject_relation sr ON u.id = sr.user_id 
                     JOIN Subjects s ON sr.subject_id=s.id 
                     WHERE u.id=".$id;
@@ -182,9 +193,9 @@ class SQL {
      */
 
     public function getTasksByUser($id){
-        $query = "SELECT t.task_name, s.subject, u.fio FROM Task t 
+        $query = "SELECT t.task_name, s.subject, u.fio FROM Tasks t 
                     JOIN Subjects s ON t.subject_id=s.id 
-                    JOIN User u ON t.user_id=u.id WHERE u.id=".$id;
+                    JOIN Users u ON t.user_id=u.id WHERE u.id=".$id;
 
         $q = $this->db->prepare($query);
         $q->execute();
@@ -205,12 +216,11 @@ class SQL {
      */
 
     public function getTask($id){
-        $query = 'SELECT t.task_name, t.task_description, t.task_body, t.task_file, s.subject, u.fio FROM Task t 
-                            JOIN Subjects s ON t.subject_id=s.id 
-                            JOIN User u ON t.user_id=u.id WHERE t.id='.$id;
 
-        $q = $this->db->prepare($query);
-        $q->execute();
+        $q = $this->db->prepare('SELECT t.task_name, t.task_description, t.task_body, t.task_file, s.subject, u.fio FROM Tasks t 
+                                    JOIN Subjects s ON t.subject_id=s.id 
+                                    JOIN Users u ON t.user_id=u.id WHERE t.id=:id');
+        $q->execute(['id'=>$id]);
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
             $info = $q->errorInfo();
@@ -228,7 +238,7 @@ class SQL {
      */
 
     public function getTasks(){
-        $q = $this->db->prepare('SELECT t.task_name, s.subject, u.fio FROM Task t JOIN Subjects s ON t.subject_id=s.id JOIN User u ON t.user_id=u.id');
+        $q = $this->db->prepare('SELECT t.task_name, t.id, s.subject, u.fio FROM Tasks t JOIN Subjects s ON t.subject_id=s.id JOIN Users u ON t.user_id=u.id');
         $q->execute();
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
@@ -245,16 +255,16 @@ class SQL {
      * По id  выдает всю информацию о пользователе, предмета, класс, уровень доступа.
      */
     public function getUser($id){
-        $query = 'SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `User` u 
+
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
                             LEFT JOIN Сlasses c ON cr.class_id=c.id 
                             LEFT JOIN Auth a ON u.access_id=a.id 
-                            WHERE u.id='.$id;
+                            WHERE u.id=:id');
 
-        $q = $this->db->prepare($query);
-        $q->execute();
+        $q->execute( [ 'id' => $id ] );
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
             $info = $q->errorInfo();
@@ -271,7 +281,7 @@ class SQL {
      */
     public function getUsers(){
 
-        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `User` u 
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
@@ -286,12 +296,35 @@ class SQL {
 
         return $q->fetchAll();
     }
+    
+    /**
+     * @param array
+     * @return array
+     *      Авторизация пользователя по почте и паролю. Возвращает массив с данными пользователя
+     */
 
+    public function login( array $params) {
+        
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
+                            LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
+                            LEFT JOIN Subjects s ON sr.subject_id=s.id 
+                            LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
+                            LEFT JOIN Сlasses c ON cr.class_id=c.id 
+                            LEFT JOIN Auth a ON u.access_id=a.id WHERE u.email=:email and u.pass=:pass');
+
+         $q->execute( $params );
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+        $info = $q->errorInfo();
+        throw new \PDOException($info[2]);
+        }
+
+        return $q->fetch();
+        
+    } 
+
+    public function __call($name, $params){
+        $msg = 'SQL.php метода нет: '.$name;
+      throw new \Exception($msg);
+    }
 }
-
-// пример использования
-// $obj = School\models\SQL::Instance()->insert("User", ['login'=> 'Alex', 'fio'=>'Alexandr Baukov']);
-// $odj = School\models\SQL::Instance()->Select('User', 'id', 3);
-// $obj = School\models\SQL::Instance()->Update('User', ['access_id' => 4], 'id = 3')
-// $odj = School\models\SQL::Instance()->Delete('User', 'id = 3');
-//

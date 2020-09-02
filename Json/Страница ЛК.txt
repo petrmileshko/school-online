@@ -17,14 +17,13 @@
 Положительный
 
 {
-	     'result' : 'positive',
          'id' : integer,
          'name' : string,
          'email' : string,
          'fio' : string,
          'avatar' : string,
-         'password' : string,
-         'access' : { 'access_id'=>integer, 'name'=>string},
+         'pass' : string,
+         'access' : string,
          'subject' : string,									       (только для учителей)
          'class' : string											   (только для учеников)
 }
@@ -38,27 +37,29 @@
 
 ------------------------------------------------------------
 
-Запрос
+Запрос на обновление полей 
 
 {
 	
 		 'Table' : 'Users',
-		 'action' : 'update',
+		 'action' : 'Update',
+		 'question' : string,
 		 'id' : integer,
-         'name' : string,
-         'email' : string,
-         'fio' : string,
-         'avatar' : string,
-         'password' : string,
-		 'question' : string					
+         ...
+         Ниже поля в соответсвии с названиями полей таблицы Users
+         только те поля, которые надо обновить пример:
+         'fio' : 'Иванов Иван Иваныч'
+         ...
+		 					
 }
 
-Ответы:
+Ответы
 
 Положительный
 
 {
-	     'result' : 'positive'
+	'result' : 'positive',
+	'message' : 'количетсво обновленных строк'
 }
 
 Отрицательный

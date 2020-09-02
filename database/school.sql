@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Answer`
+-- Структура таблицы `Answers`
 --
 
 CREATE TABLE `Answers` (
@@ -85,7 +85,7 @@ CREATE TABLE `Subject_relation` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Task`
+-- Структура таблицы `Tasks`
 --
 
 CREATE TABLE `Tasks` (
@@ -102,7 +102,7 @@ CREATE TABLE `Tasks` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `User`
+-- Структура таблицы `Users`
 --
 
 CREATE TABLE `Users` (
@@ -132,7 +132,7 @@ CREATE TABLE `Сlasses` (
 --
 
 --
--- Индексы таблицы `Answer`
+-- Индексы таблицы `Answers`
 --
 ALTER TABLE `Answers`
   ADD PRIMARY KEY (`id`),
@@ -166,7 +166,7 @@ ALTER TABLE `Subject_relation`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Индексы таблицы `Task`
+-- Индексы таблицы `Tasks`
 --
 ALTER TABLE `Tasks`
   ADD PRIMARY KEY (`id`),
@@ -174,7 +174,7 @@ ALTER TABLE `Tasks`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Индексы таблицы `User`
+-- Индексы таблицы `Users`
 --
 ALTER TABLE `Users`
   ADD PRIMARY KEY (`id`),
@@ -191,7 +191,7 @@ ALTER TABLE `Сlasses`
 --
 
 --
--- AUTO_INCREMENT для таблицы `Answer`
+-- AUTO_INCREMENT для таблицы `Answers`
 --
 ALTER TABLE `Answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -206,12 +206,12 @@ ALTER TABLE `Auth`
 ALTER TABLE `Subjects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT для таблицы `Task`
+-- AUTO_INCREMENT для таблицы `Tasks`
 --
 ALTER TABLE `Tasks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT для таблицы `User`
+-- AUTO_INCREMENT для таблицы `Users`
 --
 ALTER TABLE `Users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
@@ -225,7 +225,7 @@ ALTER TABLE `Сlasses`
 --
 
 --
--- Ограничения внешнего ключа таблицы `Answer`
+-- Ограничения внешнего ключа таблицы `Answers`
 --
 ALTER TABLE `Answers`
   ADD CONSTRAINT `Answers_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `Tasks` (`id`),
@@ -246,14 +246,14 @@ ALTER TABLE `Subject_relation`
   ADD CONSTRAINT `Subject_relation_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
 
 --
--- Ограничения внешнего ключа таблицы `Task`
+-- Ограничения внешнего ключа таблицы `Tasks`
 --
 ALTER TABLE `Tasks`
   ADD CONSTRAINT `Tasks_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `Subjects` (`id`),
   ADD CONSTRAINT `Tasks_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
 
 --
--- Ограничения внешнего ключа таблицы `User`
+-- Ограничения внешнего ключа таблицы `Users`
 --
 ALTER TABLE `Users`
   ADD CONSTRAINT `Users_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `Auth` (`id`);
