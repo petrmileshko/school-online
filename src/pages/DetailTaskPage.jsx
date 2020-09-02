@@ -7,7 +7,6 @@ import { TaskDetail } from '../components/Tasks/TaskDetail.jsx';
 import { useHttp } from "../hooks/http.hook";
 import { Editor, EditorState } from 'draft-js';
 import { AuthContext } from "../context/AuthContext";
-
 import 'draft-js/dist/Draft.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
@@ -42,7 +41,6 @@ export const DetailTaskPage = () => {
 
     const getEditorContent = () => {
         const content = editorState.getCurrentContent().getPlainText();
-        
         setAnswer({ answer_id: Date.now(), answer_userId: userId, answer_content: content });
     }
 
@@ -53,7 +51,6 @@ export const DetailTaskPage = () => {
             console.log(answer);
         }
     }, [answer]);
-
     return (
         <div className={`page page__task-detail${ sbShrink ? '' : ' sidebar-shrink' }`}>
             <Header 
