@@ -138,7 +138,7 @@ trait TraitControllers {
      *          Возврат в случае ошибки + сообщение
      */
     public function fail( $message ) {
-            throw new \Exception($message);
+            throw new \Exception($message.' : '.$this->controller);
         }
     
 }

@@ -104,7 +104,7 @@ class Users extends Controller {
                      return json_encode($users);
                     }
 
-             $this->fail('Пользователей в базе нет.');
+             $this->fail('Пользователей в базе нет');
         } 
 
 
@@ -121,7 +121,7 @@ class Users extends Controller {
                      return json_encode(['result'=>'positive', 'message'=>$result]);
                     }
 
-             $this->fail('Ошибка сохранения данных таблицы: '.$this->controller);
+             $this->fail('Ошибка сохранения данных таблицы');
         } 
 
     

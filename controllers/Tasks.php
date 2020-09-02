@@ -34,7 +34,7 @@ class Tasks extends Controller {
                      return json_encode($tasks);
                     }
 
-            $message = 'Заданий в базе нет.';
+            $message = 'Заданий в базе нет';
 
              $this->fail($message);
         } 
@@ -51,7 +51,7 @@ class Tasks extends Controller {
                      return json_encode($task);
                     }
 
-           $message = 'Задача не найдена : '.$this->id;
+           $message = 'Задача не найдена id='.$this->id;
 
              $this->fail($message);
 
@@ -65,7 +65,7 @@ class Tasks extends Controller {
 
 
 
-           $message = 'Задача не найдена : '.$this->id;
+           $message = 'Задача не найдена id='.$this->id;
 
              $this->fail($message);
 
