@@ -1,7 +1,7 @@
 <?php
 /**
  * Class SQL Служит для подключения к БД, с использованием Singleton, и использования основных запросов.
- * Code by Aleksand Baukov
+ * Code by Aleksand Baukov and Peter Mileshko
  */
 namespace School\models;
 
@@ -297,6 +297,25 @@ class SQL {
         return $q->fetchAll();
     }
     
+    /**
+     * @param 
+     * @return mixed
+     * Выдает полную информацию о всех пользователях.
+     */
+    public function getAnswers(){
+
+        $q = $this->db->prepare('SELECT a.answer_bode, a.id, s.subject, u.fio FROM Answers a JOIN Tasks t ON a.task_id=t.id JOIN Users u ON a.user_id=u.id');
+
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetchAll();
+    }
+
     /**
      * @param array
      * @return array
