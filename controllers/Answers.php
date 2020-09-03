@@ -15,14 +15,13 @@ use School\models\SQL;
 class Answers extends Controller {
 
     private $id;
-    private $array;
+    //private $array;
 
     use TraitControllers;
     
     public function __construct ($rest) {
         parent::__construct ($rest);
         $this->id = parent::getValue('id');
-        $this->array = parent::getValue('array');
     }
 
 
@@ -32,10 +31,10 @@ class Answers extends Controller {
      */
     public function action_getAnswer() {
 
-        $user = $this->getValue( null, $this->id, $this->query['action']);
+        $answer = $this->getValue( null, $this->id, $this->query['action']);
 
-        if( $user ) {
-            return json_encode($user);
+        if( $answer ) {
+            return json_encode($answer);
         }
 
         $message = 'Ответ не найден : '.$this->id;
@@ -51,10 +50,10 @@ class Answers extends Controller {
      */
     public function action_getAnswers() {
 
-        $users = $this->getValue( null, null , $this->query['action']);
+        $answers = $this->getValue( null, null , $this->query['action']);
 
-        if( $users ) {
-            return json_encode($users);
+        if( $answers ) {
+            return json_encode($answers);
         }
 
         $this->fail('Ответов в базе нет.');
@@ -80,8 +79,8 @@ class Answers extends Controller {
      * @return false|string
      * @throws \Exception
      */
-    public function action_Insert(){ // принимает $table, $array
-        $result =  $this->addValue('Answers', $this->array , $this->query['action']);
+    public function action_Insert(){
+        $result =  $this->setValue(null, array_slice($this->query, 3) , $this->query['action']);
 
         if( $result ) {
             return json_encode(['result'=>'positive', 'message'=>$result]);

@@ -16,7 +16,6 @@ abstract class Controller
     protected $query;
     protected $data;
     protected $passport;
-    protected $array;
 
     /**
      * @param $message
@@ -110,24 +109,6 @@ abstract class Controller
            
         throw new \Exception($message);
 
-    }
-
-    /**
-     * @param $table
-     * @param $array
-     * @param $func
-     * @return mixed
-     * @throws \Exception
-     */
-    public function addValue($table, $array, $func ){
-        if ($array) {
-            return $this->db->$func($this->controller, $array);
-        }
-
-
-        $message = 'Ошибка addValue. Таблица '.$this->controller;
-
-        throw new \Exception($message);
     }
 
 
