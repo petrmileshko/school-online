@@ -1,5 +1,16 @@
 <?php
+
+/*
+
+                    code by Peter Mileshko 
+                    Класс инициализации серверного приложения
+
+                    Автозагрузчик классов
+
+*/
+
 session_start();
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -7,24 +18,22 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once 'config/db.php';
-/*
-
-                    code by Peter Mileshko 
-					Класс инициализации серверного приложения
-
-					Автозагрузчик классов
-
-*/
 
 
 use \School\controllers;
 use \School\models;
 
+// показывать сообщения об ошибках 
+error_reporting(E_ALL);
+ 
+// установить часовой пояс по умолчанию 
+date_default_timezone_set('Europe/Moscow');
 
-/*
-	Функция против инъекций 
-	@param string 
-*/
+
+    /**
+     * @param string
+     * @return string
+     */
 
 function multiStrip($str) {
     return stripslashes( strip_tags( trim($str) ) );
