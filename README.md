@@ -70,7 +70,7 @@
 5. Таблица классов Classes ( id / class / some_code )
 6. Таблица привязки учеников к классам ClassesRelation ( user_id / class_id )
 7. Таблица заданий Tasks (id / task_name / task_description / task_file / task_body / user_id / subject_id / time_stamp )
-8. Таблица ответов Answers (id / answer_file / answer_body / user_id / task_id / status / score / time_stamp )
+8. Таблица ответов Answers (id / answer_file / answer_body / user_id / task_id / score / time_stamp )
 
 ___________________________________________________________________________________________
 * Пункт необязателен в первой версии продукта.
