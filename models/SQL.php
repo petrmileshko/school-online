@@ -1,7 +1,7 @@
 <?php
 /**
  * Class SQL Служит для подключения к БД, с использованием Singleton, и использования основных запросов.
- * Code by Aleksand Baukov
+ * Code by Aleksand Baukov and Peter Mileshko
  */
 namespace School\models;
 
@@ -67,20 +67,20 @@ class SQL {
     //insert("goods",['title'=>'Товар 1','price'=>100])
     /**
      * @param $table
-     * @param $object
+     * @param $array
      * @return string
      */
-    public function Insert($table, $object) {
+    public function Insert($table, $array) {
 
         $columns = array();
 
-        foreach ($object as $key => $value) {
+        foreach ($array as $key => $value) {
 
             $columns[] = $key;
             $masks[] = ":$key";
 
             if ($value === null) {
-                $object[$key] = 'NULL';
+                $array[$key] = 'NULL';
             }
         }
 
@@ -90,7 +90,7 @@ class SQL {
         $query = "INSERT INTO $table ($columns_s) VALUES ($masks_s)";
 
         $q = $this->db->prepare($query);
-        $q->execute($object);
+        $q->execute($array);
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
             $info = $q->errorInfo();
@@ -103,16 +103,22 @@ class SQL {
     //UPDATE table set count=10,price=1000 where id = 2
     //Update('table', ['count' => 10,'price'=>1000], 'id = 2')
 
-    public function Update($table, $object, $where) {
+    /**
+     * @param $table
+     * @param $array
+     * @param $where
+     * @return int
+     */
+    public function Update($table, $array, $where) {
 
         $sets = array();
 
-        foreach ($object as $key => $value) {
+        foreach ($array as $key => $value) {
 
             $sets[] = "$key=:$key";
 
             if ($value === NULL) {
-                $object[$key]='NULL';
+                $array[$key]='NULL';
             }
         }
 
@@ -120,7 +126,7 @@ class SQL {
         $query = "UPDATE $table SET $sets_s WHERE $where";
 
         $q = $this->db->prepare($query);
-        $q->execute($object);
+        $q->execute($array);
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
             $info = $q->errorInfo();
@@ -131,6 +137,12 @@ class SQL {
     }
 
     //Delete('table', 'id = 2')
+
+    /**
+     * @param $table
+     * @param $where
+     * @return int
+     */
     public function Delete($table, $where) {
 
         $query = "DELETE FROM $table WHERE $where";
@@ -286,6 +298,25 @@ class SQL {
     }
     
     /**
+     * @param 
+     * @return mixed
+     * Выдает полную информацию о всех пользователях.
+     */
+    public function getAnswers(){
+
+        $q = $this->db->prepare('SELECT a.answer_body, a.id, a.score, a.time_stamp, t.task_name, u.fio FROM Answers a JOIN Tasks t ON a.task_id=t.id JOIN Users u ON a.user_id=u.id');
+
+        $q->execute();
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetchAll();
+    }
+
+    /**
      * @param array
      * @return array
      *      Авторизация пользователя по почте и паролю. Возвращает массив с данными пользователя
@@ -316,10 +347,3 @@ class SQL {
       throw new \Exception($msg);
     }
 }
-
-// пример использования
-// $obj = School\models\SQL::Instance()->insert("Users", ['login'=> 'Alex', 'fio'=>'Alexandr Baukov']);
-// $odj = School\models\SQL::Instance()->Select('Users', 'id', 3);
-// $obj = School\models\SQL::Instance()->Update('Users', ['access_id' => 4], 'id = 3')
-// $odj = School\models\SQL::Instance()->Delete('Users', 'id = 3');
-//
