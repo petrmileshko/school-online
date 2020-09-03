@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 29 2020 г., 19:51
--- Версия сервера: 5.7.30-33-log
+-- Время создания: Сен 04 2020 г., 01:35
+-- Версия сервера: 5.7.31-34-log
 -- Версия PHP: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -32,7 +32,6 @@ CREATE TABLE `Answers` (
   `answer_body` text NOT NULL,
   `user_id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL,
   `score` int(255) NOT NULL,
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -48,6 +47,16 @@ CREATE TABLE `Auth` (
   `access` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `Auth`
+--
+
+INSERT INTO `Auth` (`id`, `access`) VALUES
+(1, 'Ученик'),
+(2, 'Учитель'),
+(3, 'Директор'),
+(4, 'Администратор');
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +67,14 @@ CREATE TABLE `Classes_relation` (
   `user_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `Classes_relation`
+--
+
+INSERT INTO `Classes_relation` (`user_id`, `class_id`) VALUES
+(2, 1),
+(6, 2);
 
 -- --------------------------------------------------------
 
@@ -71,6 +88,14 @@ CREATE TABLE `Subjects` (
   `some_code` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `Subjects`
+--
+
+INSERT INTO `Subjects` (`id`, `subject`, `some_code`) VALUES
+(1, 'Математика', NULL),
+(2, 'Физика', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +106,14 @@ CREATE TABLE `Subject_relation` (
   `user_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `Subject_relation`
+--
+
+INSERT INTO `Subject_relation` (`user_id`, `subject_id`) VALUES
+(3, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -99,6 +132,15 @@ CREATE TABLE `Tasks` (
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `Tasks`
+--
+
+INSERT INTO `Tasks` (`id`, `task_name`, `task_description`, `task_file`, `task_body`, `user_id`, `subject_id`, `time_stamp`) VALUES
+(1, 'Задание 1', 'Описание задания 1', '/data/tasks/task1.txt', 'Текст задания 1\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nobis voluptatibus minus, cum ut praesentium sunt inventore itaque dolorem rerum porro laboriosam alias natus molestiae adipisci aperiam facilis consequuntur perspiciatis ipsa vero magni est? Vitae ullam ut totam unde saepe error aliquam architecto asperiores, reiciendis, neque rerum porro ipsa sed!', 1, 1, '2020-08-28 14:32:07'),
+(2, 'Задание 2', 'Описание задания 2', '/data/tasks/task2.txt', 'Текст задания 2\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nobis voluptatibus minus, cum ut praesentium sunt inventore itaque dolorem rerum porro laboriosam alias natus molestiae adipisci aperiam facilis consequuntur perspiciatis ipsa vero magni est? Vitae ullam ut totam unde saepe error aliquam architecto asperiores, reiciendis, neque rerum porro ipsa sed!', 3, 2, '2020-08-28 14:33:26'),
+(3, 'Задание 3', 'Описание задания 3', '/data/tasks/task3.txt', 'Текст задания 3\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nobis voluptatibus minus, cum ut praesentium sunt inventore itaque dolorem rerum porro laboriosam alias natus molestiae adipisci aperiam facilis consequuntur perspiciatis ipsa vero magni est? Vitae ullam ut totam unde saepe error aliquam architecto asperiores, reiciendis, neque rerum porro ipsa sed!', 4, 2, '2020-08-28 14:40:01');
+
 -- --------------------------------------------------------
 
 --
@@ -115,6 +157,18 @@ CREATE TABLE `Users` (
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+--
+-- Дамп данных таблицы `Users`
+--
+
+INSERT INTO `Users` (`id`, `login`, `fio`, `pass`, `email`, `access_id`, `time_stamp`) VALUES
+(1, 'admin', 'Baukov Aleksandr', '12345', 'test@mail.ru', 4, '2020-08-19 13:51:36'),
+(2, 'Ivan', 'vanov', '1234', 'ivan@gamle.ru', 1, '2020-08-28 14:35:15'),
+(3, 'user1', 'test user', '12345', 'test@test.ru', 2, '2020-08-19 14:02:48'),
+(4, 'teacher1', 'Гавриков Андрей Иванович', '1234', 'email@email.com', 2, '2020-08-28 14:36:29'),
+(5, 'Director', 'Абросимов Валерий Олегович', '1234', 'abros@bros.bro', 3, '2020-08-29 15:55:45'),
+(6, 'pavel', 'Росами Антон', '1234', 'rossam@ramd.ru', 1, '2020-09-01 07:37:30');
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +180,14 @@ CREATE TABLE `Сlasses` (
   `class` varchar(50) NOT NULL,
   `some_code` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `Сlasses`
+--
+
+INSERT INTO `Сlasses` (`id`, `class`, `some_code`) VALUES
+(1, '1А', NULL),
+(2, '2Б', NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -214,7 +276,7 @@ ALTER TABLE `Tasks`
 -- AUTO_INCREMENT для таблицы `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `Сlasses`
 --
