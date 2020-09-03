@@ -31,7 +31,7 @@ class Tasks extends Controller {
             $tasks = $this->getValue( null, null , $this->query['action']);
 
                 if( $tasks ) {
-                     return json_encode($tasks);
+                     return json_encode($tasks, JSON_UNESCAPED_UNICODE);
                     }
 
             $message = 'Заданий в базе нет';
@@ -48,7 +48,7 @@ class Tasks extends Controller {
              $task = $this->getValue( null, $this->id, $this->query['action']);
 
                 if( $task ) {
-                     return json_encode($task);
+                     return json_encode($task, JSON_UNESCAPED_UNICODE);
                     }
 
            $message = 'Задача не найдена id='.$this->id;

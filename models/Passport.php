@@ -15,7 +15,7 @@ class Passport {
 
     public function __construct ( array $user ) {
 
-        $this->token = random_int(100, 1000).$user['id'];
+        $this->token = md5(random_int(100, 1000).$user['id']);
         \Init::save( [ 'question' => $this->token ] , 'question' );
         \Init::save( $user , 'Users' );
 

@@ -43,7 +43,7 @@ class Users extends Controller {
                     $this->passport = new \School\models\Passport($user);
                     $user += $this->passport->get(); 
 
-                    return json_encode($user);
+                    return json_encode($user, JSON_UNESCAPED_UNICODE);
                 }
                 else {
                 $message = 'Ошибочный email: ('.$this->email.') или пароль.';
@@ -82,7 +82,7 @@ class Users extends Controller {
               $user = $this->getValue( null, $this->id, $this->query['action']);
 
                 if( $user ) {
-                     return json_encode($user);
+                     return json_encode($user, JSON_UNESCAPED_UNICODE);
                     }
 
            $message = 'Пользователь не найден : '.$this->id;
@@ -101,7 +101,7 @@ class Users extends Controller {
             $users = $this->getValue( null, null , $this->query['action']);
 
                 if( $users ) {
-                     return json_encode($users);
+                     return json_encode($users, JSON_UNESCAPED_UNICODE);
                     }
 
              $this->fail('Пользователей в базе нет');
@@ -118,6 +118,7 @@ class Users extends Controller {
             $result =  $this->setValue( 'id='.$this->id, array_slice($this->query, 3) , $this->query['action']);
 
                     if( $result ) {
+
                      return json_encode(['result'=>'positive', 'message'=>$result]);
                     }
 

@@ -23,7 +23,9 @@ $rest = Init::initialize();
     if ($rest['controller']) {
     
     $instance = new $rest['controller']($rest);
-        
+      
+    http_response_code(200);
+
     echo $instance->request();
 
     }
@@ -35,13 +37,15 @@ $rest = Init::initialize();
 catch(Exception $e) {
 
            $answer = ['result'=>'negative','message'=>$e->getMessage()];
-           echo json_encode($answer);
+           http_response_code(404);
+           echo json_encode($answer, JSON_UNESCAPED_UNICODE);
 
  }
 catch(PDOException $e) {
 
            $answer = ['result'=>'negative','message'=>$e->getMessage()];
-           echo json_encode($answer);
+           http_response_code(404);
+           echo json_encode($answer, JSON_UNESCAPED_UNICODE);
  }
 
 
