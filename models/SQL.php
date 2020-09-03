@@ -304,7 +304,7 @@ class SQL {
      */
     public function getAnswers(){
 
-        $q = $this->db->prepare('SELECT a.answer_bode, a.id, s.subject, u.fio FROM Answers a JOIN Tasks t ON a.task_id=t.id JOIN Users u ON a.user_id=u.id');
+        $q = $this->db->prepare('SELECT a.answer_body, a.id, a.score, a.time_stamp, t.task_name, u.fio FROM Answers a JOIN Tasks t ON a.task_id=t.id JOIN Users u ON a.user_id=u.id');
 
         $q->execute();
 
