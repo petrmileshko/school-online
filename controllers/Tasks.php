@@ -61,15 +61,35 @@ class Tasks extends Controller {
      * 
      * @return json
      */
-        public function action_createTask() {
+        public function action_Insert() {
 
 
+            $result =  $this->setValue(null, array_slice($this->query, 2) , $this->query['action']);
 
-           $message = 'Задача не найдена id='.$this->id;
+            if( $result ) {
 
-             $this->fail($message);
+            return json_encode(['result'=>'positive', 'message'=>$result]);
+            }
 
+            $this->fail('Ошибка при добавлении данных в таблицу: '.$this->controller);
         }
+
+            /**
+     * 
+     * @return json
+     */
+
+         public function action_Update() {
+
+            $result =  $this->setValue( 'id='.$this->id, array_slice($this->query, 3) , $this->query['action']);
+
+                    if( $result ) {
+
+                     return json_encode(['result'=>'positive', 'message'=>$result]);
+                    }
+
+             $this->fail('Ошибка сохранения данных в таблицу: '.$this->controller);
+        } 
 
 
 
