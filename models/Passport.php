@@ -37,7 +37,7 @@ class Passport {
 
     public static function confirm( $question ) {
 
-        return ( \Init::load('question')['question'] == $question );
+        return ( \Init::load('question') == $question );
 
     }
 
