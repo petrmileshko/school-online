@@ -70,6 +70,7 @@ public static function initialize( $log ) {
                 if ($table and is_array($query) ) {
 
                     $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
+                    $log->save( json_encode($$_GET, JSON_UNESCAPED_UNICODE), null);
                     return $rest;
                 }
                 else {
