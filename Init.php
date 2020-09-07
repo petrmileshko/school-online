@@ -17,14 +17,12 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once 'config/db.php';
+include_once 'config/config.php';
 
 
 use \School\controllers;
 use \School\models;
 
-// показывать сообщения об ошибках 
-//error_reporting(E_ALL);
  
 // установить часовой пояс по умолчанию 
 date_default_timezone_set('Europe/Moscow');
@@ -44,11 +42,11 @@ function multiStrip($str) {
 final class Init {
 
     /**
-     * 
+     * @param Log
      * @return array
      */
 
-public static function initialize() {
+public static function initialize( $log ) {
 
 
         // Регистрируем автозагрузчик классов
@@ -114,7 +112,7 @@ public static function initialize() {
                 }
 
                 if ( is_array($assoc) and !$message )  {
-
+                                $log->save( $rawData, null);
                                 $table = $assoc['Table'];
                                 $query = array_slice($assoc, 1);
                                 $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
