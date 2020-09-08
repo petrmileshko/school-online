@@ -217,7 +217,7 @@ class SQL {
 
     public function getTask($id){
 
-        $q = $this->db->prepare('SELECT t.task_name, t.task_description, t.task_body, t.task_file, s.subject, u.fio FROM Tasks t 
+        $q = $this->db->prepare('SELECT t.task_name, t.task_description, t.task_body, t.task_file, t.subject_id, s.subject, t.user_id, u.fio FROM Tasks t 
                                     JOIN Subjects s ON t.subject_id=s.id 
                                     JOIN Users u ON t.user_id=u.id WHERE t.id=:id');
         $q->execute(['id'=>$id]);
