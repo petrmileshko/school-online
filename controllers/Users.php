@@ -135,7 +135,7 @@ class Users extends Controller {
                 $this->fail('Пользователь :'.$this->email.' зарегистрирован.');
             }
 
-           // $result =  $this->setValue(null, array_slice($this->query, 2) , $this->query['action']);
+           $result =  $this->setValue(null, array_slice($this->query, 2) , $this->query['action']);
 
             if( $result ) {
 
