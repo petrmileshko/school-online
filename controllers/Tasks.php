@@ -68,7 +68,7 @@ class Tasks extends Controller {
 
             if( $result ) {
 
-            return json_encode(['result'=>'positive', 'message'=>$result]);
+            return json_encode(['result'=>'positive', 'message'=>$result], JSON_UNESCAPED_UNICODE);
             }
 
             $this->fail('Ошибка при добавлении данных в таблицу ');
@@ -85,7 +85,7 @@ class Tasks extends Controller {
 
                     if( $result ) {
 
-                     return json_encode(['result'=>'positive', 'message'=>$result]);
+                     return json_encode(['result'=>'positive', 'message'=>$result], JSON_UNESCAPED_UNICODE);
                     }
 
              $this->fail('Ошибка сохранения данных в таблицу: '.$this->controller);
