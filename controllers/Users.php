@@ -51,7 +51,7 @@ class Users extends Controller {
                 }
 
             }
-                $message = 'Уже авторизованы. is Authorized';
+                $message = 'Уже авторизованы';
                 $this->fail($message);  
     } 
 
@@ -122,7 +122,7 @@ class Users extends Controller {
                      return json_encode(['result'=>'positive', 'message'=>$result]);
                     }
 
-              $this->fail('Ошибка сохранения данных в таблицу: '.$this->controller);
+              $this->fail('Ошибка сохранения данных ');
         } 
 
     /**

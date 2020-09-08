@@ -71,10 +71,10 @@ class Tasks extends Controller {
             return json_encode(['result'=>'positive', 'message'=>$result]);
             }
 
-            $this->fail('Ошибка при добавлении данных в таблицу: '.$this->controller);
+            $this->fail('Ошибка при добавлении данных в таблицу ';
         }
 
-            /**
+    /**
      * 
      * @return json
      */
