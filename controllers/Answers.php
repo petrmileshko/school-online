@@ -56,7 +56,7 @@ class Answers extends Controller {
             return json_encode($answers, JSON_UNESCAPED_UNICODE);
         }
 
-        $this->fail('Ответов в базе нет.');
+        $this->fail('Ответов в базе нет ');
     }
 
 
@@ -72,7 +72,7 @@ class Answers extends Controller {
             return json_encode(['result'=>'positive', 'message'=>$result], JSON_UNESCAPED_UNICODE);
         }
 
-        $this->fail('Ошибка обновления данных в таблице: '.$this->controller);
+        $this->fail('Ошибка обновления ответов в таблице ');
     }
 
     /**
@@ -86,7 +86,7 @@ class Answers extends Controller {
             return json_encode(['result'=>'positive', 'message'=>$result], JSON_UNESCAPED_UNICODE);
         }
 
-        $this->fail('Ошибка при добавлении данных в таблицу: '.$this->controller);
+        $this->fail('Ошибка при добавлении ответа в таблицу ');
     }
 
 }

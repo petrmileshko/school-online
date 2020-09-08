@@ -51,7 +51,7 @@ class Tasks extends Controller {
                      return json_encode($task, JSON_UNESCAPED_UNICODE);
                     }
 
-           $message = 'Задача не найдена id='.$this->id;
+           $message = 'Задание не найдено id='.$this->id;
 
              $this->fail($message);
 
@@ -71,7 +71,7 @@ class Tasks extends Controller {
             return json_encode(['result'=>'positive', 'message'=>$result], JSON_UNESCAPED_UNICODE);
             }
 
-            $this->fail('Ошибка при добавлении данных в таблицу ');
+            $this->fail('Ошибка при добавлении задания в таблицу ');
         }
 
     /**
@@ -88,7 +88,7 @@ class Tasks extends Controller {
                      return json_encode(['result'=>'positive', 'message'=>$result], JSON_UNESCAPED_UNICODE);
                     }
 
-             $this->fail('Ошибка сохранения данных в таблицу: '.$this->controller);
+             $this->fail('Ошибка обновления задания в таблицу ');
         } 
 
 

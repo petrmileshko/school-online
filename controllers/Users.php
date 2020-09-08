@@ -122,7 +122,7 @@ class Users extends Controller {
                      return json_encode(['result'=>'positive', 'message'=>$result]);
                     }
 
-              $this->fail('Ошибка сохранения данных ');
+              $this->fail('Ошибка обновления пользователя '.$this->email);
         } 
 
     /**
@@ -142,7 +142,7 @@ class Users extends Controller {
             return json_encode(['result'=>'positive', 'message'=>$result]);
             }
 
-            $this->fail('Ошибка добавления пользователя : '.$this->email);
+            $this->fail('Ошибка добавления пользователя :'.$this->email);
         }
     
 }
