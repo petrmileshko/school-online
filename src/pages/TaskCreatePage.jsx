@@ -5,21 +5,21 @@ import { AuthContext } from '../context/AuthContext';
 import { Header } from '../components/Header/Header.jsx';
 import { Sidebar } from '../components/Sidebar/Sidebar.jsx';
 
+import Spinner from 'react-bootstrap/Spinner';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 export const TaskCreatePage = () => {
 	const [sbShrink, setSbShrink] = useState(true);
-	const { userId } = useContext(AuthContext);
-	const { request } = useHttp();
+	const { userId, token } = useContext(AuthContext);
+	const { loading, request } = useHttp();
 	const history = useHistory();
 	const [form, setForm] = useState({
-		task_name: '',
-		task_description: '',
 		task_body: '',
-		task_file: '',
+		task_description: '',
+		task_name: '',
 	});
 
-	const formGroupClasses = 'form-group row d-flex align-items-center mb-5';
+	const formGroupClasses = 'row d-flex align-items-center mb-5';
 	const formLabelClasses = 'col-lg-3 form-control-label';
 
 	const sidebarToggleHandler = useCallback(() => {
@@ -30,16 +30,32 @@ export const TaskCreatePage = () => {
 		setForm({ ...form, [event.target.name]: event.target.value });
 	};
 
-	const createTaskHandler = async () => {
+	const createTaskHandler = useCallback(async () => {
 		try {
 			const data = await request(
 				'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/MainController.php',
 				'POST',
-				{ Table: 'Tasks', action: 'create', ...form, user_id: userId },
+				{
+					Table: 'Tasks',
+					action: 'Insert',
+					question: token,
+					subject_id: '1',
+					...form,
+					user_id: userId,
+				},
 			);
 			console.log(data);
+			history.push(`/task/${data.message}`);
 		} catch (e) {}
-	};
+	}, [request, form, userId, history, token]);
+
+	if (loading) {
+		return (
+			<Spinner animation="border" role="status">
+				<span className="sr-only">Loading...</span>
+			</Spinner>
+		);
+	}
 
 	return (
 		<div className={`page page__tasks${sbShrink ? '' : ' sidebar-shrink'}`}>
@@ -95,7 +111,8 @@ export const TaskCreatePage = () => {
 											</Form.Label>
 											<Col lg={7}>
 												<Form.Control
-													type="text"
+													as="textarea"
+													rows="3"
 													name="task_description"
 													placeholder=""
 													value={form.task_description}
@@ -113,23 +130,13 @@ export const TaskCreatePage = () => {
 											<Col lg={7}>
 												<Form.Control
 													as="textarea"
-													rows="3"
+													rows="10"
 													name="task_body"
 													placeholder=""
 													value={form.task_body}
 													onChange={changeHandler}
 												/>
 											</Col>
-										</Form.Group>
-										<Form.Group>
-											<Form.File
-												id="inputFile"
-												name="task_file"
-												label="Загрузите файл задания"
-												accept=".txt"
-												value={form.task_file}
-												onChange={changeHandler}
-											/>
 										</Form.Group>
 										<div className="btn__group">
 											<Button
