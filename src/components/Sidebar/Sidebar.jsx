@@ -50,6 +50,9 @@ export const Sidebar = props => {
                             <li className="nav-item sb-dropdown__item">
                                 <Link to="/answers" className="sb-dropdown__link">Answers</Link>
                             </li>
+                            <li className="nav-item sb-dropdown__item">
+                                <Link to="/magazine" className="sb-dropdown__link">Журнал оценок</Link>
+                            </li>
                         </ul>
                     </li>
                     <li className="side-navbar__item">

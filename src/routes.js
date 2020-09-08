@@ -6,6 +6,7 @@ import {ProfilePage} from './pages/ProfilePage.jsx';
 import {TasksPage} from './pages/TasksPage.jsx';
 import {DetailTaskPage} from './pages/DetailTaskPage.jsx';
 import { AnswersPage } from "./pages/AnswersPage.jsx";
+import { MagazinePage } from './pages/MagazinePage.jsx';
 
 export const useRoutes = isAuthenticated => {
     if (isAuthenticated) {
@@ -22,6 +23,9 @@ export const useRoutes = isAuthenticated => {
                 </Route>
                 <Route path="/answers" exact>
                     <AnswersPage />
+                </Route>
+                <Route path="/magazine">
+                    <MagazinePage />
                 </Route>
                 <Redirect to="/profile" />
             </Switch>
