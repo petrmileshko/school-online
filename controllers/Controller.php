@@ -18,6 +18,7 @@ abstract class Controller
     protected $passport;
 
     /**
+     * @param $message
      * @return Exception
      */
     
@@ -60,6 +61,7 @@ abstract class Controller
     /**
      * @param $key string
      * @param $value string or integer
+     * @param null $func
      * @return string or integer or array
      */
 
@@ -86,8 +88,11 @@ abstract class Controller
     }
 
     /**
-     * @param array , integer , array
-     * @return array server response 
+     * @param null $key
+     * @param $value
+     * @param $func
+     * @return array server response
+     * @throws \Exception
      */
 
     public function setValue( $key = null, $value , $func ) {
@@ -105,16 +110,7 @@ abstract class Controller
         throw new \Exception($message);
 
     }
-    
-    /**
-     * @param string , string or integer
-     * @return boolean 
-     */
 
-    public function is_Value( $param , $value ) {
-
-        return ( $this->db->Select($this->controller, $param, $value ) ) ? true : false; 
-    }
 
     /**
      * @param $name string

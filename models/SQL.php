@@ -1,7 +1,7 @@
 <?php
 /**
  * Class SQL Служит для подключения к БД, с использованием Singleton, и использования основных запросов.
- * Code by Aleksand Baukov and Peter Mileshko
+ * Code by Aleksand Baukov
  */
 namespace School\models;
 
@@ -238,7 +238,7 @@ class SQL {
      */
 
     public function getTasks(){
-        $q = $this->db->prepare('SELECT t.task_name, t.id, t.subject_id, s.subject, u.fio FROM Tasks t JOIN Subjects s ON t.subject_id=s.id JOIN Users u ON t.user_id=u.id');
+        $q = $this->db->prepare('SELECT t.task_name, t.id, s.subject, u.fio FROM Tasks t JOIN Subjects s ON t.subject_id=s.id JOIN Users u ON t.user_id=u.id');
         $q->execute();
 
         if ($q->errorCode() != \PDO::ERR_NONE) {
@@ -256,7 +256,7 @@ class SQL {
      */
     public function getUser($id){
 
-        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
@@ -281,7 +281,7 @@ class SQL {
      */
     public function getUsers(){
 
-        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
@@ -298,44 +298,6 @@ class SQL {
     }
     
     /**
-     * @param 
-     * @return mixed
-     * Выдает полную информацию о всех пользователях.
-     */
-    public function getAnswers(){
-
-        $q = $this->db->prepare('SELECT a.answer_body, a.id, a.score, a.time_stamp, t.task_name, u.fio FROM Answers a JOIN Tasks t ON a.task_id=t.id JOIN Users u ON a.user_id=u.id');
-
-        $q->execute();
-
-        if ($q->errorCode() != \PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
-        }
-
-        return $q->fetchAll();
-    }
-
-    /**
-     * @param 
-     * @return mixed
-     * Выдает полную информацию о всех пользователях.
-     */
-    public function getAnswer($id){
-
-        $q = $this->db->prepare('SELECT a.answer_body, a.id, a.score, a.time_stamp, t.task_name, u.fio FROM Answers a JOIN Tasks t ON a.task_id=t.id JOIN Users u ON a.user_id=u.id  WHERE a.id=:id');
-
-        $q->execute( [ 'id' => $id ] );
-
-        if ($q->errorCode() != \PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            throw new \PDOException($info[2]);
-        }
-
-        return $q->fetchAll();
-    }
-
-    /**
      * @param array
      * @return array
      *      Авторизация пользователя по почте и паролю. Возвращает массив с данными пользователя
@@ -343,7 +305,7 @@ class SQL {
 
     public function login( array $params) {
         
-        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, s.subject, a.access, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
