@@ -125,6 +125,25 @@ class Users extends Controller {
               $this->fail('Ошибка сохранения данных в таблицу: '.$this->controller);
         } 
 
+    /**
+     * 
+     * @return json
+     */
+        public function action_Insert() {
+
+            if( $this->is_Value( 'email', $this->email ) ) {
+                $this->fail('Пользователь :'.$this->email.' зарегистрирован.');
+            }
+
+           // $result =  $this->setValue(null, array_slice($this->query, 2) , $this->query['action']);
+
+            if( $result ) {
+
+            return json_encode(['result'=>'positive', 'message'=>$result]);
+            }
+
+            $this->fail('Ошибка добавления пользователя : '.$this->email);
+        }
     
 }
 

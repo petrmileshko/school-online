@@ -105,6 +105,16 @@ abstract class Controller
         throw new \Exception($message);
 
     }
+    
+    /**
+     * @param string , string or integer
+     * @return boolean 
+     */
+
+    public function is_Value( $param , $value ) {
+
+        return ( $this->db->Select($this->controller, $param, $value ) ) ? true : false; 
+    }
 
     /**
      * @param $name string
