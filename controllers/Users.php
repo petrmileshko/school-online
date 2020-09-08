@@ -68,7 +68,7 @@ class Users extends Controller {
 
                 return json_encode(['result'=>'positive','message'=>'Signed off']);
             }
-
+            $this->fail('Вы не авторизованы '); 
     } 
 
     /**
