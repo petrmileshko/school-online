@@ -39,20 +39,20 @@ $rest = Init::initialize($queryLog);
  }
 catch(Exception $e) {
 
-           $answer = ['result'=>'negative','message'=>$e->getMessage()];
+           $answer = json_encode(['result'=>'negative','message'=>$e->getMessage()], JSON_UNESCAPED_UNICODE);
            $queryLog->save( null , $answer);
            $queryLog->close();
            http_response_code(404);
-           echo json_encode($answer, JSON_UNESCAPED_UNICODE);
+           echo $answer;
 
  }
 catch(PDOException $e) {
 
-           $answer = ['result'=>'negative','message'=>$e->getMessage()];
-           http_response_code(404);
+           $answer = json_encode(['result'=>'negative','message'=>$e->getMessage()], JSON_UNESCAPED_UNICODE);
            $queryLog->save( null , $answer);
            $queryLog->close();
-           echo json_encode($answer, JSON_UNESCAPED_UNICODE);
+           http_response_code(404);
+           echo $answer;
  }
 
 
