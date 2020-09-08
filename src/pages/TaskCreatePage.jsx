@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
@@ -10,6 +10,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 export const TaskCreatePage = () => {
 	const [sbShrink, setSbShrink] = useState(true);
+	const [user, setUser] = useState([]);
 	const { userId, token } = useContext(AuthContext);
 	const { loading, request } = useHttp();
 	const history = useHistory();
@@ -26,6 +27,25 @@ export const TaskCreatePage = () => {
 		setSbShrink((prev) => !prev);
 	}, []);
 
+	const getUser = useCallback(async () => {
+		try {
+			const data = await request(
+				'https://cors-anywhere.herokuapp.com/http://test-school.webpeternet.com/MainController.php',
+				'POST',
+				{
+					Table: 'Users',
+					action: 'getUser',
+					id: userId,
+				},
+			);
+			setUser(data);
+		} catch (e) {}
+	}, [request, userId]);
+
+	useEffect(() => {
+		getUser();
+	}, [getUser]);
+
 	const changeHandler = (event) => {
 		setForm({ ...form, [event.target.name]: event.target.value });
 	};
@@ -39,15 +59,15 @@ export const TaskCreatePage = () => {
 					Table: 'Tasks',
 					action: 'Insert',
 					question: token,
-					subject_id: '1',
+					subject_id: user.subject_id,
 					...form,
-					user_id: userId,
+					user_id: user.id,
 				},
 			);
 			console.log(data);
 			history.push(`/task/${data.message}`);
 		} catch (e) {}
-	}, [request, form, userId, history, token]);
+	}, [request, form, user, history, token]);
 
 	if (loading) {
 		return (
