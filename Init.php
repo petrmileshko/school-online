@@ -67,10 +67,11 @@ public static function initialize( $log ) {
                 foreach ($query as $key=>$item) {
                     $query[$key] = multiStrip($item);
                 }
+                $log->save( json_encode($_GET, JSON_UNESCAPED_UNICODE), null);
                 if ($table and is_array($query) ) {
 
                     $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
-                    $log->save( json_encode($_GET, JSON_UNESCAPED_UNICODE), null);
+                    
                     return $rest;
                 }
                 else {
@@ -83,7 +84,7 @@ public static function initialize( $log ) {
 
             $rawData = multiStrip( preg_replace( '|\xEF\xBB\xBF|', "", file_get_contents("php://input") ) );
 
-
+            $log->save( $rawData, null);
             if( $rawData == '' ) {
 
                 $message = 'Headers пустой. Ничего не передано на сервер. Метод: '.$method;
@@ -113,7 +114,7 @@ public static function initialize( $log ) {
                 }
 
                 if ( is_array($assoc) and !$message )  {
-                                $log->save( $rawData, null);
+                                
                                 $table = $assoc['Table'];
                                 $query = array_slice($assoc, 1);
                                 $rest = [ 'Method'=>$method ,'Table'=>$table,'Query'=>$query, 'controller'=>"School\\controllers\\$table"]; 
