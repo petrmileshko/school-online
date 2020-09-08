@@ -256,7 +256,7 @@ class SQL {
      */
     public function getUser($id){
 
-        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
@@ -281,7 +281,7 @@ class SQL {
      */
     public function getUsers(){
 
-        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
@@ -324,7 +324,7 @@ class SQL {
 
     public function login( array $params) {
         
-        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, u.pass, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
+        $q = $this->db->prepare('SELECT u.id, u.fio, u.email, sr.subject_id, s.subject, u.access_id, a.access, cr.class_id, c.class  FROM `Users` u 
                             LEFT JOIN Subject_relation sr ON u.id = sr.user_id 
                             LEFT JOIN Subjects s ON sr.subject_id=s.id 
                             LEFT JOIN Classes_relation cr ON u.id = cr.user_id 
