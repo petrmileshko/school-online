@@ -317,6 +317,25 @@ class SQL {
     }
 
     /**
+     * @param 
+     * @return mixed
+     * Выдает полную информацию о всех пользователях.
+     */
+    public function getAnswer($id){
+
+        $q = $this->db->prepare('SELECT a.answer_body, a.id, a.score, a.time_stamp, t.task_name, u.fio FROM Answers a JOIN Tasks t ON a.task_id=t.id JOIN Users u ON a.user_id=u.id  WHERE a.id=:id');
+
+        $q->execute( [ 'id' => $id ] );
+
+        if ($q->errorCode() != \PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            throw new \PDOException($info[2]);
+        }
+
+        return $q->fetchAll();
+    }
+
+    /**
      * @param array
      * @return array
      *      Авторизация пользователя по почте и паролю. Возвращает массив с данными пользователя
