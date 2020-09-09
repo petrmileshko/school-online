@@ -10,6 +10,7 @@ const LOG_FILE = 'data/query_log.html';
 class Log {
 
     static $fileOpen;
+    private $records;
     
     /**
      * @param string
@@ -27,25 +28,25 @@ class Log {
     }
 
     /**
-     * @param string
-     * @return array
+     * @param json , json
+     * @return 
      */
 
     public function save( $query = null , $answer = null) {
 
-        if (self::$fileOpen) {
 
                 if ( $query ) {
-                        fwrite(self::$fileOpen,date('d-m-Y, G:i'));
-                        fwrite(self::$fileOpen,'<br>Получен запрос :'.$query);
-                        fwrite(self::$fileOpen,'<br>' );
+                    
+                    $this->records .= date('d-m-Y, G:i').'<br>Получен запрос :'.$query.'<br>';
+
                 }
                 elseif ( $answer ) {
-                        fwrite(self::$fileOpen,'<br>Ответ на запрос :'.$answer);
-                        fwrite(self::$fileOpen,'<hr>' );
+
+                        $this->records .= '<br>Ответ на запрос :'.$answer.'<hr>';
+                    
                 }
-        }
     }
+
     /**
      * @param 
      * @return 
@@ -53,8 +54,9 @@ class Log {
 
     public function close() {
 
-        if (self::$fileOpen){
+        if (self::$fileOpen and $this->records) {
 
+                fwrite(self::$fileOpen, $this->records);
                 fclose(self::$fileOpen);
         }
     }
