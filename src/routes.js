@@ -5,6 +5,7 @@ import { LoginPage } from './pages/LoginPage.jsx';
 import { ProfilePage } from './pages/ProfilePage.jsx';
 import { TasksPage } from './pages/TasksPage.jsx';
 import { TaskCreatePage } from './pages/TaskCreatePage.jsx';
+import { TaskEditPage } from './pages/TaskEditPage.jsx';
 import { DetailTaskPage } from './pages/DetailTaskPage.jsx';
 import { AnswersPage } from './pages/AnswersPage.jsx';
 
@@ -20,6 +21,9 @@ export const useRoutes = (isAuthenticated) => {
 				</Route>
 				<Route path="/tasks/create" exact>
 					<TaskCreatePage />
+				</Route>
+				<Route path="/task/edit/:id">
+					<TaskEditPage />
 				</Route>
 				<Route path="/task/:id">
 					<DetailTaskPage />
