@@ -1,50 +1,51 @@
 @charset "UTF-8";
 
 .table {
-    color: $meta-font-color;
+	color: $meta-font-color;
 
-    thead {
-        background-color: rgba(52,40,104,.05);
-        border-radius: 4px;
-    }
-    tr {
-        border-bottom-color: transparent;
-    }
-    th {
-        vertical-align: middle;
-        border: 0 none;
-        padding: 20px 12px 20px 12px;
-        color: $pr-color;
-        font-weight: 600;
-    }
-    td {
-        border-top: 0;
-        padding: .85rem;
-        vertical-align: middle;
-        font-weight: 500;
-    }
-    .td-actions {
+	thead {
+		background-color: rgba(52, 40, 104, 0.05);
+		border-radius: 4px;
+	}
+	tr {
+		border-bottom-color: transparent;
+	}
+	th {
+		vertical-align: middle;
+		border: 0 none;
+		padding: 20px 12px 20px 12px;
+		color: $pr-color;
+		font-weight: 600;
+	}
+	td {
+		border-top: 0;
+		padding: 0.85rem;
+		vertical-align: middle;
+		font-weight: 500;
+	}
+	.td-actions {
+		i {
+			background: transparent;
+			color: rgba(52, 40, 104, 0.4);
+			font-size: 1.6rem;
+			padding: 0.5rem;
+			border-radius: 50%;
+			-webkit-transition: all 0.4s ease;
+			-o-transition: all 0.4s ease;
+			transition: all 0.4s ease;
 
-        a i {
-            background: transparent;
-            color: rgba(52,40,104,.4);
-            font-size: 1.6rem;
-            padding: .5rem;
-            border-radius: 50%;
-            transition: all 0.4s ease;
-
-            &.edit:hover {
-                background: $pr-color;
-                color: #fff;
-            }
-            &.delete:hover {
-                background: $danger-color;
-                color: #fff;
-            }
-        }
-    }
+			&.edit:hover {
+				background: $pr-color;
+				color: #fff;
+			}
+			&.delete:hover {
+				background: $danger-color;
+				color: #fff;
+			}
+		}
+	}
 }
 
-.table-hover>tbody>tr:hover {
-    color: $pr-color;
+.table-hover > tbody > tr:hover {
+	color: $pr-color;
 }
