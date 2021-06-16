@@ -1,20 +1,19 @@
 import React from 'react';
-import { Navbar } from 'react-bootstrap';
 
+
+import { Navbar } from 'react-bootstrap';
 import logo from '../../img/logo.png';
 
-// const handleToggleSidebar = () => {
-//     console.log('click');
-// }
-
-
-export default function Header (props) {
+export const Header = props => {
     return (
         <header className="header">
             <Navbar className="fixed-top">
                 <div className="navbar__wrapper">
                     <div className="navbar__header">
-                        <Navbar.Brand href="#">
+                        <Navbar.Brand
+                            href="/"
+                            className="d-flex align-items-center"
+                        >
                             <img
                                 src={ logo }
                                 width="70"
@@ -27,7 +26,7 @@ export default function Header (props) {
                         <button
                             className={`btn navbar__toggler${ props.sidebarShrink ? '' : ' active' }`}
                             type="button"
-                            onClick={ props.sidebarToggle }
+                            onClick={ props.sbToggle }
                         >
                             <span></span>
                             <span></span>

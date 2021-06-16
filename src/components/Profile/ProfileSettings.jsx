@@ -1,61 +1,61 @@
 import React from 'react';
 
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Col, Form, Button } from 'react-bootstrap';
 
-export default function ProfileSettings () {
+export const ProfileSettings = props => {
+    const { user } = props;
+
+    const formGroupClasses = 'form-group row d-flex align-items-center mb-5';
+    const formLabelClasses = 'col-lg-3 form-control-label d-flex justify-content-lg-end';
+
     return (
-        <div className="widget__wrapper widget__profile--update has-shadow">
-            <div className="widget__header">
-                <h4 className="widget__title">Update Profile</h4>
-            </div>
-            <div className="widget__body">
-                <span className="widget__section--title h4">01. Personnal Informations</span>
-                <Form className="form-horizontal">
-                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userName">
-                        <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Full Name</Form.Label>
-                        <Col lg={7}>
-                            <Form.Control type="text" placeholder="David Green" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userEmail">
-                        <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Email</Form.Label>
-                        <Col lg={7}>
-                            <Form.Control type="email" placeholder="dgreen@mail.com" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userPhone">
-                        <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Phone</Form.Label>
-                        <Col lg={7}>
-                            <Form.Control type="tel" placeholder="+00 987 654 32" />
-                        </Col>
-                    </Form.Group>
-                </Form>
-                <span className="widget__section--title h4">02. Change Password</span>
-                <Form className="form-horizontal">
-                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userCurrentPassword">
-                        <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Current Password</Form.Label>
-                        <Col lg={7}>
-                            <Form.Control type="password" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userNewPassword">
-                        <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">New Password</Form.Label>
-                        <Col lg={7}>
-                            <Form.Control type="password" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group className="form-group row d-flex align-items-center mb-5" controlId="userConfirmPassword">
-                        <Form.Label className="col-lg-3 form-control-label d-flex justify-content-lg-end">Confirm Password</Form.Label>
-                        <Col lg={7}>
-                            <Form.Control type="password" />
-                        </Col>
-                    </Form.Group>
-                </Form>
-                <hr className="separator-dashed" />
-                <div className="btn__group">
-                    <Button className="btn btn__gradient btn__grad-danger" type="submit">Save</Button>
-                    <Button variant="secondary" type="reset">Cancel</Button>
-                </div>
+        <div className="widget__body">
+            <span className="widget__section--title h4">01. Personnal Informations</span>
+            <Form className="form-horizontal">
+                <Form.Group className={ formGroupClasses } controlId="userName">
+                    <Form.Label className={ formLabelClasses }>Full Name</Form.Label>
+                    <Col lg={7}>
+                        <Form.Control type="text" placeholder={ user.name } />
+                    </Col>
+                </Form.Group>
+                <Form.Group className={ formGroupClasses } controlId="userEmail">
+                    <Form.Label className={ formLabelClasses }>Email</Form.Label>
+                    <Col lg={7}>
+                        <Form.Control type="email" placeholder={ user.email } />
+                    </Col>
+                </Form.Group>
+                <Form.Group className={ formGroupClasses } controlId="userPhone">
+                    <Form.Label className={ formLabelClasses }>Phone</Form.Label>
+                    <Col lg={7}>
+                        <Form.Control type="tel" placeholder="" />
+                    </Col>
+                </Form.Group>
+            </Form>
+            <span className="widget__section--title h4">02. Change Password</span>
+            <Form className="form-horizontal">
+                <Form.Group className={ formGroupClasses } controlId="userCurrentPassword">
+                    <Form.Label className={ formLabelClasses }>Current Password</Form.Label>
+                    <Col lg={7}>
+                        <Form.Control type="password" />
+                    </Col>
+                </Form.Group>
+                <Form.Group className={ formGroupClasses } controlId="userNewPassword">
+                    <Form.Label className={ formLabelClasses }>New Password</Form.Label>
+                    <Col lg={7}>
+                        <Form.Control type="password" />
+                    </Col>
+                </Form.Group>
+                <Form.Group className={ formGroupClasses } controlId="userConfirmPassword">
+                    <Form.Label className={ formLabelClasses }>Confirm Password</Form.Label>
+                    <Col lg={7}>
+                        <Form.Control type="password" />
+                    </Col>
+                </Form.Group>
+            </Form>
+            <hr className="separator-dashed" />
+            <div className="btn__group">
+                <Button className="btn btn__gradient btn__grad-danger" type="submit">Save</Button>
+                <Button variant="secondary" type="reset">Cancel</Button>
             </div>
         </div>
     )

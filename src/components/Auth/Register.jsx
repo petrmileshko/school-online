@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import logo from '../../img/logo.png';
 
-export default function Login() {
+export const Register = () => {
     return (
         <Container fluid className="auth__page">
             <Row>

@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar/Sidebar.jsx';
 import MagazineContent from '../MagazineContent/MagazineContent';
 
 import Spinner from 'react-bootstrap/Spinner';
-
+import Loader from '../Loader/Loader';
 
 class MagazineList extends React.Component {
 
@@ -87,4 +87,7 @@ class MagazineList extends React.Component {
     }
 }
 export default MagazineList;
-         
+
+// (!this.state.loading && this.state.user) && 
+//                     <MagazineContent 
+//                     user={this.state.user} />
