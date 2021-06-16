@@ -1,7 +1,7 @@
 <?php
 
 /*
-        code by  Aleksandr Baukov
+        code by  Aleksandr Baukov and Petr Mileshko
         Контроллер для работы с моделью - БД / талица Answers
 
 */
