@@ -2,6 +2,7 @@ import React from 'react';
 
 import avatar from '../../img/avatar-01.jpg';
 
+
 export const Profile = ({ user }) => {
 
     return (
@@ -28,6 +29,7 @@ export const Profile = ({ user }) => {
                     </ul>
                 }
                 <hr className="separator-dashed" />
+
             </div>
         </div>
     )

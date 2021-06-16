@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap';
 
+
 import './sass/bootstrap-custom.scss';
 import './icons/lineawesome/css/line-awesome.css';
 import './sass/style.scss';

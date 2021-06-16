@@ -58,6 +58,7 @@ export const Sidebar = props => {
                             <span className="side-navbar__link--title">Logout</span>
                         </a>
                     </li>
+
                 </Nav>
             </div>
         </div>

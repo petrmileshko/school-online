@@ -15,6 +15,7 @@
         .btn:not(:first-child) {
             margin-left: 10px;
         }
+
     }
     &__grad-pr { 
         background: $btn__grad-pr;
@@ -72,6 +73,7 @@
         width: 25px;
         height: 25px;
     }
+
 }
 
 @media (min-width: 576px) {
@@ -82,4 +84,5 @@
             justify-content: flex-end;
         }
     }
+
 }

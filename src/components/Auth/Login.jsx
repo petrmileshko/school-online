@@ -1,8 +1,8 @@
+
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useHttp } from '../../hooks/http.hook';
 import { AuthContext } from '../../context/AuthContext';
-
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import logo from '../../img/logo.png';
 
@@ -30,6 +30,7 @@ export const Login = () => {
         } catch (e) {}
     }
 
+
     return (
         <Container fluid className="auth__page">
             <Row>
@@ -37,6 +38,7 @@ export const Login = () => {
                     <div className="title__wrapper">
                         <h1 className="title">Welcome To Education Online!</h1>
                         <span className="subtitle">Etiam consequat urna at magna bibendum, in tempor arcu fermentum vitae mi massa egestas.</span>
+
                         <span className="h3 pt-5" style={{color: '#fff'}}>Данные для авторизации в приложении</span>
                         <span className="h4 pt-3" style={{color: '#fff'}}>Ученик:</span>
                         <span>Email: ivan@gamle.ru</span>
@@ -65,6 +67,7 @@ export const Login = () => {
 
                         <Form className="form__signIn">
                             <Form.Group controlId="inputEmail">
+
                                 <Form.Control
                                     type="email"
                                     name="email"
@@ -87,6 +90,7 @@ export const Login = () => {
                             <div className="form__include">
                                 <Form.Check
                                     type="checkbox"
+
                                     name="checkbox"
                                     label="Remember me"
                                     id="check_remember"
@@ -102,6 +106,13 @@ export const Login = () => {
                             Sign in
                             </Button>
                         </Form>
+
+                        <Link to="/profile"
+                            className="btn btn-primary btn__gradient btn__grad-danger btn__sign-in"
+                        >
+                            Аварийный вход
+                        </Link>
+
                         <div className="register">
                             <span className="register__text">Don't have an account?</span>
                             <Link to="/register">Create an account</Link>
